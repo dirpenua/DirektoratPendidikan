@@ -4,28 +4,23 @@ import com.google.gson.annotations.SerializedName;
 import java.sql.Timestamp;
 
 public class Agenda {
-    @SerializedName("idagenda") private String idagenda;
-    @SerializedName("namakegiatan") private String namakegiatan;
-    @SerializedName("tempat") private String tempat;
-    @SerializedName("mulai") private Timestamp mulai;
-    @SerializedName("selesai") private Timestamp selesai;
-    @SerializedName("jumlahundangan") private  Integer jumlahundangan;
-
+    @SerializedName("id_agenda") private String id_agenda;
+    @SerializedName("nama_kegiatan") private String nama_kegiatan;
 
     public String getId() {
-        return idagenda;
+        return id_agenda;
     }
 
     public void setId(String id_agenda) {
-        this.idagenda = id_agenda;
+        this.id_agenda = id_agenda;
     }
 
     public String getNama() {
-        return namakegiatan;
+        return nama_kegiatan;
     }
 
     public void setNama(String nama_kegiatan) {
-        this.namakegiatan = nama_kegiatan;
+        this.nama_kegiatan = nama_kegiatan;
     }
 
 }
