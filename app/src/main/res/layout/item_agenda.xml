@@ -6,7 +6,7 @@
     android:layout_marginLeft="20dp"
     android:layout_marginTop="10dp"
     android:layout_marginRight="20dp"
-    android:layout_marginBottom="10dp"
+    android:layout_marginBottom="3dp"
     android:orientation="horizontal"
     android:background="#FFFFFF">
 
@@ -16,7 +16,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_margin="10dp"
-            android:text="12"
+            android:text="02"
             android:textSize="30sp"
             android:textStyle="bold"
             android:layout_weight="0"/>
@@ -32,14 +32,14 @@
             android:textStyle="bold"
             android:layout_weight="1"/>
 
-        <!--<ImageView-->
-            <!--android:id="@+id/swipe_right"-->
-            <!--android:layout_width="50dp"-->
-            <!--android:layout_height="50dp"-->
-            <!--android:layout_gravity="center_vertical"-->
-            <!--android:layout_margin="10dp"-->
-            <!--android:src="@drawable/ic_swipe_right"-->
-            <!--android:layout_weight="0"/>-->
-    </LinearLayout>
+        <ImageView
+            android:id="@+id/swipe_right"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center_vertical"
+            android:layout_margin="10dp"
+            android:src="@drawable/ic_swipe_right"
+            android:layout_weight="0"/>
+</LinearLayout>
 
 

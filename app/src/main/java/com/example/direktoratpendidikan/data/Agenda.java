@@ -4,15 +4,15 @@ import com.google.gson.annotations.SerializedName;
 import java.sql.Timestamp;
 
 public class Agenda {
-    @SerializedName("id_agenda") private String id_agenda;
+    @SerializedName("agenda_id") private String agenda_id;
     @SerializedName("nama_kegiatan") private String nama_kegiatan;
 
     public String getId() {
-        return id_agenda;
+        return agenda_id;
     }
 
-    public void setId(String id_agenda) {
-        this.id_agenda = id_agenda;
+    public void setId(String agenda_id) {
+        this.agenda_id = agenda_id;
     }
 
     public String getNama() {

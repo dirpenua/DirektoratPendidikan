@@ -32,10 +32,10 @@ import retrofit2.Response;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class AgendaFragment extends Fragment{
+public class AgendaFragment extends Fragment {
 
-//    private Toolbar mToolbar;
-//    private Spinner mSpinner;
+    private Toolbar mToolbar;
+    private Spinner mSpinner;
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
     private List agendaList;
@@ -43,60 +43,61 @@ public class AgendaFragment extends Fragment{
     private ApiInterface apiInterface;
     ProgressBar progressBar;
 
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_agenda, container, false);
+        progressBar = view.findViewById(R.id.prograss);
+        recyclerView = view.findViewById(R.id.recyclerView);
 
-     @Override
-     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-         View view = inflater.inflate(R.layout.fragment_agenda, container, false);
-//         mSpinner = view.findViewById(R.id.spinner_rss);
-//         mToolbar = view.findViewById(R.id.toolbar);
 
-//         ((AppCompatActivity) getActivity()).setSupportActionBar(mToolbar);
-//
-//         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayShowTitleEnabled(false);
-//
-//         mSpinner = view.findViewById(R.id.spinner_rss);
-//
-//         String[] items = getResources().getStringArray(R.array.hari);
-//         List<String> spinnerItems = new ArrayList<String>();
-//
-//         for (int i = 0; i < items.length; i++) {
-//             spinnerItems.add(items[i]);
-//         }
-//
-//         SpinnerAdapter spinneradapter = new SpinnerAdapter(((AppCompatActivity) getActivity()).getSupportActionBar().getThemedContext(), spinnerItems);
-//         mSpinner.setAdapter(spinneradapter);
-//
-//         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
-//             mSpinner.setDropDownVerticalOffset(-116);
-//         }
+         mSpinner = view.findViewById(R.id.spinner_rss);
+         mToolbar = view.findViewById(R.id.toolbar);
 
-         progressBar = view.findViewById(R.id.prograss);
-         recyclerView = view.findViewById(R.id.recyclerView );
-         layoutManager = new LinearLayoutManager(getActivity());
-         recyclerView.setLayoutManager(layoutManager);
-         recyclerView.setHasFixedSize(true);
-         //fetchAgenda("agenda");
+         ((AppCompatActivity) getActivity()).setSupportActionBar(mToolbar);
 
-         apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
-         Call< List< Agenda>> call = apiInterface.getAgenda("agenda");
-         call.enqueue(new Callback<List<Agenda>>() {
-             @Override
-             public void onResponse(@NonNull Call<List<Agenda>> call, @NonNull Response<List<Agenda>> response) {
-                 progressBar.setVisibility(View.GONE);
-                 agendaList = response.body();
-                 adapter = new Adapter(getActivity(), agendaList);
-                 recyclerView.setAdapter(adapter);
-                 adapter.notifyDataSetChanged();
-                 Log.e("tesAgendaBerhasil",new Gson().toJson(response.body()));
-             }
-             @Override
-             public void onFailure(@NonNull Call<List<Agenda>> call, @NonNull Throwable t) {
-                 Log.e("tesAgendaGagal","Gagal");
-             }
-         });
+         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayShowTitleEnabled(false);
 
-         return view;
-     }
+
+         String[] items = getResources().getStringArray(R.array.hari);
+         List<String> spinnerItems = new ArrayList<String>();
+
+         for (int i = 0; i < items.length; i++) {
+             spinnerItems.add(items[i]);
+         }
+
+         SpinnerAdapter spinneradapter = new SpinnerAdapter(((AppCompatActivity) getActivity()).getSupportActionBar().getThemedContext(), spinnerItems);
+         mSpinner.setAdapter(spinneradapter);
+
+         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+             mSpinner.setDropDownVerticalOffset(-116);
+         }
+
+        layoutManager = new LinearLayoutManager(getActivity());
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setHasFixedSize(true);
+        //fetchAgenda("agenda");
+
+        apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
+        Call<List<Agenda>> call = apiInterface.getAgenda("agenda");
+        call.enqueue(new Callback<List<Agenda>>() {
+            @Override
+            public void onResponse(@NonNull Call<List<Agenda>> call, @NonNull Response<List<Agenda>> response) {
+                progressBar.setVisibility(View.GONE);
+                agendaList = response.body();
+                adapter = new Adapter(getActivity(), agendaList);
+                recyclerView.setAdapter(adapter);
+                adapter.notifyDataSetChanged();
+                Log.e("tesGudangBerhasil", new Gson().toJson(response.body()));
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<List<Agenda>> call, @NonNull Throwable t) {
+                Log.e("tesAgendaGagal", "Gagal");
+            }
+        });
+        return view;
+    }
+
 
 //    public void fetchAgenda(String type){
 //        apiInterface = ApiClient.getApiClient().create(ApiInterface.class);

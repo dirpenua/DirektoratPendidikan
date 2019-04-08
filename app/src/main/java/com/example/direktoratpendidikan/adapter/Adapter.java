@@ -9,24 +9,26 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import com.example.direktoratpendidikan.R;
 import com.example.direktoratpendidikan.data.Agenda;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder>{
 
     List<Agenda> agendaList;
-    private Activity activity;
+    private Context context;
 
-    public Adapter(Activity fragmentAgenda, List agendaList) {
-        this.agendaList = agendaList;
-        activity = fragmentAgenda;
+    public Adapter(Context fragmentAgenda, List agendaList) {
+        this.agendaList = new ArrayList<>(agendaList);
+        context = fragmentAgenda;
     }
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        //View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_agenda, parent, false);
-        LayoutInflater inflater = (LayoutInflater)activity.getSystemService(activity
-                .LAYOUT_INFLATER_SERVICE);
-        View v = inflater.inflate(R.layout.item_agenda, null);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_agenda, parent, false);
+        //LayoutInflater inflater = (LayoutInflater)activity.getSystemService(activity
+                //LAYOUT_INFLATER_SERVICE);
+        //View v = inflater.inflate(R.layout.item_agenda, null);
         return new MyViewHolder(v);
     }
 

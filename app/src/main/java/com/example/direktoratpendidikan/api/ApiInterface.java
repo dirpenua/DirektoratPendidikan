@@ -11,7 +11,7 @@ import retrofit2.http.Query;
 
 public interface ApiInterface {
 
-    @GET("getlist.php")
+    @GET("getlist.php?")
     Call < List<Agenda>> getAgenda(
             @Query("item_type") String item_type
     );
