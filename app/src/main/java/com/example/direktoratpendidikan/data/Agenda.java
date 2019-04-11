@@ -5,6 +5,7 @@ import java.sql.Timestamp;
 
 public class Agenda {
     @SerializedName("agenda_id") private String agenda_id;
+    @SerializedName("tanggal") private String tanggal;
     @SerializedName("nama_kegiatan") private String nama_kegiatan;
 
     public String getId() {
@@ -13,6 +14,11 @@ public class Agenda {
 
     public void setId(String agenda_id) {
         this.agenda_id = agenda_id;
+    }
+
+    public String getTanggal() { return tanggal; }
+
+    public void setTanggal(String tanggal) { this.tanggal = tanggal;
     }
 
     public String getNama() {
