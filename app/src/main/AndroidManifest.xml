@@ -15,7 +15,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".DetailAgenda"></activity>
+        <activity android:name=".DetailAgenda" android:theme="@style/NoActionBar"></activity>
         <activity
             android:name=".SplashActivity"
             android:theme="@style/NoActionBar">
