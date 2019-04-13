@@ -13,12 +13,16 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.direktoratpendidikan.data.Agenda;
 
 public class DetailAgenda extends AppCompatActivity {
 
     public String agenda_id;
+    private TextView tanggal_kegiatan;
+    private TextView nama_kegiatan;
+    private TextView bulantahun;
     public ImageView onback;
 
 
@@ -34,6 +38,23 @@ public class DetailAgenda extends AppCompatActivity {
                 onBackPressed();
             }
         });
+
+        tanggal_kegiatan = findViewById(R.id.tanggaldetail);
+        nama_kegiatan = findViewById(R.id.nama_kegiatan_detail);
+        bulantahun = findViewById(R.id.bulantahun);
+        Intent iin= getIntent();
+        Bundle b = iin.getExtras();
+
+        if(b!=null)
+        {
+            String tgl =(String) b.get("tanggalKegiatan");
+            tanggal_kegiatan.setText(tgl);
+            String blnthn =(String) b.get("bulanTahun");
+            bulantahun.setText(blnthn);
+            String nama =(String) b.get("namaKegiatan");
+            nama_kegiatan.setText(nama);
+        }
+
     }
 
 

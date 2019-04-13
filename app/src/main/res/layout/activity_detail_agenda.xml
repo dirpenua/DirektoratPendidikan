@@ -75,7 +75,7 @@
                     android:id="@+id/bulantahun"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="April 2019"
+                    android:text="Bulan 2019"
                     android:textSize="17dp"
                     android:gravity="center"
                     android:textColor="@color/colorAccent"

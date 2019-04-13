@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/agenda_id"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginLeft="20dp"
@@ -32,6 +33,15 @@
             android:textSize="15sp"
             android:textStyle="bold"
             android:layout_weight="1"/>
+
+        <TextView
+            android:id="@+id/bultahun"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:visibility="invisible"
+            android:text="HAHAHA"
+            android:textSize="0sp"
+            android:layout_weight="0"/>
 
         <ImageView
             android:id="@+id/swipe_right"

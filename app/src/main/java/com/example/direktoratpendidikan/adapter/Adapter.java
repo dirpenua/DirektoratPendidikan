@@ -41,6 +41,8 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder> {
     public void onBindViewHolder(MyViewHolder holder, int position) {
         holder.tanggal.setText(agendaList.get(position).getTanggal());
         holder.nama_kegiatan.setText(agendaList.get(position).getNama());
+        holder.bulantahun.setText(agendaList.get(position).getBulantahun());
+
     }
 
     @Override
@@ -50,29 +52,33 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder> {
 
 
     public interface OnItemClickListener {
-        public void onItemClick(View view , int position);
+        public void onItemClick(View view, int position);
     }
 
     public void SetOnItemClickListener(final OnItemClickListener mItemClickListener) {
         this.mItemClickListener = mItemClickListener;
     }
 
-    public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        TextView tanggal, nama_kegiatan, agenda_id;
+    public class MyViewHolder extends RecyclerView.ViewHolder {
+        TextView tanggal, nama_kegiatan, agenda_id, bulantahun;
 
         public MyViewHolder(final View itemView) {
             super(itemView);
             tanggal = itemView.findViewById(R.id.tanggal);
             nama_kegiatan = itemView.findViewById(R.id.nama_kegiatan);
+            bulantahun = itemView.findViewById(R.id.bultahun);
             itemView.setTag(itemView);
-            itemView.setOnClickListener(this);
-        }
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent i = new Intent(v.getContext(), DetailAgenda.class);
+                    i.putExtra("tanggalKegiatan",agendaList.get(getAdapterPosition()).getTanggal());
+                    i.putExtra("bulanTahun",agendaList.get(getAdapterPosition()).getBulantahun());
+                    i.putExtra("namaKegiatan",agendaList.get(getAdapterPosition()).getNama());
+                    v.getContext().startActivity(i);
+                }
 
-        @Override
-        public void onClick(View v) {
-            if (mItemClickListener != null) {
-                mItemClickListener.onItemClick(v, getPosition());
-            }
+            });
         }
     }
 }

@@ -100,14 +100,15 @@ public class AgendaFragment extends Fragment{
                     adapter = new Adapter(getActivity(), agendaList);
                     recyclerView.setAdapter(adapter);
                     adapter.notifyDataSetChanged();
-                    adapter.SetOnItemClickListener(new Adapter.OnItemClickListener() {
-
-                        @Override
-                        public void onItemClick(View v , int position) {
-                            Intent i = new Intent(getActivity(), DetailAgenda.class);
-                            startActivity(i);
-                        }
-                    });
+//                    adapter.SetOnItemClickListener(new Adapter.OnItemClickListener() {
+//
+//                        @Override
+//                        public void onItemClick(View v , int position) {
+//                            Intent i = new Intent(getActivity(), DetailAgenda.class);
+//                            i.putExtra("namaKegiatan",);
+//                            startActivity(i);
+//                        }
+//                    });
                     Log.e("tesGudangBerhasil", new Gson().toJson(response.body()));
                 }
 

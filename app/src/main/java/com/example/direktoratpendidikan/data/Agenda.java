@@ -1,11 +1,12 @@
 package com.example.direktoratpendidikan.data;
 
 import com.google.gson.annotations.SerializedName;
-import java.sql.Timestamp;
+
 
 public class Agenda {
     @SerializedName("agenda_id") private String agenda_id;
     @SerializedName("tanggal") private String tanggal;
+    @SerializedName("bulantahun") private String bulantahun;
     @SerializedName("nama_kegiatan") private String nama_kegiatan;
 
     public String getId() {
@@ -20,6 +21,10 @@ public class Agenda {
 
     public void setTanggal(String tanggal) { this.tanggal = tanggal;
     }
+
+   public String getBulantahun() { return bulantahun; }
+
+   public void setBulantahun(String bulantahun) { this.bulantahun = bulantahun;}
 
     public String getNama() {
         return nama_kegiatan;
