@@ -39,7 +39,52 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:visibility="invisible"
-            android:text="HAHAHA"
+            android:text="hide bulan tahun"
+            android:textSize="0sp"
+            android:layout_weight="0"/>
+
+        <TextView
+            android:id="@+id/jmulai"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:visibility="invisible"
+            android:text="hide jam mulai"
+            android:textSize="0sp"
+            android:layout_weight="0"/>
+
+        <TextView
+            android:id="@+id/jselesai"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:visibility="invisible"
+            android:text="hide jam selesai"
+            android:textSize="0sp"
+            android:layout_weight="0"/>
+
+        <TextView
+            android:id="@+id/tempat"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:visibility="invisible"
+            android:text="hide tempat"
+            android:textSize="0sp"
+            android:layout_weight="0"/>
+
+        <TextView
+            android:id="@+id/jumundangan"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:visibility="invisible"
+            android:text="hide jumlah undangan"
+            android:textSize="0sp"
+            android:layout_weight="0"/>
+
+        <TextView
+            android:id="@+id/narahubung"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:visibility="invisible"
+            android:text="hide narahubung"
             android:textSize="0sp"
             android:layout_weight="0"/>
 

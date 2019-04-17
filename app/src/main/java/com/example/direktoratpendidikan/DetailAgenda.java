@@ -20,9 +20,7 @@ import com.example.direktoratpendidikan.data.Agenda;
 public class DetailAgenda extends AppCompatActivity {
 
     public String agenda_id;
-    private TextView tanggal_kegiatan;
-    private TextView nama_kegiatan;
-    private TextView bulantahun;
+    private TextView tanggal_kegiatan, jam_mulai, jam_selesai, nama_kegiatan, bulantahun, tempat, jumlahundangan, narahubung;
     public ImageView onback;
 
 
@@ -40,8 +38,13 @@ public class DetailAgenda extends AppCompatActivity {
         });
 
         tanggal_kegiatan = findViewById(R.id.tanggaldetail);
+        jam_mulai = findViewById(R.id.jammulai);
+        jam_selesai = findViewById(R.id.jamselesai);
         nama_kegiatan = findViewById(R.id.nama_kegiatan_detail);
         bulantahun = findViewById(R.id.bulantahun);
+        tempat = findViewById(R.id.tempatdetail);
+        jumlahundangan = findViewById(R.id.jumlahundangan);
+        narahubung = findViewById(R.id.narahubungdetail);
         Intent iin= getIntent();
         Bundle b = iin.getExtras();
 
@@ -49,14 +52,24 @@ public class DetailAgenda extends AppCompatActivity {
         {
             String tgl =(String) b.get("tanggalKegiatan");
             tanggal_kegiatan.setText(tgl);
+            String jm =(String) b.get("jamMulai");
+            jam_mulai.setText(jm);
+            String js =(String) b.get("jamSelesai");
+            jam_selesai.setText(js);
             String blnthn =(String) b.get("bulanTahun");
             bulantahun.setText(blnthn);
             String nama =(String) b.get("namaKegiatan");
             nama_kegiatan.setText(nama);
+            String tmpt =(String) b.get("tempatKegiatan");
+            tempat.setText(tmpt);
+            String jmlund =(String) b.get("jumlahUndangan");
+            jumlahundangan.setText(jmlund);
+            String nrhb =(String) b.get("nohpNarahubung");
+            narahubung.setText(nrhb);
+
         }
 
     }
-
 
     public String getId_agenda(){
         return this.agenda_id;

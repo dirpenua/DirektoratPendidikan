@@ -91,7 +91,7 @@
                         android:id="@+id/jammulai"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="10:30"
+                        android:text="00:00"
                         android:textSize="17dp"
                         android:textColor="#FFFFFF"
                         android:layout_marginLeft="10dp" />
@@ -106,7 +106,7 @@
                         android:id="@+id/jamselesai"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="12:00"
+                        android:text="00:00"
                         android:textSize="17dp"
                         android:textColor="#FFFFFF"
                         android:layout_marginLeft="10dp"
@@ -123,7 +123,104 @@
             android:layout_gravity="center"
             android:textColor="@color/colorAccent"
             android:textStyle="bold"
-            android:layout_margin="15dp"/>
-    </LinearLayout>
+            android:layout_margin="20dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_gravity="center"
+            >
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:layout_margin="10dp"
+                android:src="@drawable/tempat"/>
+
+            <TextView
+                android:id="@+id/tempatdetail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_gravity="center"
+                android:text="Isidengantempatagendadilaksanakan"
+                android:textSize="15dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:orientation="horizontal">
+
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:layout_margin="10dp"
+                android:src="@drawable/jumlahundangan" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_gravity="center"
+                android:layout_marginLeft="15dp">
+                <TextView
+                    android:id="@+id/jumlahundangan"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:textSize="15dp"
+                    android:text="0" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:textSize="15dp"
+                    android:layout_marginLeft="5dp"
+                    android:text="orang" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_gravity="center"
+            >
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:layout_margin="10dp"
+                android:src="@drawable/narahubung" />
+
+            <TextView
+                android:id="@+id/narahubungdetail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="15dp"
+                android:textSize="15dp"
+                android:text="+62............"/>
+
+        </LinearLayout>
+        </LinearLayout>
+
+
 
 </FrameLayout>

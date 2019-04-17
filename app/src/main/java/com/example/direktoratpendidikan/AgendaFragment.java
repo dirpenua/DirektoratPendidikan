@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Spinner;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +21,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.ProgressBar;
 import android.support.v7.widget.Toolbar;
+import android.widget.Toast;
 
 import com.example.direktoratpendidikan.adapter.Adapter;
 import com.example.direktoratpendidikan.api.ApiClient;
@@ -77,21 +79,95 @@ public class AgendaFragment extends Fragment{
 
         SpinnerAdapter spinneradapter = new SpinnerAdapter(((AppCompatActivity) getActivity()).getSupportActionBar().getThemedContext(), spinnerItems);
         mSpinner.setAdapter(spinneradapter);
+        layoutManager = new LinearLayoutManager(getActivity());
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setHasFixedSize(true);
+
+        mSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+
+            }
+
+            @Override
+            public void onItemSelected(AdapterView<?> arg0, View view,
+                                       int position, long row_id) {
+
+                final Intent intent;
+                switch(position){
+                    case 0:
+                        progressBar.setVisibility(View.VISIBLE);
+                        fetchAgenda("agenda", "monday");
+                        Toast.makeText(getActivity(),
+                                "You have selected Senin : " + position,
+                                Toast.LENGTH_SHORT).show();
+                        break;
+                    case 1:
+                        progressBar.setVisibility(View.VISIBLE);
+                        fetchAgenda("agenda", "tuesday");
+                        Toast.makeText(getActivity(),
+                                "You have selected Selasa : " + position,
+                                Toast.LENGTH_SHORT).show();
+                        break;
+                    case 2:
+                        progressBar.setVisibility(View.VISIBLE);
+                        fetchAgenda("agenda", "wednesday");
+                        Toast.makeText(getActivity(),
+                                "You have selected Rabu : " + position,
+                                Toast.LENGTH_SHORT).show();
+                        break;
+                    case 3:
+                        progressBar.setVisibility(View.VISIBLE);
+                        fetchAgenda("agenda", "thursday");
+                        Toast.makeText(getActivity(),
+                                "You have selected Kamis : " + position,
+                                Toast.LENGTH_SHORT).show();
+                        break;
+                    case 4:
+                        progressBar.setVisibility(View.VISIBLE);
+                        fetchAgenda("agenda", "friday");
+                        Toast.makeText(getActivity(),
+                                "You have selected Jum'at : " + position,
+                                Toast.LENGTH_SHORT).show();
+                        break;
+                    case 5:
+                        progressBar.setVisibility(View.VISIBLE);
+                        fetchAgenda("agenda", "saturday");
+                        Toast.makeText(getActivity(),
+                                "You have selected Sabtu : " + position,
+                                Toast.LENGTH_SHORT).show();
+                        break;
+                    case 6:
+                        progressBar.setVisibility(View.VISIBLE);
+                        fetchAgenda("agenda", "sunday");
+                        Toast.makeText(getActivity(),
+                                "You have selected Minggu : " + position,
+                                Toast.LENGTH_SHORT).show();
+                        break;
+
+                }
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> arg0) {
+                // TODO Auto-generated method stub
+
+            }
+
+        });
 
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
             mSpinner.setDropDownVerticalOffset(-116);
         }
 
-        layoutManager = new LinearLayoutManager(getActivity());
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setHasFixedSize(true);
-        fetchAgenda("agenda");
         return view;
     }
 
-        public void fetchAgenda (String type){
+        public void fetchAgenda (String type, String hari){
             apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
-            Call<List<Agenda>> call = apiInterface.getAgenda("agenda");
+            Call<List<Agenda>> call = apiInterface.getAgenda(type,hari);
             call.enqueue(new Callback<List<Agenda>>() {
                 @Override
                 public void onResponse(@NonNull Call<List<Agenda>> call, @NonNull Response<List<Agenda>> response) {

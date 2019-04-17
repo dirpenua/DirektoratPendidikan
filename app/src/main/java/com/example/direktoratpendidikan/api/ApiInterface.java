@@ -13,8 +13,14 @@ public interface ApiInterface {
 
     @GET("getlist.php?")
     Call < List<Agenda>> getAgenda(
-            @Query("item_type") String item_type
+            @Query("item_type") String item_type,
+            @Query("spinner_hari") String spinner_hari
     );
+
+//    @POST("getlist.php?")
+//    Call < List<Agenda>> postSpinner(
+//            @Query("spinner_hari") String spinner_hari
+//    );
 
     //@FormUrlEncoded
     //@POST("getlist.php")
