@@ -23,4 +23,9 @@
         <item name="android:windowBackground">@drawable/splash_bg</item>
     </style>
 
+    <style name="AppTheme_Dark_Dialog" parent="android:Theme.Holo.Dialog">
+        <item name="android:textColorPrimary">@color/RedWarning</item>
+        <item name="android:background">#FFF</item>
+    </style>
+
 </resources>
