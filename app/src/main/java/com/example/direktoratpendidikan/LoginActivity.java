@@ -64,8 +64,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void loginByServer() {
-        pDialog = new ProgressDialog(LoginActivity.this,
-                R.style.AppTheme_Dark_Dialog);
+        pDialog = new ProgressDialog(LoginActivity.this);
         pDialog.setIndeterminate(true);
         pDialog.setMessage("Trying to login...");
         pDialog.setCancelable(false);
@@ -81,8 +80,6 @@ public class LoginActivity extends AppCompatActivity {
         ApiInterface service = ApiClient.getApiClient().create(ApiInterface.class);
 
         Call<MSG> userCall = service.userLogIn(nipnik,password_user);
-        Log.d("NIP/NIK :", nipnik);
-        Log.d("Password:", password_user);
         userCall.enqueue(new Callback<MSG>() {
             @Override
             public void onResponse(Call<MSG> call, Response<MSG> response) {
@@ -93,6 +90,12 @@ public class LoginActivity extends AppCompatActivity {
 
                 if(response.body().getSuccess() == 1) {
                     startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                    String text = "" + response.body().getMessage();
+                    Spannable centeredText = new SpannableString(text);
+                    centeredText.setSpan(new AlignmentSpan.Standard(Layout.Alignment.ALIGN_CENTER),
+                            0, text.length() - 1,
+                            Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+                    Toast.makeText(LoginActivity.this,centeredText, Toast.LENGTH_LONG).show();
                     finish();
                 }else {
                     String text = "" + response.body().getMessage();
@@ -100,7 +103,7 @@ public class LoginActivity extends AppCompatActivity {
                     centeredText.setSpan(new AlignmentSpan.Standard(Layout.Alignment.ALIGN_CENTER),
                             0, text.length() - 1,
                             Spannable.SPAN_INCLUSIVE_INCLUSIVE);
-                    Toast.makeText(LoginActivity.this,text, Toast.LENGTH_LONG).show();
+                    Toast.makeText(LoginActivity.this,centeredText, Toast.LENGTH_LONG).show();
                 }
             }
 
