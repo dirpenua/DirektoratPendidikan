@@ -15,15 +15,12 @@ import android.widget.Button;
 import android.widget.TextView;
 
 
-import java.util.HashMap;
-
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class AkunFragment extends Fragment {
 
-//    SessionManager session;
     SharedPreferences sharedpreferences;
     public final static String TAG_NAMA = "nama_user";
     public final static String TAG_NIPNIK = "nipnik";
@@ -40,7 +37,6 @@ public class AkunFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_akun, container, false);
-        //session = new SessionManager(getContext());
 
         sharedpreferences = this.getActivity().getSharedPreferences(LoginActivity.my_shared_preferences, Context.MODE_PRIVATE);
         nama = getActivity().getIntent().getStringExtra(TAG_NAMA);
@@ -52,30 +48,6 @@ public class AkunFragment extends Fragment {
          * This will redirect user to LoginActivity is he is not
          * logged in
          * */
-//        if(!session.isLoggedIn()){
-//            // user is not logged in redirect him to Login Activity
-//            Intent i = new Intent(getContext(), LoginActivity.class);
-//            // Closing all the Activities
-//            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//
-//            // Add new Flag to start new Activity
-//            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//
-//            // Staring Login Activity
-//            getContext().startActivity(i);
-//        }else{
-//            Intent i = new Intent(getContext(), MainActivity.class);
-//            getContext().startActivity(i);
-//        }
-
-        // get user data from session
-//        HashMap<String, String> user = session.getUserDetails();
-//
-//        // name
-//        String nama = user.get(SessionManager.KEY_NAMA);
-//
-//        // email
-//        String nipnik = user.get(SessionManager.KEY_NIPNIK);
 
         _namauser = view.findViewById(R.id.akun_namauser);
         _nipnik = view.findViewById(R.id.akun_nipnik);
@@ -87,21 +59,7 @@ public class AkunFragment extends Fragment {
 
             @Override
             public void onClick(View arg0) {
-                // Clear the session data
-                // This will clear all session data and
 
-                //sharedpreferences.logoutSession();
-
-                // After logout redirect user to Login Activity
-//                Intent i = new Intent(getContext(), LoginActivity.class);
-//                // Closing all the Activities
-//                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//
-//                // Add new Flag to start new Activity
-//                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//
-//                // Staring Login Activity
-//                getContext().startActivity(i);
                 SharedPreferences.Editor editor = sharedpreferences.edit();
                 editor.putBoolean(LoginActivity.session_status, false);
                 editor.putString(TAG_NAMA, null);
@@ -109,6 +67,7 @@ public class AkunFragment extends Fragment {
                 editor.commit();
 
                 Intent intent = new Intent(getContext(), LoginActivity.class);
+                getActivity().finish();
                 startActivity(intent);
             }
         });

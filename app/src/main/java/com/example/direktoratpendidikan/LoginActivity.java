@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Handler;
-import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Layout;
@@ -30,7 +29,6 @@ import com.example.direktoratpendidikan.api.ApiClient;
 import com.example.direktoratpendidikan.api.ApiInterface;
 import com.example.direktoratpendidikan.data.MSG;
 
-import java.util.HashMap;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -54,9 +52,6 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-//        session = new SessionManager(getApplicationContext());
-//        Toast.makeText(getApplicationContext(), "User Login Status: " + session.isLoggedIn(), Toast.LENGTH_LONG).show();
-        // Cek session login jika TRUE maka langsung buka MainActivity
         sharedpreferences = getSharedPreferences(my_shared_preferences, Context.MODE_PRIVATE);
         session = sharedpreferences.getBoolean(session_status, false);
         nama = sharedpreferences.getString(TAG_NAMA, null);
@@ -88,8 +83,6 @@ public class LoginActivity extends AppCompatActivity {
             return;
         }
 
-        //_loginButton.setEnabled(false);
-
         loginByServer();
     }
 
@@ -112,13 +105,11 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<MSG> call, Response<MSG> response) {
                 hidepDialog();
-                //onSignupSuccess();
                 Log.d("onResponse", "" + response.body().getMessage());
 
 
                 if(response.body().getSuccess() == 1) {
                     String nama = response.body().getNamaUser();
-//                    session.createLoginSession(nama, nipnik);
                     startActivity(new Intent(LoginActivity.this, MainActivity.class));
                     String text = "" + response.body().getMessage();
                     Spannable centeredText = new SpannableString(text);
@@ -156,17 +147,6 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    public HashMap<String, String> getUserDetails(){
-        HashMap<String, String> user = new HashMap<String, String>();
-        // user name
-        user.put(TAG_NAMA, sharedpreferences.getString(TAG_NAMA, null));
-
-        // user email id
-        user.put(TAG_NIPNIK, sharedpreferences.getString(TAG_NIPNIK, null));
-
-        // return user
-        return user;
-    }
 
     private void showpDialog() {
         if (!pDialog.isShowing())
@@ -240,14 +220,14 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         if (doubleBackToExitPressedOnce) {
-            super.onBackPressed();
-            return;
+            finish();
         }
 
         this.doubleBackToExitPressedOnce = true;
         Toast.makeText(this, "Ketuk lagi untuk KEMBALI ", Toast.LENGTH_SHORT).show();
 
         mHandler.postDelayed(mRunnable, 2000);
+
     }
 }
 
