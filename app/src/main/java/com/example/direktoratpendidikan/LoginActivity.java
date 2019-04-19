@@ -1,7 +1,10 @@
 package com.example.direktoratpendidikan;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.Handler;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -27,10 +30,22 @@ import com.example.direktoratpendidikan.api.ApiClient;
 import com.example.direktoratpendidikan.api.ApiInterface;
 import com.example.direktoratpendidikan.data.MSG;
 
+import java.util.HashMap;
+
 public class LoginActivity extends AppCompatActivity {
 
     private static final String TAG = "LoginActivity";
     private ProgressDialog pDialog;
+
+//    SessionManager session;
+    SharedPreferences sharedpreferences;
+    public static final String my_shared_preferences = "my_shared_preferences";
+    public static final String session_status = "session_status";
+    Boolean session = false;
+    public final static String TAG_NAMA = "nama_user";
+    public final static String TAG_NIPNIK = "nipnik";
+    String nama, nipnik;
+
     @BindView(R.id.nipnik) EditText _nipnik;
     @BindView(R.id.password) EditText _password;
     @BindView(R.id.btn_login) Button _loginButton;
@@ -39,7 +54,22 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+//        session = new SessionManager(getApplicationContext());
+//        Toast.makeText(getApplicationContext(), "User Login Status: " + session.isLoggedIn(), Toast.LENGTH_LONG).show();
+        // Cek session login jika TRUE maka langsung buka MainActivity
+        sharedpreferences = getSharedPreferences(my_shared_preferences, Context.MODE_PRIVATE);
+        session = sharedpreferences.getBoolean(session_status, false);
+        nama = sharedpreferences.getString(TAG_NAMA, null);
+        nipnik = sharedpreferences.getString(TAG_NIPNIK, null);
         ButterKnife.bind(this);
+
+        if (session) {
+            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+            intent.putExtra(TAG_NAMA, nama);
+            intent.putExtra(TAG_NIPNIK, nipnik);
+            finish();
+            startActivity(intent);
+        }
 
         _loginButton.setOnClickListener(new View.OnClickListener() {
 
@@ -66,14 +96,12 @@ public class LoginActivity extends AppCompatActivity {
     private void loginByServer() {
         pDialog = new ProgressDialog(LoginActivity.this);
         pDialog.setIndeterminate(true);
-        pDialog.setMessage("Trying to login...");
+        pDialog.setMessage("Anda sedang login...");
         pDialog.setCancelable(false);
 
         showpDialog();
 
-        //EditText nipnik1 = findViewById(R.id.nipnik);
-        String nipnik = _nipnik.getText().toString();
-        //TextInputEditText password1 = findViewById(R.id.password);
+        final String nipnik = _nipnik.getText().toString();
         String password_user = _password.getText().toString();
 
 
@@ -89,6 +117,8 @@ public class LoginActivity extends AppCompatActivity {
 
 
                 if(response.body().getSuccess() == 1) {
+                    String nama = response.body().getNamaUser();
+//                    session.createLoginSession(nama, nipnik);
                     startActivity(new Intent(LoginActivity.this, MainActivity.class));
                     String text = "" + response.body().getMessage();
                     Spannable centeredText = new SpannableString(text);
@@ -96,7 +126,18 @@ public class LoginActivity extends AppCompatActivity {
                             0, text.length() - 1,
                             Spannable.SPAN_INCLUSIVE_INCLUSIVE);
                     Toast.makeText(LoginActivity.this,centeredText, Toast.LENGTH_LONG).show();
+                    // menyimpan login ke session
+                    SharedPreferences.Editor editor = sharedpreferences.edit();
+                    editor.putBoolean(session_status, true);
+                    editor.putString(TAG_NAMA, nama);
+                    editor.putString(TAG_NIPNIK, nipnik);
+                    editor.commit();
+                    // Memanggil main activity
+                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                    intent.putExtra(TAG_NAMA, nama);
+                    intent.putExtra(TAG_NIPNIK, nipnik);
                     finish();
+                    startActivity(intent);
                 }else {
                     String text = "" + response.body().getMessage();
                     Spannable centeredText = new SpannableString(text);
@@ -113,6 +154,18 @@ public class LoginActivity extends AppCompatActivity {
                 Log.d("onFailure", t.toString());
             }
         });
+    }
+
+    public HashMap<String, String> getUserDetails(){
+        HashMap<String, String> user = new HashMap<String, String>();
+        // user name
+        user.put(TAG_NAMA, sharedpreferences.getString(TAG_NAMA, null));
+
+        // user email id
+        user.put(TAG_NIPNIK, sharedpreferences.getString(TAG_NIPNIK, null));
+
+        // return user
+        return user;
     }
 
     private void showpDialog() {
@@ -164,6 +217,37 @@ public class LoginActivity extends AppCompatActivity {
         if (view.requestFocus()) {
             getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
         }
+    }
+
+    private boolean doubleBackToExitPressedOnce;
+    private Handler mHandler = new Handler();
+
+    private final Runnable mRunnable = new Runnable() {
+        @Override
+        public void run() {
+            doubleBackToExitPressedOnce = false;
+        }
+    };
+
+    @Override
+    protected void onDestroy()
+    {
+        super.onDestroy();
+
+        if (mHandler != null) { mHandler.removeCallbacks(mRunnable); }
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (doubleBackToExitPressedOnce) {
+            super.onBackPressed();
+            return;
+        }
+
+        this.doubleBackToExitPressedOnce = true;
+        Toast.makeText(this, "Ketuk lagi untuk KEMBALI ", Toast.LENGTH_SHORT).show();
+
+        mHandler.postDelayed(mRunnable, 2000);
     }
 }
 

@@ -39,7 +39,7 @@
             android:orientation="vertical"
             android:layout_marginTop="55dp"
             android:elevation="5dp"
-            android:background="#FDFD96"
+            android:background="#FFF"
             android:layout_marginBottom="10dp">
 
             <de.hdodenhof.circleimageview.CircleImageView
@@ -55,6 +55,7 @@
                 app:civ_border_width="1dp" />
 
             <TextView
+                android:id="@+id/akun_namauser"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -63,8 +64,9 @@
                 android:textSize="14dp"
                 android:textColor="@color/colorPrimaryDark"
                 android:textStyle="bold"/>
-
+ b
             <TextView
+                android:id="@+id/akun_nipnik"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="20dp"
@@ -425,7 +427,7 @@
 
 
             <Button
-                android:id="@+id/btn_login"
+                android:id="@+id/btn_logout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"

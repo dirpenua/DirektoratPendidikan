@@ -4,6 +4,7 @@ public class MSG {
 
     private Integer success;
     private String message;
+    private String nama_user;
 
     /**
      * No args constructor for use in serialization
@@ -35,6 +36,14 @@ public class MSG {
 
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    public String getNamaUser() {
+        return nama_user;
+    }
+
+    public void seNamaUser(String nama_user) {
+        this.nama_user = nama_user;
     }
 
 }
