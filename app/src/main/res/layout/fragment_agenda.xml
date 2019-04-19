@@ -22,6 +22,7 @@
             android:theme="@style/ThemeOverlay.AppCompat.Light" />
 
     </android.support.v7.widget.Toolbar>
+
     <ProgressBar
         android:id="@+id/prograss"
         android:layout_centerInParent="true"
@@ -29,19 +30,13 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"/>
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginBottom="60dp">
-
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/toolbar"
         android:layout_above="@id/bn_main"
-        android:layout_marginTop="8dp"/>
-
-    </ScrollView>
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="70dp"/>
 
 </RelativeLayout>
