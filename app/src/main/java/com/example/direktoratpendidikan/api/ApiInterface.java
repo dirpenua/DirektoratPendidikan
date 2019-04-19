@@ -21,7 +21,7 @@ public interface ApiInterface {
     );
 
     @FormUrlEncoded
-    @POST("login.php?")
+    @POST("login.php")
     Call<MSG> userLogIn(@Field("nipnik") String nipnik,
                         @Field("password_baru") String password_baru
     );

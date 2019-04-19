@@ -32,7 +32,7 @@ public class LoginActivity extends AppCompatActivity {
     private static final String TAG = "LoginActivity";
     private ProgressDialog pDialog;
     @BindView(R.id.nipnik) EditText _nipnik;
-    @BindView(R.id.password) TextInputEditText _password;
+    @BindView(R.id.password) EditText _password;
     @BindView(R.id.btn_login) Button _loginButton;
 
     @Override
@@ -81,7 +81,8 @@ public class LoginActivity extends AppCompatActivity {
         ApiInterface service = ApiClient.getApiClient().create(ApiInterface.class);
 
         Call<MSG> userCall = service.userLogIn(nipnik,password_user);
-
+        Log.d("NIP/NIK :", nipnik);
+        Log.d("Password:", password_user);
         userCall.enqueue(new Callback<MSG>() {
             @Override
             public void onResponse(Call<MSG> call, Response<MSG> response) {
@@ -92,7 +93,6 @@ public class LoginActivity extends AppCompatActivity {
 
                 if(response.body().getSuccess() == 1) {
                     startActivity(new Intent(LoginActivity.this, MainActivity.class));
-
                     finish();
                 }else {
                     String text = "" + response.body().getMessage();
