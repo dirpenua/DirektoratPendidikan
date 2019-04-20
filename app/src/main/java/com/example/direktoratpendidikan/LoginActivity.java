@@ -110,25 +110,39 @@ public class LoginActivity extends AppCompatActivity {
 
                 if(response.body().getSuccess() == 1) {
                     String nama = response.body().getNamaUser();
-                    startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                    //startActivity(new Intent(LoginActivity.this, MainActivity.class));
+
                     String text = "" + response.body().getMessage();
                     Spannable centeredText = new SpannableString(text);
                     centeredText.setSpan(new AlignmentSpan.Standard(Layout.Alignment.ALIGN_CENTER),
                             0, text.length() - 1,
                             Spannable.SPAN_INCLUSIVE_INCLUSIVE);
                     Toast.makeText(LoginActivity.this,centeredText, Toast.LENGTH_LONG).show();
-                    // menyimpan login ke session
-                    SharedPreferences.Editor editor = sharedpreferences.edit();
-                    editor.putBoolean(session_status, true);
-                    editor.putString(TAG_NAMA, nama);
-                    editor.putString(TAG_NIPNIK, nipnik);
-                    editor.commit();
-                    // Memanggil main activity
-                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                    intent.putExtra(TAG_NAMA, nama);
-                    intent.putExtra(TAG_NIPNIK, nipnik);
-                    finish();
-                    startActivity(intent);
+
+                    if(response.body().getStatus() == 0){
+                        //Login pertama kali reset paswword
+                        Intent intent = new Intent(LoginActivity.this, UbahPWUserBaru.class);
+                        intent.putExtra(TAG_NAMA, nama);
+                        intent.putExtra(TAG_NIPNIK, nipnik);
+                        finish();
+                        startActivity(intent);
+                    }else{
+                        // Sudah pernah login
+                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                        intent.putExtra(TAG_NAMA, nama);
+                        intent.putExtra(TAG_NIPNIK, nipnik);
+                        finish();
+                        startActivity(intent);
+
+                        // menyimpan login ke session
+                        SharedPreferences.Editor editor = sharedpreferences.edit();
+                        editor.putBoolean(session_status, true);
+                        editor.putString(TAG_NAMA, nama);
+                        editor.putString(TAG_NIPNIK, nipnik);
+                        editor.commit();
+
+                    }
+
                 }else {
                     String text = "" + response.body().getMessage();
                     Spannable centeredText = new SpannableString(text);

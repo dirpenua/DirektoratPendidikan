@@ -5,6 +5,7 @@ public class MSG {
     private Integer success;
     private String message;
     private String nama_user;
+    private Integer status_user;
 
     /**
      * No args constructor for use in serialization
@@ -42,8 +43,16 @@ public class MSG {
         return nama_user;
     }
 
-    public void seNamaUser(String nama_user) {
+    public void setNamaUser(String nama_user) {
         this.nama_user = nama_user;
+    }
+
+    public Integer getStatus() {
+        return status_user;
+    }
+
+    public void setStatus(Integer status_user) {
+        this.status_user = status_user;
     }
 
 }

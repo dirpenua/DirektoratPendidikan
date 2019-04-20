@@ -13,6 +13,8 @@ public class Agenda {
     @SerializedName("jumlah_undangan") private String jumlah_undangan;
     @SerializedName("tempat") private String tempat;
     @SerializedName("nohp_narahubung") private String nohp_narahubung;
+    @SerializedName("notif") private String notif;
+    @SerializedName("success") private Integer success;
 
     public String getId() {
         return agenda_id;
@@ -59,6 +61,22 @@ public class Agenda {
 
     public String getJumlahUndangan() {
         return jumlah_undangan;
+    }
+
+    public String getNotif() {
+        return notif;
+    }
+
+    public void setNotif(String notif) {
+        this.notif = notif;
+    }
+
+    public Integer getSuccess() {
+        return success;
+    }
+
+    public void setSuccess(Integer success) {
+        this.success = success;
     }
 
 }

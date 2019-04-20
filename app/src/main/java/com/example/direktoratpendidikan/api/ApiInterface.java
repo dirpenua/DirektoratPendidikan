@@ -17,13 +17,20 @@ public interface ApiInterface {
     @GET("getlist.php?")
     Call < List<Agenda>> getAgenda(
             @Query("item_type") String item_type,
-            @Query("spinner_hari") String spinner_hari
+            @Query("spinner_hari") String spinner_hari,
+            @Query("nipnik") String nipnik
     );
 
     @FormUrlEncoded
     @POST("login.php")
     Call<MSG> userLogIn(@Field("nipnik") String nipnik,
-                        @Field("password_baru") String password_baru
+                        @Field("password_user") String password_user
+    );
+
+    @FormUrlEncoded
+    @POST("ubahpassword.php")
+    Call<MSG> resetPassword(@Field("nipnik") String nipnik,
+                            @Field("password_reset") String password_reset
     );
 
 

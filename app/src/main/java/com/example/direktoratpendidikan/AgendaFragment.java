@@ -1,7 +1,9 @@
 package com.example.direktoratpendidikan;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -46,8 +48,11 @@ public class AgendaFragment extends Fragment{
     private List agendaList;
     private Adapter adapter;
     private ApiInterface apiInterface;
-    private String agenda_id;
     ProgressBar progressBar;
+
+    SharedPreferences sharedpreferences;
+    public final static String TAG_NIPNIK = "nipnik";
+    String nipnik;
 
     @Override
     public void onAttach(Activity activity) {
@@ -62,6 +67,8 @@ public class AgendaFragment extends Fragment{
         progressBar = view.findViewById(R.id.prograss);
         recyclerView = view.findViewById(R.id.recyclerView);
 
+        sharedpreferences = this.getActivity().getSharedPreferences(LoginActivity.my_shared_preferences, Context.MODE_PRIVATE);
+        nipnik = getActivity().getIntent().getStringExtra(TAG_NIPNIK);
         mSpinner = view.findViewById(R.id.spinner_rss);
         mToolbar = view.findViewById(R.id.toolbar);
 
@@ -98,52 +105,31 @@ public class AgendaFragment extends Fragment{
                 switch(position){
                     case 0:
                         progressBar.setVisibility(View.VISIBLE);
-                        fetchAgenda("agenda", "monday");
-                        Toast.makeText(getActivity(),
-                                "You have selected Senin : " + position,
-                                Toast.LENGTH_SHORT).show();
+                        fetchAgenda("agenda", "monday", nipnik);
                         break;
                     case 1:
                         progressBar.setVisibility(View.VISIBLE);
-                        fetchAgenda("agenda", "tuesday");
-                        Toast.makeText(getActivity(),
-                                "You have selected Selasa : " + position,
-                                Toast.LENGTH_SHORT).show();
+                        fetchAgenda("agenda", "tuesday", nipnik);
                         break;
                     case 2:
                         progressBar.setVisibility(View.VISIBLE);
-                        fetchAgenda("agenda", "wednesday");
-                        Toast.makeText(getActivity(),
-                                "You have selected Rabu : " + position,
-                                Toast.LENGTH_SHORT).show();
+                        fetchAgenda("agenda", "wednesday", nipnik);
                         break;
                     case 3:
                         progressBar.setVisibility(View.VISIBLE);
-                        fetchAgenda("agenda", "thursday");
-                        Toast.makeText(getActivity(),
-                                "You have selected Kamis : " + position,
-                                Toast.LENGTH_SHORT).show();
+                        fetchAgenda("agenda", "thursday", nipnik);
                         break;
                     case 4:
                         progressBar.setVisibility(View.VISIBLE);
-                        fetchAgenda("agenda", "friday");
-                        Toast.makeText(getActivity(),
-                                "You have selected Jum'at : " + position,
-                                Toast.LENGTH_SHORT).show();
+                        fetchAgenda("agenda", "friday", nipnik);
                         break;
                     case 5:
                         progressBar.setVisibility(View.VISIBLE);
-                        fetchAgenda("agenda", "saturday");
-                        Toast.makeText(getActivity(),
-                                "You have selected Sabtu : " + position,
-                                Toast.LENGTH_SHORT).show();
+                        fetchAgenda("agenda", "saturday", nipnik);
                         break;
                     case 6:
                         progressBar.setVisibility(View.VISIBLE);
-                        fetchAgenda("agenda", "sunday");
-                        Toast.makeText(getActivity(),
-                                "You have selected Minggu : " + position,
-                                Toast.LENGTH_SHORT).show();
+                        fetchAgenda("agenda", "sunday", nipnik);
                         break;
 
                 }
@@ -165,9 +151,9 @@ public class AgendaFragment extends Fragment{
         return view;
     }
 
-        public void fetchAgenda (String type, String hari){
+        public void fetchAgenda (String type, String hari, String nipnik){
             apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
-            Call<List<Agenda>> call = apiInterface.getAgenda(type,hari);
+            Call<List<Agenda>> call = apiInterface.getAgenda(type,hari,nipnik);
             call.enqueue(new Callback<List<Agenda>>() {
                 @Override
                 public void onResponse(@NonNull Call<List<Agenda>> call, @NonNull Response<List<Agenda>> response) {
@@ -191,6 +177,7 @@ public class AgendaFragment extends Fragment{
                 @Override
                 public void onFailure(@NonNull Call<List<Agenda>> call, @NonNull Throwable t) {
                     Log.e("tesAgendaGagal", "Gagal");
+                    progressBar.setVisibility(View.GONE);
                 }
             });
         }
