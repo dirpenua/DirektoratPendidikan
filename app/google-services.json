@@ -1,52 +1,45 @@
 {
   "project_info": {
-    "project_number": "393479860551",
-    "firebase_url": "https://dirpenunair.firebaseio.com",
-    "project_id": "dirpenunair",
-    "storage_bucket": "dirpenunair.appspot.com"
+    "project_number": "303650707319",
+    "firebase_url": "https://direktoratpendidikan-c4c09.firebaseio.com",
+    "project_id": "direktoratpendidikan-c4c09",
+    "storage_bucket": "direktoratpendidikan-c4c09.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:393479860551:android:a69f0082e1ee6dd8",
+        "mobilesdk_app_id": "1:303650707319:android:a69f0082e1ee6dd8",
         "android_client_info": {
           "package_name": "com.example.direktoratpendidikan"
         }
       },
       "oauth_client": [
         {
-          "client_id": "393479860551-cblgva21o0q26tseeevji3358avb3gfe.apps.googleusercontent.com",
+          "client_id": "303650707319-3t4vf7rj3n76kvj8nbr95grnuk6thjia.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.example.direktoratpendidikan",
-            "certificate_hash": "d34138e47f5ed3da45fffa96cf3b33b059fab768"
+            "certificate_hash": "0ef5adcb60c5071c4083c6b8b5e8a55c37154080"
           }
         },
         {
-          "client_id": "393479860551-cmu54des448ak9njrfte779pjur0s21f.apps.googleusercontent.com",
+          "client_id": "303650707319-jd4vkhq3cldub5ajq8f4hfrp73170n98.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDwyXhO5wOtH5H9f8uT366GmLqp6BHBgys"
+          "current_key": "AIzaSyD2bE84eDeYrUXGrrLTaW3oTsITtQ2kE2g"
         }
       ],
       "services": {
-        "analytics_service": {
-          "status": 1
-        },
         "appinvite_service": {
-          "status": 2,
           "other_platform_oauth_client": [
             {
-              "client_id": "393479860551-cmu54des448ak9njrfte779pjur0s21f.apps.googleusercontent.com",
+              "client_id": "303650707319-jd4vkhq3cldub5ajq8f4hfrp73170n98.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
-        },
-        "ads_service": {
-          "status": 2
         }
       }
     }

@@ -2,6 +2,7 @@ package com.example.direktoratpendidikan.api;
 
 import com.example.direktoratpendidikan.data.Agenda;
 import com.example.direktoratpendidikan.data.MSG;
+import com.example.direktoratpendidikan.data.Notif;
 
 import java.util.List;
 import retrofit2.Call;
@@ -31,6 +32,17 @@ public interface ApiInterface {
     @POST("ubahpassword.php")
     Call<MSG> resetPassword(@Field("nipnik") String nipnik,
                             @Field("password_reset") String password_reset
+    );
+
+//    @FormUrlEncoded
+//    @POST("regpushnotif.php")
+//    Observable<Notif> registerToken (@Field("token") String token
+//    );
+
+    @FormUrlEncoded
+    @POST("savetoken.php")
+    Call<Notif> saveToken (@Field("nipnik") String nipnik,
+                                 @Field("token") String token
     );
 
 
