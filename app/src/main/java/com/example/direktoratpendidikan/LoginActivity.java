@@ -26,9 +26,16 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 import com.example.direktoratpendidikan.R;
+import com.example.direktoratpendidikan.admin.AgendaAdminFragment;
+import com.example.direktoratpendidikan.admin.AkunAdminFragment;
+import com.example.direktoratpendidikan.admin.BeasiswaAdminFragment;
+import com.example.direktoratpendidikan.admin.BerandaAdminFragment;
+import com.example.direktoratpendidikan.admin.MainActivityAdmin;
+import com.example.direktoratpendidikan.admin.ProsedurAdminFragment;
 import com.example.direktoratpendidikan.api.ApiClient;
 import com.example.direktoratpendidikan.api.ApiInterface;
 import com.example.direktoratpendidikan.data.MSG;
+import com.example.direktoratpendidikan.mahasiswa.MainActivityMhs;
 
 
 public class LoginActivity extends AppCompatActivity {
@@ -44,7 +51,9 @@ public class LoginActivity extends AppCompatActivity {
     Boolean session = false;
     public final static String TAG_NAMA = "nama_user";
     public final static String TAG_NIPNIK = "nipnik";
+    public final static Integer TAG_RULE = 0;
     String nama, nipnik;
+    Integer rule;
 
     @BindView(R.id.nipnik) EditText _nipnik;
     @BindView(R.id.password) EditText _password;
@@ -68,16 +77,36 @@ public class LoginActivity extends AppCompatActivity {
 
         sharedpreferences = getSharedPreferences(my_shared_preferences, Context.MODE_PRIVATE);
         session = sharedpreferences.getBoolean(session_status, false);
+
         nama = sharedpreferences.getString(TAG_NAMA, null);
         nipnik = sharedpreferences.getString(TAG_NIPNIK, null);
+        rule = sharedpreferences.getInt("TAG_RULE", 0);
         ButterKnife.bind(this);
 
         if (session) {
-            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-            intent.putExtra(TAG_NAMA, nama);
-            intent.putExtra(TAG_NIPNIK, nipnik);
-            finish();
-            startActivity(intent);
+            switch (rule) {
+                case 1:
+                    Intent rule1 = new Intent(LoginActivity.this, MainActivityAdmin.class);
+                    rule1.putExtra(TAG_NAMA, nama);
+                    rule1.putExtra(TAG_NIPNIK, nipnik);
+                    finish();
+                    startActivity(rule1);
+                    break;
+                case 2:
+                    Intent rule2 = new Intent(LoginActivity.this, MainActivity.class);
+                    rule2.putExtra(TAG_NAMA, nama);
+                    rule2.putExtra(TAG_NIPNIK, nipnik);
+                    finish();
+                    startActivity(rule2);
+                    break;
+                case 3:
+                    Intent rule3 = new Intent(LoginActivity.this, MainActivityMhs.class);
+                    rule3.putExtra(TAG_NAMA, nama);
+                    rule3.putExtra(TAG_NIPNIK, nipnik);
+                    finish();
+                    startActivity(rule3);
+                    break;
+            }
         }
 
         _loginButton.setOnClickListener(new View.OnClickListener() {
@@ -127,49 +156,157 @@ public class LoginActivity extends AppCompatActivity {
                 hidepDialog();
                 Log.d("onResponse", "" + response.body().getMessage());
 
+//                if(response.body().getSuccess() == 1) {
+//                    String nama = response.body().getNamaUser();
+//                    //startActivity(new Intent(LoginActivity.this, MainActivity.class));
+//
+//                    String text = "" + response.body().getMessage();
+//                    Spannable centeredText = new SpannableString(text);
+//                    centeredText.setSpan(new AlignmentSpan.Standard(Layout.Alignment.ALIGN_CENTER),
+//                            0, text.length() - 1,
+//                            Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+//                    Toast.makeText(LoginActivity.this,centeredText, Toast.LENGTH_LONG).show();
+//
+//
+//                    if(response.body().getStatus() == 0){
+//                        //Login pertama kali reset paswword
+//                        Intent intent = new Intent(LoginActivity.this, UbahPWUserBaru.class);
+//                        intent.putExtra(TAG_NAMA, nama);
+//                        intent.putExtra(TAG_NIPNIK, nipnik);
+//                        finish();
+//                        startActivity(intent);
+//                    }else{
+//                        // Sudah pernah login
+//                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+//                        intent.putExtra(TAG_NAMA, nama);
+//                        intent.putExtra(TAG_NIPNIK, nipnik);
+//                        finish();
+//                        startActivity(intent);
+//
+//                        // menyimpan login ke session
+//                        SharedPreferences.Editor editor = sharedpreferences.edit();
+//                        editor.putBoolean(session_status, true);
+//                        editor.putString(TAG_NAMA, nama);
+//                        editor.putString(TAG_NIPNIK, nipnik);
+//                        editor.commit();
+//                    }
+//
+//                }else {
+//                    String text = "" + response.body().getMessage();
+//                    Spannable centeredText = new SpannableString(text);
+//                    centeredText.setSpan(new AlignmentSpan.Standard(Layout.Alignment.ALIGN_CENTER),
+//                            0, text.length() - 1,
+//                            Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+//                    Toast.makeText(LoginActivity.this,centeredText, Toast.LENGTH_LONG).show();
+//                }
 
-                if(response.body().getSuccess() == 1) {
-                    String nama = response.body().getNamaUser();
-                    //startActivity(new Intent(LoginActivity.this, MainActivity.class));
 
-                    String text = "" + response.body().getMessage();
-                    Spannable centeredText = new SpannableString(text);
-                    centeredText.setSpan(new AlignmentSpan.Standard(Layout.Alignment.ALIGN_CENTER),
-                            0, text.length() - 1,
-                            Spannable.SPAN_INCLUSIVE_INCLUSIVE);
-                    Toast.makeText(LoginActivity.this,centeredText, Toast.LENGTH_LONG).show();
+                switch (response.body().getSuccess()) {
+                    case 1:
+                        String nama = response.body().getNamaUser();
+                        String text = response.body().getMessage();
+                        Spannable centeredText = new SpannableString(text);
+                        centeredText.setSpan(new AlignmentSpan.Standard(Layout.Alignment.ALIGN_CENTER),
+                                0, text.length() - 1,
+                                Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+                        Toast.makeText(LoginActivity.this,centeredText, Toast.LENGTH_LONG).show();
+                            if(response.body().getStatus() == 0){
+                                //Login pertama kali reset paswword
+                                Intent intent = new Intent(LoginActivity.this, UbahPWUserBaru.class);
+                                intent.putExtra(TAG_NAMA, nama);
+                                intent.putExtra(TAG_NIPNIK, nipnik);
+                                finish();
+                                startActivity(intent);
+                            }else{
+                                // Sudah pernah login
+                                Intent intent = new Intent(LoginActivity.this, MainActivityAdmin.class);
+                                intent.putExtra(TAG_NAMA, nama);
+                                intent.putExtra(TAG_NIPNIK, nipnik);
+                                finish();
+                                startActivity(intent);
 
-                    if(response.body().getStatus() == 0){
-                        //Login pertama kali reset paswword
-                        Intent intent = new Intent(LoginActivity.this, UbahPWUserBaru.class);
-                        intent.putExtra(TAG_NAMA, nama);
-                        intent.putExtra(TAG_NIPNIK, nipnik);
-                        finish();
-                        startActivity(intent);
-                    }else{
-                        // Sudah pernah login
-                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                        intent.putExtra(TAG_NAMA, nama);
-                        intent.putExtra(TAG_NIPNIK, nipnik);
-                        finish();
-                        startActivity(intent);
+                                // menyimpan login ke session
+                                SharedPreferences.Editor editor = sharedpreferences.edit();
+                                editor.putBoolean(session_status, true);
+                                editor.putString(TAG_NAMA, nama);
+                                editor.putString(TAG_NIPNIK, nipnik);
+                                editor.putInt("TAG_RULE", 1);
+                                editor.commit();
+                            }
+                        break;
+                    case 2:
+                        nama = response.body().getNamaUser();
+                        //startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                        text = response.body().getMessage();
+                        centeredText = new SpannableString(text);
+                        centeredText.setSpan(new AlignmentSpan.Standard(Layout.Alignment.ALIGN_CENTER),
+                                0, text.length() - 1,
+                                Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+                        Toast.makeText(LoginActivity.this,centeredText, Toast.LENGTH_LONG).show();
+                        if(response.body().getStatus() == 0){
+                            //Login pertama kali reset paswword
+                            Intent intent = new Intent(LoginActivity.this, UbahPWUserBaru.class);
+                            intent.putExtra(TAG_NAMA, nama);
+                            intent.putExtra(TAG_NIPNIK, nipnik);
+                            finish();
+                            startActivity(intent);
+                        }else{
+                            // Sudah pernah login
+                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                            intent.putExtra(TAG_NAMA, nama);
+                            intent.putExtra(TAG_NIPNIK, nipnik);
+                            finish();
+                            startActivity(intent);
 
-                        // menyimpan login ke session
-                        SharedPreferences.Editor editor = sharedpreferences.edit();
-                        editor.putBoolean(session_status, true);
-                        editor.putString(TAG_NAMA, nama);
-                        editor.putString(TAG_NIPNIK, nipnik);
-                        editor.commit();
+                            // menyimpan login ke session
+                            SharedPreferences.Editor editor = sharedpreferences.edit();
+                            editor.putBoolean(session_status, true);
+                            editor.putString(TAG_NAMA, nama);
+                            editor.putString(TAG_NIPNIK, nipnik);
+                            editor.putInt("TAG_RULE", 2);
+                            editor.commit();
+                        }
+                        break;
+                    case 3:
+                        nama = response.body().getNamaUser();
+                        //startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                        text = response.body().getMessage();
+                        centeredText = new SpannableString(text);
+                        centeredText.setSpan(new AlignmentSpan.Standard(Layout.Alignment.ALIGN_CENTER),
+                                0, text.length() - 1,
+                                Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+                        Toast.makeText(LoginActivity.this,centeredText, Toast.LENGTH_LONG).show();
+                        if(response.body().getStatus() == 0){
+                            //Login pertama kali reset paswword
+                            Intent intent = new Intent(LoginActivity.this, UbahPWUserBaru.class);
+                            intent.putExtra(TAG_NAMA, nama);
+                            intent.putExtra(TAG_NIPNIK, nipnik);
+                            finish();
+                            startActivity(intent);
+                        }else{
+                            // Sudah pernah login
+                            Intent intent = new Intent(LoginActivity.this, MainActivityMhs.class);
+                            intent.putExtra(TAG_NAMA, nama);
+                            intent.putExtra(TAG_NIPNIK, nipnik);
+                            finish();
+                            startActivity(intent);
 
-                    }
-
-                }else {
-                    String text = "" + response.body().getMessage();
-                    Spannable centeredText = new SpannableString(text);
-                    centeredText.setSpan(new AlignmentSpan.Standard(Layout.Alignment.ALIGN_CENTER),
-                            0, text.length() - 1,
-                            Spannable.SPAN_INCLUSIVE_INCLUSIVE);
-                    Toast.makeText(LoginActivity.this,centeredText, Toast.LENGTH_LONG).show();
+                            // menyimpan login ke session
+                            SharedPreferences.Editor editor = sharedpreferences.edit();
+                            editor.putBoolean(session_status, true);
+                            editor.putString(TAG_NAMA, nama);
+                            editor.putString(TAG_NIPNIK, nipnik);
+                            editor.putInt("TAG_RULE", 3);
+                            editor.commit();
+                        }
+                        break;
+                    default:
+                        text = "NIM/NIP/NIK atau Password anda SALAH";
+                        centeredText = new SpannableString(text);
+                        centeredText.setSpan(new AlignmentSpan.Standard(Layout.Alignment.ALIGN_CENTER),
+                                0, text.length() - 1,
+                                Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+                        Toast.makeText(LoginActivity.this,centeredText, Toast.LENGTH_LONG).show();
                 }
             }
 

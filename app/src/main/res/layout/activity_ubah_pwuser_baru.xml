@@ -39,7 +39,7 @@
         android:layout_marginRight="20dp"
     android:textSize="14dp"
     android:gravity="center"
-    android:text="Anda masih menggunakan password default (NIP/NIK anda). Silahkan ubah ke password baru, yang akan anda gunakan login seterusnya." />
+    android:text="Saat ini anda login masih menggunakan password default (NIM/NIP/NIK). Silahkan ubah ke password baru, yang akan anda gunakan login seterusnya." />
 
     <LinearLayout
         android:layout_width="match_parent"

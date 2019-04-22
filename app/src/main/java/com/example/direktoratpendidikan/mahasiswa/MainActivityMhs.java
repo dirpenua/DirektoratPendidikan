@@ -1,16 +1,15 @@
-package com.example.direktoratpendidikan;
+package com.example.direktoratpendidikan.mahasiswa;
 
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
-import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.text.Layout;
 import android.text.Spannable;
 import android.text.SpannableString;
@@ -19,23 +18,27 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.example.direktoratpendidikan.AgendaFragment;
+import com.example.direktoratpendidikan.AkunFragment;
+import com.example.direktoratpendidikan.BeasiswaFragment;
+import com.example.direktoratpendidikan.BerandaFragment;
+import com.example.direktoratpendidikan.LoginActivity;
+import com.example.direktoratpendidikan.MainActivity;
+import com.example.direktoratpendidikan.ProsedurFragment;
+import com.example.direktoratpendidikan.R;
 import com.example.direktoratpendidikan.api.ApiClient;
 import com.example.direktoratpendidikan.api.ApiInterface;
-import com.example.direktoratpendidikan.data.MSG;
 import com.example.direktoratpendidikan.data.Notif;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.InstanceIdResult;
-import com.google.firebase.messaging.FirebaseMessaging;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-
-public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
+public class MainActivityMhs extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
 
     SharedPreferences sharedpreferences;
     public final static String TAG_NIPNIK = "nipnik";
@@ -47,7 +50,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_main_mhs);
         sharedpreferences = this.getSharedPreferences(LoginActivity.my_shared_preferences, Context.MODE_PRIVATE);
         nipnik = getIntent().getStringExtra(TAG_NIPNIK);
 
@@ -85,7 +88,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         loadFragment(new BerandaFragment());
 
         // inisialisasi BottomNavigaionView
-        BottomNavigationView bottomNavigationView = findViewById(R.id.bn_main);
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bn_main_mhs);
 
         // beri listener pada saat item/menu bottomnavigation terpilih
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
@@ -106,7 +109,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
                     centeredText.setSpan(new AlignmentSpan.Standard(Layout.Alignment.ALIGN_CENTER),
                             0, text.length() - 1,
                             Spannable.SPAN_INCLUSIVE_INCLUSIVE);
-                    Toast.makeText(MainActivity.this,centeredText, Toast.LENGTH_LONG).show();
+                    Toast.makeText(MainActivityMhs.this,centeredText, Toast.LENGTH_LONG).show();
 
                 }else {
 
@@ -126,7 +129,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     private boolean loadFragment(Fragment fragment) {
         if (fragment != null) {
             getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.fl_container, fragment)
+                    .replace(R.id.fl_containermhs, fragment)
                     .commit();
             return true;
         }
@@ -146,8 +149,8 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
             case R.id.prosedur:
                 fragment = new ProsedurFragment();
                 break;
-            case R.id.agenda:
-                fragment = new AgendaFragment();
+            case R.id.faq: //ganti dengan FAQ
+                fragment = new FaqFragment();
                 break;
             case R.id.beasiswa:
                 fragment = new BeasiswaFragment();

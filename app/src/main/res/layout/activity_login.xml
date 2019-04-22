@@ -35,7 +35,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:drawableLeft="@drawable/ic_akun"
-                android:hint=" NIP/NIK"
+                android:hint="NIM/NIP/NIK"
                 android:inputType="textEmailAddress"
                 android:singleLine="true"
                 android:textColorHint="@color/colorPrimaryDark"

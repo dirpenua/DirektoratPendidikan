@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/beranda_admin"
+        android:icon="@drawable/ic_beranda"
+        android:title="@string/menu_beranda" />
+
+    <item
+        android:id="@+id/prosedur_admin"
+        android:icon="@drawable/ic_prosedur"
+        android:title="@string/menu_prosedur" />
+
+    <item
+        android:id="@+id/agenda_admin"
+        android:icon="@drawable/ic_agenda"
+        android:title="@string/menu_agenda" />
+
+    <item
+        android:id="@+id/beasiswa_admin"
+        android:icon="@drawable/ic_beasiswa"
+        android:title="@string/menu_beasiswa" />
+
+    <item
+        android:id="@+id/akun_admin"
+        android:icon="@drawable/ic_akun"
+        android:title="@string/menu_akun" />
+
+
+</menu>
