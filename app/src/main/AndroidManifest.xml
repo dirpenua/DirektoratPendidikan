@@ -18,11 +18,24 @@
         <activity
             android:name=".admin.MainActivityAdmin"
             android:label="@string/title_activity_main_admin"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".mahasiswa.MainActivityMhs" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="adjustPan"/>
+
+        <activity
+            android:name=".mahasiswa.MainActivityMhs"
+            android:label="@string/title_activity_main_admin"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="adjustPan"/>
+
+        <activity
+            android:name=".MainActivity"
+            android:theme="@style/NoActionBar"
+            android:windowSoftInputMode="adjustPan"/>
+
         <activity
             android:name=".DetailAgenda"
             android:theme="@style/NoActionBar" />
+
         <activity
             android:name=".SplashActivity"
             android:theme="@style/NoActionBar">
@@ -38,9 +51,7 @@
         <activity
             android:name=".UbahPWUserBaru"
             android:theme="@style/NoActionBar" />
-        <activity
-            android:name=".MainActivity"
-            android:theme="@style/NoActionBar" />
+
 
         <service android:name=".MyFirebaseMessagingService">
             <intent-filter>

@@ -158,6 +158,9 @@ public class AgendaFragment extends Fragment{
         public void fetchAgenda (String type, String hari, String nipnik){
             apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
             Call<List<Agenda>> call = apiInterface.getAgenda(type,hari,nipnik);
+            Log.e("tipe", type);
+            Log.e("hari", hari);
+            Log.e("hari", nipnik);
             call.enqueue(new Callback<List<Agenda>>() {
                 @Override
                 public void onResponse(@NonNull Call<List<Agenda>> call, @NonNull Response<List<Agenda>> response) {

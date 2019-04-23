@@ -159,7 +159,7 @@ public class MainActivityAdmin extends AppCompatActivity implements BottomNaviga
                 fragment = new BeasiswaAdminFragment();
                 break;
             case R.id.akun:
-                fragment = new AkunAdminFragment();
+                fragment = new AkunFragment();
                 break;
         }
         return loadFragment(fragment);

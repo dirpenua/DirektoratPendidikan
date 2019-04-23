@@ -37,6 +37,18 @@
         <item>Minggu</item>
     </string-array>
 
+    <string-array name="kategoriprosedur">
+        <item>Tampilkan semua</item>
+        <item>Administrasi Pendidikan</item>
+        <item>Pengembangan Pendidikan</item>
+    </string-array>
+
+    <string-array name="kategoribeasiswa">
+        <item>Tampilkan semua</item>
+        <item>Dalam Negeri</item>
+        <item>Luar Negeri</item>
+    </string-array>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_main_admin">MainActivityAdmin</string>

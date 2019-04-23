@@ -1,14 +1,61 @@
-<?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/fragment_agenda"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".admin.AgendaAdminFragment">
+    android:fitsSystemWindows="true">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimaryDark"
+        android:elevation="5dp"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+
+        <Spinner
+            android:id="@+id/spinner_rss"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="?android:selectableItemBackground"
+            android:theme="@style/ThemeOverlay.AppCompat.Light" />
+
+    </android.support.v7.widget.Toolbar>
+
+    <ProgressBar
+        android:id="@+id/prograss"
+        android:layout_centerInParent="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"/>
+
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerViewAdmin"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Halo ini fragment agenda ADMIN" />
+        android:layout_below="@id/toolbar"
+        android:layout_above="@id/bn_main"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="70dp"/>
 
-</FrameLayout>
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/tambahagenda"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginBottom="90dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:backgroundTint="@color/colorPrimaryDark"
+        android:src="@drawable/ic_tambah"
+        app:elevation="8dp"
+        app:fabSize="normal"
+        app:maxImageSize="35dp"/>
+
+
+
+
+</RelativeLayout>

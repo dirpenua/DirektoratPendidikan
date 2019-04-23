@@ -1,51 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".BerandaFragment">
+    tools:context=".BerandaFragment"
+    android:orientation="vertical">
 
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
+
         android:background="#FFFFFF">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:elevation="3dp"
+            android:layout_marginBottom="20dp"
             android:orientation="vertical">
 
-            <SearchView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="30dp"
-                android:background="@drawable/round"></SearchView>
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_margin="30dp"
+                    android:src="@drawable/ic_notif"
+                    android:layout_gravity="end"/>
 
             <!-- milik kolom 1 -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:id="@+id/ic_pengumuman"
-                    android:layout_width="wrap_content"
-                    android:layout_height="60dp"
-                    android:layout_margin="8dp"
-                    android:layout_weight="0.2"
-                    android:background="@drawable/round"
-                    android:src="@drawable/ic_pengumuman" />
-
-                <ImageView
                     android:id="@+id/ic_berita"
                     android:layout_width="wrap_content"
                     android:layout_height="60dp"
-                    android:layout_margin="8dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginBottom="10dp"
                     android:layout_weight="0.2"
                     android:background="@drawable/round"
                     android:src="@drawable/ic_berita" />
@@ -54,17 +53,23 @@
                     android:id="@+id/ic_prodi"
                     android:layout_width="wrap_content"
                     android:layout_height="60dp"
-                    android:layout_margin="8dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginBottom="10dp"
                     android:layout_weight="0.2"
                     android:background="@drawable/round"
                     android:src="@drawable/ic_prodi"
                     android:textAlignment="center" />
 
                 <ImageView
-                    android:id="@+id/ic_tentang"
+                    android:id="@+id/ic_disabilitas"
                     android:layout_width="wrap_content"
                     android:layout_height="60dp"
-                    android:layout_margin="8dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginBottom="10dp"
                     android:layout_weight="0.2"
                     android:background="@drawable/round"
                     android:src="@drawable/ic_disabilitas" />
@@ -78,18 +83,6 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/txt_pengumuman"
-                    android:layout_width="40dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginRight="8dp"
-                    android:layout_marginBottom="16dp"
-                    android:layout_weight="0.2"
-                    android:text="@string/submenu_pengumuman"
-                    android:textAlignment="center"
-                    android:textSize="12dp" />
-
-                <TextView
                     android:id="@+id/txt_berita"
                     android:layout_width="40dp"
                     android:layout_height="wrap_content"
@@ -98,7 +91,8 @@
                     android:layout_weight="0.2"
                     android:text="@string/submenu_berita"
                     android:textAlignment="center"
-                    android:textSize="12dp" />
+                    android:textSize="12dp"
+                    android:textStyle="bold"/>
 
                 <TextView
                     android:id="@+id/txt_prodi"
@@ -109,7 +103,8 @@
                     android:layout_weight="0.2"
                     android:text="@string/submenu_prodi"
                     android:textAlignment="center"
-                    android:textSize="12dp" />
+                    android:textSize="12dp"
+                    android:textStyle="bold"/>
 
                 <TextView
                     android:id="@+id/txt_tentang"
@@ -120,7 +115,8 @@
                     android:layout_weight="0.2"
                     android:text="@string/submenu_disabilitas"
                     android:textAlignment="center"
-                    android:textSize="12dp" />
+                    android:textSize="12dp"
+                    android:textStyle="bold"/>
             </LinearLayout>
 
 
@@ -133,19 +129,13 @@
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:id="@+id/ic_petaproses"
-                    android:layout_width="wrap_content"
-                    android:layout_height="60dp"
-                    android:layout_margin="8dp"
-                    android:layout_weight="0.2"
-                    android:background="@drawable/round"
-                    android:src="@drawable/ic_petaproses" />
-
-                <ImageView
                     android:id="@+id/ic_kalender"
                     android:layout_width="wrap_content"
                     android:layout_height="60dp"
-                    android:layout_margin="8dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginBottom="10dp"
                     android:layout_weight="0.2"
                     android:background="@drawable/round"
                     android:src="@drawable/ic_kalender" />
@@ -154,7 +144,10 @@
                     android:id="@+id/ic_akreditasi"
                     android:layout_width="wrap_content"
                     android:layout_height="60dp"
-                    android:layout_margin="8dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginBottom="10dp"
                     android:layout_weight="0.2"
                     android:background="@drawable/round"
                     android:src="@drawable/ic_akreditasi" />
@@ -163,7 +156,10 @@
                     android:id="@+id/ic_download"
                     android:layout_width="wrap_content"
                     android:layout_height="60dp"
-                    android:layout_margin="8dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginBottom="10dp"
                     android:layout_weight="0.2"
                     android:background="@drawable/round"
                     android:src="@drawable/ic_download" />
@@ -177,18 +173,6 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/txt_petaproses"
-                    android:layout_width="40dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginRight="8dp"
-                    android:layout_marginBottom="16dp"
-                    android:layout_weight="1"
-                    android:text="@string/submenu_petaproses"
-                    android:textAlignment="center"
-                    android:textSize="12dp" />
-
-                <TextView
                     android:id="@+id/txt_kalender"
                     android:layout_width="40dp"
                     android:layout_height="wrap_content"
@@ -197,7 +181,8 @@
                     android:layout_weight="1"
                     android:text="@string/submenu_kalender"
                     android:textAlignment="center"
-                    android:textSize="12dp" />
+                    android:textSize="12dp"
+                    android:textStyle="bold"/>
 
                 <TextView
                     android:id="@+id/txt_akreditasi"
@@ -208,7 +193,8 @@
                     android:layout_weight="1"
                     android:text="@string/submenu_akreditasi"
                     android:textAlignment="center"
-                    android:textSize="12dp" />
+                    android:textSize="12dp"
+                    android:textStyle="bold"/>
 
                 <TextView
                     android:id="@+id/txt_download"
@@ -219,17 +205,18 @@
                     android:layout_weight="1"
                     android:text="@string/submenu_download"
                     android:textAlignment="center"
-                    android:textSize="12dp" />
+                    android:textSize="12dp"
+                    android:textStyle="bold"/>
             </LinearLayout>
 
         </LinearLayout>
+    </LinearLayout>
 
-        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:app="http://schemas.android.com/apk/res-auto"
             xmlns:tools="http://schemas.android.com/tools"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="10dp"
             android:background="@color/Background"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
             tools:showIn="@layout/activity_main">
@@ -246,15 +233,6 @@
                 app:strokeColor="#FF777777"
                 app:strokeWidth="1dp" />
 
-        </RelativeLayout>
+        </LinearLayout>
 
-        <TextView
-            android:id="@+id/token"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:textSize="10dp"/>
-    </LinearLayout>
-
-
-</ScrollView>
+</LinearLayout>

@@ -1,14 +1,95 @@
-<?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/fragment_beasiswa"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".BeasiswaFragment">
+    android:fitsSystemWindows="true"
+    android:orientation="vertical"
+    >
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Hello ini fragment beasiswa sama kayak dosen" />
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@color/colorPrimaryDark"
+        android:elevation="8dp">
 
-</FrameLayout>
+        <SearchView
+            android:id="@+id/cari_beasiswa"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:background="@drawable/whiteround">
+
+        </SearchView>
+
+        <Spinner
+            android:id="@+id/spinner_beasiswa"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="?android:selectableItemBackground"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginBottom="10dp"
+            android:theme="@style/ThemeOverlay.AppCompat.Light" />
+
+    </LinearLayout>
+
+
+
+    <!--<LinearLayout-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:orientation="horizontal"-->
+    <!--android:background="@drawable/whiteround"-->
+    <!--android:layout_marginTop="30dp"-->
+    <!--android:layout_marginLeft="30dp"-->
+    <!--android:layout_marginRight="30dp"-->
+    <!--&gt;-->
+
+    <!--<ImageView-->
+    <!--android:layout_width="30dp"-->
+    <!--android:layout_height="30dp"-->
+    <!--android:src="@drawable/ic_cari"-->
+    <!--android:layout_gravity="center"-->
+    <!--android:layout_marginLeft="10dp">-->
+    <!--</ImageView>-->
+
+    <!--<EditText-->
+    <!--android:id="@+id/nipnik"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_marginLeft="5dp"-->
+    <!--android:layout_marginRight="10dp"-->
+    <!--android:layout_gravity="center"-->
+    <!--android:hint="Cari informasi prosedur.."-->
+    <!--android:inputType="textFilter"-->
+    <!--android:singleLine="true"-->
+    <!--android:textColorHint="@color/colorPrimaryDark"-->
+    <!--android:drawableTint="@color/colorPrimaryDark"/>-->
+    <!--</LinearLayout>-->
+
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ProgressBar
+            android:id="@+id/prograss"
+            android:layout_centerInParent="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"/>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerViewBeasiswa"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@id/bn_main"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="70dp"/>
+    </RelativeLayout>
+
+</LinearLayout>

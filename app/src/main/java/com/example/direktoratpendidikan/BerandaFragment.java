@@ -37,7 +37,7 @@ public class BerandaFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_beranda, container, false);
 
-        isiToken= view.findViewById(R.id.token);
+//        isiToken= view.findViewById(R.id.token);
 
         FirebaseInstanceId.getInstance().getInstanceId()
                 .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
@@ -45,7 +45,7 @@ public class BerandaFragment extends Fragment {
                     public void onComplete(@NonNull Task<InstanceIdResult> task) {
                         if (task.isSuccessful()) {
                             String token = task.getResult().getToken();
-                            isiToken.setText("Token : " + token);
+//                            isiToken.setText("Token : " + token);
                         } else {
 
                         }

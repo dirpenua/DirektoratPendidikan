@@ -6,7 +6,6 @@ import com.example.direktoratpendidikan.data.Notif;
 
 import java.util.List;
 import retrofit2.Call;
-import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -16,10 +15,23 @@ import retrofit2.http.Query;
 public interface ApiInterface {
 
     @GET("getlist.php?")
+    Call < List<Agenda>> getProsedur(
+            @Query("item_type") String item_type,
+            @Query("spinner_hari") String spinner_hari,
+            @Query("nipnik") String nipnik
+    );
+
+    @GET("getlist.php?")
     Call < List<Agenda>> getAgenda(
             @Query("item_type") String item_type,
             @Query("spinner_hari") String spinner_hari,
             @Query("nipnik") String nipnik
+    );
+
+    @GET("getlistadmin.php?")
+    Call < List<Agenda>> getAgendaAdmin(
+            @Query("item_type") String item_type,
+            @Query("spinner_hari") String spinner_hari
     );
 
     @FormUrlEncoded
