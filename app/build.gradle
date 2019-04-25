@@ -34,6 +34,9 @@ dependencies {
     implementation 'com.jakewharton:butterknife:8.8.1'
 
     implementation 'com.google.firebase:firebase-messaging:17.6.0'
+    implementation 'com.google.firebase:firebase-core:16.0.7'
+
+
 
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
     implementation 'com.synnapps:carouselview:0.1.4'
