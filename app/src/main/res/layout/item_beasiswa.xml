@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/agenda_id"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="20dp"
+    android:layout_marginTop="10dp"
+    android:layout_marginRight="20dp"
+    android:layout_marginBottom="3dp"
+    android:orientation="vertical"
+    android:elevation="3dp"
+    android:background="@drawable/whiteround">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/judulbeasiswa"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_gravity="center_vertical"
+            android:text="Judul Beasiswa"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:layout_weight="1"/>
+
+        <TextView
+            android:id="@+id/kontenbeasiswa"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:text="konten"
+            android:textSize="13sp"
+            android:layout_weight="0"/>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/baca"
+            android:layout_width="80dp"
+            android:layout_height="30dp"
+            android:layout_gravity="end"
+            android:layout_margin="10dp"
+            android:background="@drawable/rounddark"
+            android:textColor="#FFF"
+            android:gravity="center"
+            android:textAlignment="center"
+            android:text="BACA"
+            android:textSize="15sp"/>
+</LinearLayout>
+
+

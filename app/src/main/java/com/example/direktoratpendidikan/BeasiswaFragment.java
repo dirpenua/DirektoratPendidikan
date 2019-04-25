@@ -25,6 +25,7 @@ import com.example.direktoratpendidikan.adapter.Adapter;
 import com.example.direktoratpendidikan.api.ApiClient;
 import com.example.direktoratpendidikan.api.ApiInterface;
 import com.example.direktoratpendidikan.data.Agenda;
+import com.example.direktoratpendidikan.data.Beasiswa;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
@@ -138,12 +139,12 @@ public class BeasiswaFragment extends Fragment {
         return view;
     }
 
-    public void fetchProsedur (String type, String hari, String nipnik){
+    public void fetchBeasiswa (String kategori){
         apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
-        Call<List<Agenda>> call = apiInterface.getAgenda(type,hari,nipnik);
-        call.enqueue(new Callback<List<Agenda>>() {
+        Call<List<Beasiswa>> call = apiInterface.getBeasiswa(kategori);
+        call.enqueue(new Callback<List<Beasiswa>>() {
             @Override
-            public void onResponse(@NonNull Call<List<Agenda>> call, @NonNull Response<List<Agenda>> response) {
+            public void onResponse(@NonNull Call<List<Beasiswa>> call, @NonNull Response<List<Beasiswa>> response) {
                 progressBar.setVisibility(View.GONE);
                 agendaList = response.body();
                 adapter = new Adapter(getActivity(), agendaList);
@@ -162,7 +163,7 @@ public class BeasiswaFragment extends Fragment {
             }
 
             @Override
-            public void onFailure(@NonNull Call<List<Agenda>> call, @NonNull Throwable t) {
+            public void onFailure(@NonNull Call<List<Beasiswa>> call, @NonNull Throwable t) {
                 Log.e("tesAgendaGagal", "Gagal");
                 progressBar.setVisibility(View.GONE);
             }

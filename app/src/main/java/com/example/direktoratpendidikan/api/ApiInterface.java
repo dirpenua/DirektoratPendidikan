@@ -1,6 +1,7 @@
 package com.example.direktoratpendidikan.api;
 
 import com.example.direktoratpendidikan.data.Agenda;
+import com.example.direktoratpendidikan.data.Beasiswa;
 import com.example.direktoratpendidikan.data.MSG;
 import com.example.direktoratpendidikan.data.Notif;
 
@@ -26,6 +27,11 @@ public interface ApiInterface {
             @Query("item_type") String item_type,
             @Query("spinner_hari") String spinner_hari,
             @Query("nipnik") String nipnik
+    );
+
+    @GET("getbeasiswa.php?")
+    Call < List<Beasiswa>> getBeasiswa(
+            @Query("kategori") String kategori
     );
 
     @GET("getlistadmin.php?")
