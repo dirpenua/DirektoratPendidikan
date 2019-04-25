@@ -49,6 +49,22 @@
         <item>Luar Negeri</item>
     </string-array>
 
+    <string-array name="listakun">
+        <item>Profil</item>
+        <item>Email verifikasi</item>
+        <item>Ubah password</item>
+        <item>Bantuan</item>
+        <item>Tentang DirpenUA</item>
+    </string-array>
+
+    <array name="logoakun">
+        <item>@drawable/ic_akun</item>
+        <item>@drawable/ic_email</item>
+        <item>@drawable/ic_password</item>
+        <item>@drawable/ic_bantuan</item>
+        <item>@drawable/ic_tentangaplikasi</item>
+    </array>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_main_admin">MainActivityAdmin</string>

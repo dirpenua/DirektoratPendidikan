@@ -2,6 +2,7 @@ package com.example.direktoratpendidikan.api;
 
 import com.example.direktoratpendidikan.data.Agenda;
 import com.example.direktoratpendidikan.data.Beasiswa;
+import com.example.direktoratpendidikan.data.Cari;
 import com.example.direktoratpendidikan.data.MSG;
 import com.example.direktoratpendidikan.data.Notif;
 
@@ -31,7 +32,12 @@ public interface ApiInterface {
 
     @GET("getbeasiswa.php?")
     Call < List<Beasiswa>> getBeasiswa(
-            @Query("kategori") String kategori
+            @Query("kategori") Integer kategori
+    );
+
+    @FormUrlEncoded
+    @POST("searchbeasiswa.php")
+    Call<Cari> searchBeasiswa(@Field("search") String search
     );
 
     @GET("getlistadmin.php?")

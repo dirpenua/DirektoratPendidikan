@@ -178,7 +178,7 @@ public class AgendaFragment extends Fragment{
 //                            startActivity(i);
 //                        }
 //                    });
-                    Log.e("tesGudangBerhasil", new Gson().toJson(response.body()));
+                    Log.e("tesAgendaBerhasil", new Gson().toJson(response.body()));
                 }
 
                 @Override

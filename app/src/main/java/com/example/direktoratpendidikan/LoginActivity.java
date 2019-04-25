@@ -25,13 +25,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import com.example.direktoratpendidikan.R;
-import com.example.direktoratpendidikan.admin.AgendaAdminFragment;
-import com.example.direktoratpendidikan.admin.AkunAdminFragment;
-import com.example.direktoratpendidikan.admin.BeasiswaAdminFragment;
-import com.example.direktoratpendidikan.admin.BerandaAdminFragment;
 import com.example.direktoratpendidikan.admin.MainActivityAdmin;
-import com.example.direktoratpendidikan.admin.ProsedurAdminFragment;
 import com.example.direktoratpendidikan.api.ApiClient;
 import com.example.direktoratpendidikan.api.ApiInterface;
 import com.example.direktoratpendidikan.data.MSG;

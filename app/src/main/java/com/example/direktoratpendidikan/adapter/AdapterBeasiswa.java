@@ -9,14 +9,15 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.direktoratpendidikan.DetailAgenda;
+import com.example.direktoratpendidikan.DetailBeasiswa;
 import com.example.direktoratpendidikan.R;
-import com.example.direktoratpendidikan.data.Agenda;
+import com.example.direktoratpendidikan.data.Beasiswa;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class AdapterBeasiswa extends RecyclerView.Adapter<AdapterBeasiswa.MyViewHolder> {
-    List<Agenda> beasiswaList;
+    List<Beasiswa> beasiswaList;
     private Context context;
     private Adapter.OnItemClickListener mItemClickListener;
 
@@ -34,7 +35,11 @@ public class AdapterBeasiswa extends RecyclerView.Adapter<AdapterBeasiswa.MyView
 
     @Override
     public void onBindViewHolder(AdapterBeasiswa.MyViewHolder holder, int position) {
-        holder.judulbeasiswa.setText(beasiswaList.get(position).getTanggal());
+        holder.idbeasiswa.setText(beasiswaList.get(position).getId());
+        holder.judulbeasiswa.setText(beasiswaList.get(position).getJudul());
+        holder.kontenbeasiswa.setText(beasiswaList.get(position).getKontenPendek());
+        holder.kontenpanjang.setText(beasiswaList.get(position).getKontenPanjang());
+        holder.tglpublish.setText(beasiswaList.get(position).getTanggal());
 
 
     }
@@ -54,19 +59,24 @@ public class AdapterBeasiswa extends RecyclerView.Adapter<AdapterBeasiswa.MyView
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        TextView judulbeasiswa, konten;
+        TextView idbeasiswa, judulbeasiswa, kontenbeasiswa, kontenpanjang, tglpublish;
 
         public MyViewHolder(final View itemView) {
             super(itemView);
+            idbeasiswa = itemView.findViewById(R.id.hideid);
             judulbeasiswa = itemView.findViewById(R.id.judulbeasiswa);
-            konten = itemView.findViewById(R.id.kontenbeasiswa);
+            kontenbeasiswa = itemView.findViewById(R.id.kontenpendek);
+            kontenpanjang = itemView.findViewById(R.id.hidekonten);
+            tglpublish = itemView.findViewById(R.id.hidetgl);
             itemView.setTag(itemView);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent i = new Intent(v.getContext(), DetailAgenda.class); //Detail Beasiswa
-                    i.putExtra("tanggalKegiatan",beasiswaList.get(getAdapterPosition()).getTanggal());
-
+                    Intent i = new Intent(v.getContext(), DetailBeasiswa.class); //Detail Beasiswa
+                    i.putExtra("idbeasiswa",beasiswaList.get(getAdapterPosition()).getId());
+                    i.putExtra("judulbeasiswa",beasiswaList.get(getAdapterPosition()).getJudul());
+                    i.putExtra("kontenpanjangbeasiswa",beasiswaList.get(getAdapterPosition()).getKontenPanjang());
+                    i.putExtra("tglpublish",beasiswaList.get(getAdapterPosition()).getTanggal());
                     v.getContext().startActivity(i);
                 }
 
