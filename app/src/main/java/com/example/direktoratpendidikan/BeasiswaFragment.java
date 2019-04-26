@@ -57,7 +57,7 @@ public class BeasiswaFragment extends Fragment implements SearchView.OnQueryText
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
     private List beasiswaList;
-    private AdapterBeasiswa                                                                adapter;
+    private AdapterBeasiswa adapter;
     private ApiInterface apiInterface;
     ProgressBar progressBar;
     private List<Beasiswa> fetchCari = new ArrayList<>();
@@ -207,6 +207,8 @@ public class BeasiswaFragment extends Fragment implements SearchView.OnQueryText
                     adapter = new AdapterBeasiswa(getActivity(), fetchCari);
                     recyclerView.setAdapter(adapter);
                     adapter.notifyDataSetChanged();
+                }else {
+                    //View v = LayoutInflater.from(getLayoutInflater().getContext()).inflate(R.layout.noresults, parent, false);
                 }
             }
 

@@ -1,5 +1,6 @@
 package com.example.direktoratpendidikan;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -20,6 +21,8 @@ import com.google.firebase.messaging.FirebaseMessaging;
 import com.synnapps.carouselview.CarouselView;
 import com.synnapps.carouselview.ImageListener;
 
+import butterknife.OnClick;
+
 
 public class BerandaFragment extends Fragment {
 
@@ -31,6 +34,7 @@ public class BerandaFragment extends Fragment {
             imageView.setImageResource(sampleImages[position]);
         }
     };
+
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -57,6 +61,17 @@ public class BerandaFragment extends Fragment {
         carouselView = view.findViewById(R.id.image_carousel);
         carouselView.setPageCount(sampleImages.length);
         carouselView.setImageListener(imageListener);
+
+
+        ImageView berita = view.findViewById(R.id.ic_berita);
+        berita.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent berita = new Intent(getActivity(), BeritaActivity.class);
+                startActivity(berita);
+            }
+        });
+
         return view;
     }
 
