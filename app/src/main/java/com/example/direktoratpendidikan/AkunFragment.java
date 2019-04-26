@@ -12,8 +12,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.direktoratpendidikan.adapter.AdapterAkun;
+
+import java.util.ArrayList;
 
 
 /**
@@ -27,6 +31,9 @@ public class AkunFragment extends Fragment {
     String nama, nipnik;
     TextView _namauser,_nipnik;
     Button btnLogout;
+    private String[] nama_pengaturan = {"Profil", "Email verifikasi", "Ubah password", "Bantuan", "Tentang DirpenUA"};
+    private Integer[] logo = {R.drawable.ic_akun, R.drawable.ic_email, R.drawable.ic_password, R.drawable.ic_bantuan, R.drawable.ic_tentangaplikasi};
+    private ListView lvakun;
 
     public AkunFragment() {
         // Required empty public constructor
@@ -37,6 +44,12 @@ public class AkunFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_akun, container, false);
+
+
+        lvakun = (ListView) view.findViewById(R.id.lvakun);
+
+        AdapterAkun adapter = new AdapterAkun(getActivity(), nama_pengaturan, logo);
+        lvakun.setAdapter(adapter);
 
         sharedpreferences = this.getActivity().getSharedPreferences(LoginActivity.my_shared_preferences, Context.MODE_PRIVATE);
         nama = getActivity().getIntent().getStringExtra(TAG_NAMA);

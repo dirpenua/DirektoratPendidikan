@@ -57,13 +57,13 @@
         <item>Tentang DirpenUA</item>
     </string-array>
 
-    <array name="logoakun">
+    <integer-array name="logoakun">
         <item>@drawable/ic_akun</item>
         <item>@drawable/ic_email</item>
         <item>@drawable/ic_password</item>
         <item>@drawable/ic_bantuan</item>
         <item>@drawable/ic_tentangaplikasi</item>
-    </array>
+    </integer-array>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
