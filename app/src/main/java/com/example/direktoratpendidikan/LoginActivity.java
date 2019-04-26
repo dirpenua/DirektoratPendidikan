@@ -31,6 +31,8 @@ import com.example.direktoratpendidikan.api.ApiInterface;
 import com.example.direktoratpendidikan.data.MSG;
 import com.example.direktoratpendidikan.mahasiswa.MainActivityMhs;
 
+import org.w3c.dom.Text;
+
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -308,6 +310,12 @@ public class LoginActivity extends AppCompatActivity {
             public void onFailure(Call<MSG> call, Throwable t) {
                 hidepDialog();
                 Log.d("onFailure", t.toString());
+                String text = "Mohon periksa koneksi internet anda";
+                SpannableString centeredText = new SpannableString(text);
+                centeredText.setSpan(new AlignmentSpan.Standard(Layout.Alignment.ALIGN_CENTER),
+                        0, text.length() - 1,
+                        Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+                Toast.makeText(LoginActivity.this,centeredText, Toast.LENGTH_LONG).show();
             }
         });
     }
