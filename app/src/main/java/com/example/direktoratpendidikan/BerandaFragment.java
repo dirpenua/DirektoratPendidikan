@@ -72,6 +72,15 @@ public class BerandaFragment extends Fragment {
             }
         });
 
+        ImageView download = view.findViewById(R.id.ic_download);
+        download.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent download = new Intent(getActivity(), DownloadActivity.class);
+                startActivity(download);
+            }
+        });
+
         return view;
     }
 

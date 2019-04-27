@@ -17,7 +17,7 @@ public class BeritaActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_berita);
 
-        onback = (ImageView) findViewById(R.id.agendakembali);
+        onback = (ImageView) findViewById(R.id.kembali);
         onback.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

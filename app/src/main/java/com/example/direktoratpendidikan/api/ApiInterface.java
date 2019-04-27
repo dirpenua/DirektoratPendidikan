@@ -3,6 +3,7 @@ package com.example.direktoratpendidikan.api;
 import com.example.direktoratpendidikan.data.Agenda;
 import com.example.direktoratpendidikan.data.Beasiswa;
 import com.example.direktoratpendidikan.data.Cari;
+import com.example.direktoratpendidikan.data.Download;
 import com.example.direktoratpendidikan.data.MSG;
 import com.example.direktoratpendidikan.data.Notif;
 
@@ -44,6 +45,11 @@ public interface ApiInterface {
     Call < List<Agenda>> getAgendaAdmin(
             @Query("item_type") String item_type,
             @Query("spinner_hari") String spinner_hari
+    );
+
+    @GET("getdownload.php?")
+    Call < List<Download>> getDownload(
+            @Query("item_type") String item_type
     );
 
     @FormUrlEncoded
