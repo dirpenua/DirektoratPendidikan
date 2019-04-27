@@ -64,6 +64,15 @@ public interface ApiInterface {
                             @Field("password_reset") String password_reset
     );
 
+    @FormUrlEncoded
+    @POST("changepassword.php")
+    Call<MSG> changePassword(@Field("nipnik") String nipnik,
+                             @Field("password_baru") String password_baru,
+                             @Field("password_lama") String password_lama
+    );
+
+
+
 //    @FormUrlEncoded
 //    @POST("regpushnotif.php")
 //    Observable<Notif> registerToken (@Field("token") String token

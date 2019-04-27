@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".BerandaFragment"
     android:orientation="vertical">
 
@@ -11,28 +12,94 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:background="@color/Abu">
 
-        android:background="#FFFFFF">
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimaryDark"
+            android:elevation="10dp"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:gravity="center">
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/logo"
+                app:layout_collapseMode="parallax"
+                android:layout_weight="0"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:fontFamily="@font/roboto_black"
+                android:text="DirpenUA"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp"
+                android:layout_weight="1"/>
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginRight="20dp"
+                android:src="@drawable/ic_pengumuman"
+                app:layout_collapseMode="parallax"
+                android:layout_weight="0"/>
+            </LinearLayout>
+
+        </android.support.v7.widget.Toolbar>
+
+        <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_marginTop="20dp"-->
+            <!--android:layout_marginLeft="20dp"-->
+            <!--android:layout_marginRight="20dp"-->
+            <!--android:layout_marginBottom="10dp"-->
+            <!--android:orientation="vertical"-->
+            <!--android:gravity="center">-->
+
+            <!--<TextView-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_weight="0"-->
+                <!--android:gravity="end"-->
+                <!--android:textStyle="bold"-->
+                <!--android:text="Selamat datang, "-->
+                <!--android:textColor="@color/colorPrimaryDark"-->
+                <!--android:textSize="12dp"/>-->
+
+            <!--<TextView-->
+                <!--android:id="@+id/namalengkap"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:textSize="14dp"-->
+                <!--android:layout_gravity="end"-->
+                <!--android:textColor="@color/colorPrimaryDark"-->
+                <!--android:text="nama lengkapnya siapa"/>-->
+        <!--</LinearLayout>-->
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:elevation="3dp"
-            android:layout_marginBottom="20dp"
+            android:layout_margin="8dp"
+            android:background="@drawable/whiteround"
             android:orientation="vertical">
 
-                <ImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_margin="30dp"
-                    android:src="@drawable/ic_notif"
-                    android:layout_gravity="end"/>
 
             <!-- milik kolom 1 -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-
+                android:layout_marginTop="10dp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:orientation="horizontal">
@@ -174,6 +241,7 @@
                 android:layout_height="match_parent"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
+                android:layout_marginBottom="20dp"
                 android:orientation="horizontal">
 
                 <TextView
@@ -229,7 +297,7 @@
                 android:id="@+id/image_carousel"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
-                android:layout_margin="20dp"
+                android:layout_margin="8dp"
                 app:fillColor="#FFFFFF"
                 app:pageColor="#7C000000"
                 app:radius="6dp"

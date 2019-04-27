@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".pengaturan.ProfilActivity">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimaryDark"
+        android:elevation="10dp"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        tools:ignore="MissingConstraints">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/edit_close"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/ic_close"
+                app:layout_collapseMode="parallax"
+                android:layout_weight="0"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="Edit Profil"
+                android:gravity="center"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp"
+                android:layout_weight="1"/>
+
+            <ImageView
+                android:id="@+id/edit_save"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginRight="20dp"
+                android:src="@drawable/ic_save"
+                app:layout_collapseMode="parallax"
+                android:layout_weight="0"/>
+        </LinearLayout>
+    </android.support.v7.widget.Toolbar>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="190dp"
+        android:orientation="vertical"
+        android:elevation="5dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/bg_profil"
+        android:layout_weight="0">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/profile_image"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="20dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_centerInParent="true"
+            android:src="@drawable/userpic"
+            app:civ_border_color="@color/colorPrimaryDark"
+            app:civ_border_width="0dp"
+            android:elevation="5dp"/>
+
+        <TextView
+            android:id="@+id/akun_namauser"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center_horizontal"
+            android:text="Ubah foto profil"
+            android:textSize="14dp"
+            android:textColor="#fff"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="160dp"
+        android:orientation="vertical"
+        android:elevation="5dp"
+        android:layout_margin="8dp"
+        android:background="@drawable/roundwhite"
+        android:layout_weight="0">
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp">
+
+            <EditText
+                android:id="@+id/edit_nama"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:hint="Nama lengkap"
+                android:inputType="text"
+                android:singleLine="true"
+                android:textSize="14dp"
+                android:textColorHint="@color/colorPrimaryDark"/>
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp">
+
+            <EditText
+                android:id="@+id/edit_jabatan"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:hint="NIM/NIP/NIK"
+                android:enabled="false"
+                android:inputType="text"
+                android:singleLine="true"
+                android:textSize="14dp"
+                android:textColorHint="@color/colorPrimaryDark"/>
+        </android.support.design.widget.TextInputLayout>
+
+
+    </LinearLayout>
+
+</LinearLayout>

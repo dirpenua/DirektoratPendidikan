@@ -1,6 +1,8 @@
 package com.example.direktoratpendidikan;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -24,10 +26,15 @@ import com.synnapps.carouselview.ImageListener;
 import butterknife.OnClick;
 
 
+
 public class BerandaFragment extends Fragment {
 
+    SharedPreferences sharedpreferences;
+    public final static String TAG_NAMA = "nama_user";
+    String nama;
+
     CarouselView carouselView;
-    TextView isiToken;
+    TextView isiToken, namaLengkap;
     int[] sampleImages = {R.drawable.slider1, R.drawable.slider2, R.drawable.slider3, R.drawable.slider4};
     ImageListener imageListener = new ImageListener() {
         public void setImageForPosition(int position, ImageView imageView) {
@@ -42,6 +49,8 @@ public class BerandaFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_beranda, container, false);
 
 //        isiToken= view.findViewById(R.id.token);
+//        namaLengkap = view.findViewById(R.id.namalengkap);
+
 
         FirebaseInstanceId.getInstance().getInstanceId()
                 .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
@@ -56,7 +65,9 @@ public class BerandaFragment extends Fragment {
                     }
                 });
 
-
+        sharedpreferences = getActivity().getSharedPreferences(LoginActivity.my_shared_preferences, Context.MODE_PRIVATE);
+        nama = getActivity().getIntent().getStringExtra(TAG_NAMA);
+//        namaLengkap.setText(nama);
 
         carouselView = view.findViewById(R.id.image_carousel);
         carouselView.setPageCount(sampleImages.length);

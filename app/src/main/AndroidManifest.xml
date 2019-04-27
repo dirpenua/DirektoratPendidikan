@@ -15,7 +15,16 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".DownloadActivity"
+        <activity android:name=".pengaturan.ChangePassword"
+            android:theme="@style/NoActionBar" />
+        <activity
+            android:name=".pengaturan.EmailVerifikasiActivity"
+            android:theme="@style/NoActionBar" />
+        <activity
+            android:name=".pengaturan.ProfilActivity"
+            android:theme="@style/NoActionBar" />
+        <activity
+            android:name=".DownloadActivity"
             android:theme="@style/NoActionBar" />
         <activity
             android:name=".DetailBeasiswa"
@@ -66,6 +75,10 @@
         <activity
             android:name=".BeritaActivity"
             android:theme="@style/NoActionBar" />
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
     </application>
 
 </manifest>

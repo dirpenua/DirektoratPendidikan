@@ -1,24 +1,29 @@
-package com.example.direktoratpendidikan;
+package com.example.direktoratpendidikan.pengaturan;
 
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Layout;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.AlignmentSpan;
-import android.util.JsonReader;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.direktoratpendidikan.AkunFragment;
+import com.example.direktoratpendidikan.LoginActivity;
+import com.example.direktoratpendidikan.MainActivity;
+import com.example.direktoratpendidikan.R;
+import com.example.direktoratpendidikan.UbahPWUserBaru;
 import com.example.direktoratpendidikan.api.ApiClient;
 import com.example.direktoratpendidikan.api.ApiInterface;
 import com.example.direktoratpendidikan.data.MSG;
@@ -29,93 +34,99 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class UbahPWUserBaru extends AppCompatActivity {
+public class ChangePassword extends AppCompatActivity {
 
+    public ImageView tutup;
     private ProgressDialog pDialog;
-    @BindView(R.id.passwordbaru) EditText _passwordbaru;
-    @BindView(R.id.ulangipasswordbaru) EditText _ulangipasswordbaru;
-    @BindView(R.id.btn_ubah) Button _ubahButton;
+    @BindView(R.id.pwlama) EditText _passwordlama;
+    @BindView(R.id.pwbaru) EditText _passwordbaru;
+    @BindView(R.id.ulangipwbaru) EditText _ulangipasswordbaru;
+    @BindView(R.id.edit_save) ImageView save;
 
     SharedPreferences sharedpreferences;
     public final static String TAG_NAMA = "nama_user";
     public final static String TAG_NIPNIK = "nipnik";
     String nama, nipnik;
-    public static final String session_status = "session_status";
-    Boolean session = false;
 
-
-
+    TextView tesnipnik;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_ubah_pwuser_baru);
+        setContentView(R.layout.activity_change_password);
 
-        sharedpreferences = this.getApplicationContext().getSharedPreferences(LoginActivity.my_shared_preferences, Context.MODE_PRIVATE);
-        nama = getIntent().getStringExtra(TAG_NAMA);
-        nipnik = getIntent().getStringExtra(TAG_NIPNIK);
-        session = sharedpreferences.getBoolean(session_status, false);
+        tutup = (ImageView) findViewById(R.id.edit_close);
+        tutup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
+
         ButterKnife.bind(this);
 
-        _ubahButton.setOnClickListener(new View.OnClickListener() {
+        sharedpreferences = this.getSharedPreferences(MainActivity.main_shared_preferences, Context.MODE_PRIVATE);
+        nama = getIntent().getStringExtra(TAG_NAMA);
+        nipnik = "151611513009";
+
+        tesnipnik =findViewById(R.id.tesnipnik);
+        tesnipnik.setText(nipnik); //INI TIDAK BISAAAAAAAAAAAA
+        save.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
-                ubah();
+                change();
             }
         });
+
     }
 
-    public void ubah() {
+    public void change() {
 
         if (validate() == false) {
             onLoginFailed();
             return;
         }
 
-        ubahPasswordUB();
+       changePassword();
     }
 
-    private void ubahPasswordUB() {
-        pDialog = new ProgressDialog(UbahPWUserBaru.this);
+    private void changePassword() {
+        pDialog = new ProgressDialog(ChangePassword.this);
         pDialog.setIndeterminate(true);
-        pDialog.setMessage("Sedang mengubah...");
+        pDialog.setMessage("Password sedang diubah...");
         pDialog.setCancelable(false);
 
         showpDialog();
 
+        String password_lama = _passwordlama.getText().toString();
         String password_baru = _passwordbaru.getText().toString();
+
 
 
 
         ApiInterface service = ApiClient.getApiClient().create(ApiInterface.class);
 
-        Call<MSG> userCall = service.resetPassword(nipnik,password_baru);
-        Log.d("NIPNIK",nipnik);
-        Log.d("onResponse",password_baru);
+        Call<MSG> userCall = service.changePassword(nipnik, password_baru, password_lama);
+
+        Log.d("nipnik",nipnik);
+        Log.d("pwlama",password_lama);
+        Log.d("pwbaru",password_baru);
+
         userCall.enqueue(new Callback<MSG>() {
             @Override
             public void onResponse(Call<MSG> call, Response<MSG> response) {
                 hidepDialog();
 
                 if(response.body().getSuccess() == 1) {
-                    nama = getIntent().getStringExtra(TAG_NAMA);
-                    //startActivity(new Intent(LoginActivity.this, MainActivity.class));
                     String text = "" + response.body().getMessage();
                     Spannable centeredText = new SpannableString(text);
                     centeredText.setSpan(new AlignmentSpan.Standard(Layout.Alignment.ALIGN_CENTER),
                             0, text.length() - 1,
                             Spannable.SPAN_INCLUSIVE_INCLUSIVE);
-                    Toast.makeText(UbahPWUserBaru.this,centeredText, Toast.LENGTH_LONG).show();
+                    Toast.makeText(ChangePassword.this,centeredText, Toast.LENGTH_LONG).show();
 
-                    // menyimpan login ke session
-                    SharedPreferences.Editor editor = sharedpreferences.edit();
-                    editor.putBoolean(session_status, true);
-                    editor.putString(TAG_NAMA, nama);
-                    editor.putString(TAG_NIPNIK, nipnik);
-                    editor.commit();
-
-                    Intent intent = new Intent(UbahPWUserBaru.this, MainActivity.class);
+                    Intent intent = new Intent(ChangePassword.this, AkunFragment.class);
                     intent.putExtra(TAG_NAMA, nama);
                     intent.putExtra(TAG_NIPNIK, nipnik);
                     finish();
@@ -126,7 +137,7 @@ public class UbahPWUserBaru extends AppCompatActivity {
                     centeredText.setSpan(new AlignmentSpan.Standard(Layout.Alignment.ALIGN_CENTER),
                             0, text.length() - 1,
                             Spannable.SPAN_INCLUSIVE_INCLUSIVE);
-                    Toast.makeText(UbahPWUserBaru.this,centeredText, Toast.LENGTH_LONG).show();
+                    Toast.makeText(ChangePassword.this,centeredText, Toast.LENGTH_LONG).show();
                 }
             }
 
@@ -138,6 +149,10 @@ public class UbahPWUserBaru extends AppCompatActivity {
         });
     }
 
+    public void onLoginFailed() {
+        Toast.makeText(getBaseContext(), "Mohon isi dengan benar", Toast.LENGTH_LONG).show();
+        save.setEnabled(true);
+    }
 
     private void showpDialog() {
         if (!pDialog.isShowing())
@@ -147,16 +162,6 @@ public class UbahPWUserBaru extends AppCompatActivity {
     private void hidepDialog() {
         if (pDialog.isShowing())
             pDialog.dismiss();
-    }
-
-    public void onLoginSuccess() {
-        _ubahButton.setEnabled(true);
-        finish();
-    }
-
-    public void onLoginFailed() {
-        Toast.makeText(getBaseContext(), "Mohon isi dengan benar", Toast.LENGTH_LONG).show();
-        _ubahButton.setEnabled(true);
     }
 
     public boolean validate() {
@@ -181,34 +186,5 @@ public class UbahPWUserBaru extends AppCompatActivity {
         }
     }
 
-    private boolean doubleBackToExitPressedOnce;
-    private Handler mHandler = new Handler();
 
-    private final Runnable mRunnable = new Runnable() {
-        @Override
-        public void run() {
-            doubleBackToExitPressedOnce = false;
-        }
-    };
-
-    @Override
-    protected void onDestroy()
-    {
-        super.onDestroy();
-
-        if (mHandler != null) { mHandler.removeCallbacks(mRunnable); }
-    }
-
-    @Override
-    public void onBackPressed() {
-        if (doubleBackToExitPressedOnce) {
-            finish();
-        }
-
-        this.doubleBackToExitPressedOnce = true;
-        Toast.makeText(this, "Ketuk lagi untuk KEMBALI ", Toast.LENGTH_SHORT).show();
-
-        mHandler.postDelayed(mRunnable, 2000);
-
-    }
 }

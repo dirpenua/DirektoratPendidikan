@@ -38,41 +38,6 @@
     </LinearLayout>
 
 
-
-    <!--<LinearLayout-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:orientation="horizontal"-->
-    <!--android:background="@drawable/whiteround"-->
-    <!--android:layout_marginTop="30dp"-->
-    <!--android:layout_marginLeft="30dp"-->
-    <!--android:layout_marginRight="30dp"-->
-    <!--&gt;-->
-
-    <!--<ImageView-->
-    <!--android:layout_width="30dp"-->
-    <!--android:layout_height="30dp"-->
-    <!--android:src="@drawable/ic_cari"-->
-    <!--android:layout_gravity="center"-->
-    <!--android:layout_marginLeft="10dp">-->
-    <!--</ImageView>-->
-
-    <!--<EditText-->
-    <!--android:id="@+id/nipnik"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_marginLeft="5dp"-->
-    <!--android:layout_marginRight="10dp"-->
-    <!--android:layout_gravity="center"-->
-    <!--android:hint="Cari informasi prosedur.."-->
-    <!--android:inputType="textFilter"-->
-    <!--android:singleLine="true"-->
-    <!--android:textColorHint="@color/colorPrimaryDark"-->
-    <!--android:drawableTint="@color/colorPrimaryDark"/>-->
-    <!--</LinearLayout>-->
-
-
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">

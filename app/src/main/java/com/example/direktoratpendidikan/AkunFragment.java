@@ -51,9 +51,16 @@ public class AkunFragment extends Fragment {
         AdapterAkun adapter = new AdapterAkun(getActivity(), nama_pengaturan, logo);
         lvakun.setAdapter(adapter);
 
+//        AdapterAkun posisi= (AdapterAkun) adapter.getItem(i);
+
         sharedpreferences = this.getActivity().getSharedPreferences(LoginActivity.my_shared_preferences, Context.MODE_PRIVATE);
         nama = getActivity().getIntent().getStringExtra(TAG_NAMA);
         nipnik = getActivity().getIntent().getStringExtra(TAG_NIPNIK);
+
+        SharedPreferences.Editor editor = sharedpreferences.edit();
+        editor.putString(TAG_NAMA, nama);
+        editor.putString(TAG_NIPNIK, nipnik);
+        editor.commit();
 
 
         /**

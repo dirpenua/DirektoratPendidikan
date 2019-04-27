@@ -35,12 +35,13 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="190dp"
             android:orientation="vertical"
             android:layout_marginTop="55dp"
-            android:elevation="8dp"
-            android:background="#f0f8ff"
-            android:layout_marginBottom="10dp">
+            android:elevation="5dp"
+            android:background="@drawable/bg_profil"
+            android:layout_marginBottom="10dp"
+            android:layout_weight="0">
 
             <de.hdodenhof.circleimageview.CircleImageView
                 xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -52,7 +53,8 @@
                 android:layout_centerInParent="true"
                 android:src="@drawable/userpic"
                 app:civ_border_color="@color/colorPrimaryDark"
-                app:civ_border_width="1dp" />
+                app:civ_border_width="0dp"
+                android:elevation="5dp"/>
 
             <TextView
                 android:id="@+id/akun_namauser"
@@ -62,7 +64,7 @@
                 android:gravity="center_horizontal"
                 android:text="Nama User"
                 android:textSize="14dp"
-                android:textColor="@color/colorPrimaryDark"
+                android:textColor="#fff"
                 android:textStyle="bold"/>
  b
             <TextView
@@ -73,7 +75,7 @@
                 android:gravity="center_horizontal"
                 android:text="0123456789123"
                 android:textSize="12dp"
-                android:textColor="@color/colorPrimaryDark" />
+                android:textColor="#fff" />
 
         </LinearLayout>
 
@@ -81,28 +83,30 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_margin="15dp"
-            android:background="@drawable/whiteround">
+            android:layout_marginTop="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/whiteround"
+            android:elevation="3dp"
+            android:layout_weight="1">
 
             <ListView
                 android:id="@+id/lvakun"
                 android:layout_width="match_parent"
                 android:layout_margin="5dp"
-                android:layout_height="wrap_content"
-
-            />
-
+                android:layout_height="wrap_content" />
         </LinearLayout>
 
         <Button
             android:id="@+id/btn_logout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
             android:layout_marginTop="15dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
-            android:layout_marginBottom="80dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            android:layout_marginBottom="70dp"
+            android:layout_gravity="center"
             android:background="@drawable/rounddark"
             android:text="LOGOUT"
             android:textColor="#FFF" />

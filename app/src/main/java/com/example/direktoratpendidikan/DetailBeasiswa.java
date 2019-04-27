@@ -28,7 +28,7 @@ public class DetailBeasiswa extends AppCompatActivity {
 
         judulbeasiswa = findViewById(R.id.judulbeasiswa_detail);
         tglpublish = findViewById(R.id.tgl_publikasi);
-        idbeasiswa = findViewById(R.id.idbeasiswa);
+        //idbeasiswa = findViewById(R.id.idbeasiswa);
         kontenbeasiswa = findViewById(R.id.kontenbeasiswadetail);
 
         Intent iin= getIntent();
@@ -38,10 +38,12 @@ public class DetailBeasiswa extends AppCompatActivity {
         {
             String judul =(String) b.get("judulbeasiswa");
             judulbeasiswa.setText(judul);
-            String id =(String) b.get("idbeasiswa");
-            idbeasiswa.setText(id);
+            judulbeasiswa.setTextIsSelectable(true);
+//            String id =(String) b.get("idbeasiswa");
+//            idbeasiswa.setText(id);
             String konten =(String) b.get("kontenpanjangbeasiswa");
             kontenbeasiswa.setText(konten);
+            kontenbeasiswa.setTextIsSelectable(true);
             String tgl =(String) b.get("tglpublish");
             tglpublish.setText(tgl);
 
