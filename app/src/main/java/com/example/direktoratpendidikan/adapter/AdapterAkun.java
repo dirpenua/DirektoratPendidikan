@@ -41,7 +41,7 @@ public class AdapterAkun extends BaseAdapter {
 
     @Override
     public Object getItem(int i) {
-        return null;
+        return i;
     }
 
     @Override
@@ -61,10 +61,10 @@ public class AdapterAkun extends BaseAdapter {
         // tampilkan data pada komponen
         nama_pengaturan.setText(namapengaturan[i]);
         logo_akun.setImageResource(logoakun[i]);
-
-        sharedpreferences = ((Activity) context).getSharedPreferences(LoginActivity.my_shared_preferences, Context.MODE_PRIVATE);
-        nama = ((Activity) context).getIntent().getStringExtra(TAG_NAMA);
-        nipnik = ((Activity) context).getIntent().getStringExtra(TAG_NIPNIK);
+//
+//        sharedpreferences = ((Activity) context).getSharedPreferences(LoginActivity.my_shared_preferences, Context.MODE_PRIVATE);
+//        nama = ((Activity) context).getIntent().getStringExtra(TAG_NAMA);
+//        nipnik = ((Activity) context).getIntent().getStringExtra(TAG_NIPNIK);
 
        v.setOnClickListener(new View.OnClickListener() {
             @Override

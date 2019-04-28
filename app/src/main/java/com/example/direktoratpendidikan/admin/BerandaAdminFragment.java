@@ -1,6 +1,7 @@
 package com.example.direktoratpendidikan.admin;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -11,6 +12,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.direktoratpendidikan.BeritaActivity;
+import com.example.direktoratpendidikan.DownloadActivity;
 import com.example.direktoratpendidikan.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -57,6 +60,25 @@ public class BerandaAdminFragment extends Fragment {
         carouselView = view.findViewById(R.id.image_carousel);
         carouselView.setPageCount(sampleImages.length);
         carouselView.setImageListener(imageListener);
+
+        ImageView user = view.findViewById(R.id.ic_user);
+        user.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent user = new Intent(getActivity(), UserActivity.class);
+                startActivity(user);
+            }
+        });
+
+        ImageView download = view.findViewById(R.id.ic_download);
+        download.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent download = new Intent(getActivity(), DownloadActivity.class);
+                startActivity(download);
+            }
+        });
+
         return view;
     }
 }

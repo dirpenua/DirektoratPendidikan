@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.os.Handler;
+import android.preference.PreferenceManager;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Layout;
@@ -49,7 +51,7 @@ public class LoginActivity extends AppCompatActivity {
     public final static String TAG_NIPNIK = "nipnik";
     public final static Integer TAG_RULE = 0;
     String nama, nipnik;
-    Integer rule;
+    int rule;
 
     @BindView(R.id.nipnik) EditText _nipnik;
     @BindView(R.id.password) EditText _password;
@@ -152,51 +154,6 @@ public class LoginActivity extends AppCompatActivity {
                 hidepDialog();
                 Log.d("onResponse", "" + response.body().getMessage());
 
-//                if(response.body().getSuccess() == 1) {
-//                    String nama = response.body().getNamaUser();
-//                    //startActivity(new Intent(LoginActivity.this, MainActivity.class));
-//
-//                    String text = "" + response.body().getMessage();
-//                    Spannable centeredText = new SpannableString(text);
-//                    centeredText.setSpan(new AlignmentSpan.Standard(Layout.Alignment.ALIGN_CENTER),
-//                            0, text.length() - 1,
-//                            Spannable.SPAN_INCLUSIVE_INCLUSIVE);
-//                    Toast.makeText(LoginActivity.this,centeredText, Toast.LENGTH_LONG).show();
-//
-//
-//                    if(response.body().getStatus() == 0){
-//                        //Login pertama kali reset paswword
-//                        Intent intent = new Intent(LoginActivity.this, UbahPWUserBaru.class);
-//                        intent.putExtra(TAG_NAMA, nama);
-//                        intent.putExtra(TAG_NIPNIK, nipnik);
-//                        finish();
-//                        startActivity(intent);
-//                    }else{
-//                        // Sudah pernah login
-//                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-//                        intent.putExtra(TAG_NAMA, nama);
-//                        intent.putExtra(TAG_NIPNIK, nipnik);
-//                        finish();
-//                        startActivity(intent);
-//
-//                        // menyimpan login ke session
-//                        SharedPreferences.Editor editor = sharedpreferences.edit();
-//                        editor.putBoolean(session_status, true);
-//                        editor.putString(TAG_NAMA, nama);
-//                        editor.putString(TAG_NIPNIK, nipnik);
-//                        editor.commit();
-//                    }
-//
-//                }else {
-//                    String text = "" + response.body().getMessage();
-//                    Spannable centeredText = new SpannableString(text);
-//                    centeredText.setSpan(new AlignmentSpan.Standard(Layout.Alignment.ALIGN_CENTER),
-//                            0, text.length() - 1,
-//                            Spannable.SPAN_INCLUSIVE_INCLUSIVE);
-//                    Toast.makeText(LoginActivity.this,centeredText, Toast.LENGTH_LONG).show();
-//                }
-
-
                 switch (response.body().getSuccess()) {
                     case 1:
                         String nama = response.body().getNamaUser();
@@ -228,6 +185,12 @@ public class LoginActivity extends AppCompatActivity {
                                 editor.putString(TAG_NIPNIK, nipnik);
                                 editor.putInt("TAG_RULE", 1);
                                 editor.commit();
+
+                                // menyimpan login ke session dengan default
+                                setDefaultBoolean(session_status, true, getApplicationContext());
+                                setDefaultString(TAG_NAMA, nama,getApplicationContext());
+                                setDefaultString(TAG_NIPNIK, nipnik,getApplicationContext());
+                                setDefaultInteger("TAG_RULE",1,getApplicationContext());
                             }
                         break;
                     case 2:
@@ -261,6 +224,12 @@ public class LoginActivity extends AppCompatActivity {
                             editor.putString(TAG_NIPNIK, nipnik);
                             editor.putInt("TAG_RULE", 2);
                             editor.commit();
+
+                            // menyimpan login ke session dengan default
+                            setDefaultBoolean(session_status, true, getApplicationContext());
+                            setDefaultString(TAG_NAMA, nama,getApplicationContext());
+                            setDefaultString(TAG_NIPNIK, nipnik,getApplicationContext());
+                            setDefaultInteger("TAG_RULE",2,getApplicationContext());
                         }
                         break;
                     case 3:
@@ -294,6 +263,12 @@ public class LoginActivity extends AppCompatActivity {
                             editor.putString(TAG_NIPNIK, nipnik);
                             editor.putInt("TAG_RULE", 3);
                             editor.commit();
+
+                            // menyimpan login ke session dengan default
+                            setDefaultBoolean(session_status, true, getApplicationContext());
+                            setDefaultString(TAG_NAMA, nama,getApplicationContext());
+                            setDefaultString(TAG_NIPNIK, nipnik,getApplicationContext());
+                            setDefaultInteger("TAG_RULE",3,getApplicationContext());
                         }
                         break;
                     default:
@@ -318,6 +293,29 @@ public class LoginActivity extends AppCompatActivity {
                 Toast.makeText(LoginActivity.this,centeredText, Toast.LENGTH_LONG).show();
             }
         });
+    }
+
+    public static void setDefaultString(String key, String value, Context context) {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString(key, value);
+        editor.commit();
+    }
+
+
+
+    public static void setDefaultBoolean(String key, Boolean value, Context context) {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putBoolean(key, value);
+        editor.commit();
+    }
+
+    public static void setDefaultInteger(String key, Integer value, Context context) {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putInt(key, value);
+        editor.commit();
     }
 
 
@@ -348,7 +346,7 @@ public class LoginActivity extends AppCompatActivity {
         String password_user = _password.getText().toString();
 
         if (nipnik.isEmpty()) {
-            _nipnik.setError("Kolom NIP/NIK harus diisi");
+            _nipnik.setError("Kolom NIM/NIP/NIK harus diisi");
             requestFocus(_nipnik);
             valid = false;
         } else {
@@ -356,7 +354,7 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         if (password_user.isEmpty()) {
-            _password.setError("Kolom password harus diisi");
+            _password.setError("Kolom password harus diisi",null);
             requestFocus(_password);
             valid = false;
         } else {

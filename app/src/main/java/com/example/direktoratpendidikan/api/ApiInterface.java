@@ -71,6 +71,12 @@ public interface ApiInterface {
                              @Field("password_lama") String password_lama
     );
 
+    @FormUrlEncoded
+    @POST("tambahdosen.php")
+    Call<MSG> tambahDosen (@Field("nipnik") String nipnik,
+                           @Field("nama") String nama
+    );
+
 
 
 //    @FormUrlEncoded

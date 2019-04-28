@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Layout;
@@ -24,9 +25,13 @@ import com.example.direktoratpendidikan.LoginActivity;
 import com.example.direktoratpendidikan.MainActivity;
 import com.example.direktoratpendidikan.R;
 import com.example.direktoratpendidikan.UbahPWUserBaru;
+import com.example.direktoratpendidikan.admin.MainActivityAdmin;
 import com.example.direktoratpendidikan.api.ApiClient;
 import com.example.direktoratpendidikan.api.ApiInterface;
 import com.example.direktoratpendidikan.data.MSG;
+import com.example.direktoratpendidikan.mahasiswa.MainActivityMhs;
+
+import java.util.regex.Pattern;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -46,9 +51,12 @@ public class ChangePassword extends AppCompatActivity {
     SharedPreferences sharedpreferences;
     public final static String TAG_NAMA = "nama_user";
     public final static String TAG_NIPNIK = "nipnik";
+    public final static Integer TAG_RULE = 0;
     String nama, nipnik;
+    Integer rule;
+    public static final String session_status = "session_status";
+    Boolean session = false;
 
-    TextView tesnipnik;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,11 +74,39 @@ public class ChangePassword extends AppCompatActivity {
         ButterKnife.bind(this);
 
         sharedpreferences = this.getSharedPreferences(MainActivity.main_shared_preferences, Context.MODE_PRIVATE);
-        nama = getIntent().getStringExtra(TAG_NAMA);
-        nipnik = "151611513009";
+//        nama = getIntent().getStringExtra(TAG_NAMA);
+//        nipnik = getIntent().getStringExtra(TAG_NIPNIK);
 
-        tesnipnik =findViewById(R.id.tesnipnik);
-        tesnipnik.setText(nipnik); //INI TIDAK BISAAAAAAAAAAAA
+        nama = getDefaultString(TAG_NAMA, getApplicationContext());
+        nipnik = getDefaultString(TAG_NIPNIK, getApplicationContext());
+        rule = getIntent().getIntExtra("TAG_RULE", 0);
+
+        if (session) {
+            switch (rule) {
+                case 1:
+                    Intent rule1 = new Intent(ChangePassword.this, MainActivityAdmin.class);
+                    rule1.putExtra(TAG_NAMA, nama);
+                    rule1.putExtra(TAG_NIPNIK, nipnik);
+                    finish();
+                    startActivity(rule1);
+                    break;
+                case 2:
+                    Intent rule2 = new Intent(ChangePassword.this, MainActivity.class);
+                    rule2.putExtra(TAG_NAMA, nama);
+                    rule2.putExtra(TAG_NIPNIK, nipnik);
+                    finish();
+                    startActivity(rule2);
+                    break;
+                case 3:
+                    Intent rule3 = new Intent(ChangePassword.this, MainActivityMhs.class);
+                    rule3.putExtra(TAG_NAMA, nama);
+                    rule3.putExtra(TAG_NIPNIK, nipnik);
+                    finish();
+                    startActivity(rule3);
+                    break;
+            }
+        }
+
         save.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -81,10 +117,15 @@ public class ChangePassword extends AppCompatActivity {
 
     }
 
+    public static String getDefaultString(String key, Context context) {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+        return preferences.getString(key, null);
+    }
+
     public void change() {
 
         if (validate() == false) {
-            onLoginFailed();
+            onChangeFailed();
             return;
         }
 
@@ -94,15 +135,13 @@ public class ChangePassword extends AppCompatActivity {
     private void changePassword() {
         pDialog = new ProgressDialog(ChangePassword.this);
         pDialog.setIndeterminate(true);
-        pDialog.setMessage("Password sedang diubah...");
+        pDialog.setMessage("Sedang mengubah password...");
         pDialog.setCancelable(false);
 
         showpDialog();
 
         String password_lama = _passwordlama.getText().toString();
         String password_baru = _passwordbaru.getText().toString();
-
-
 
 
         ApiInterface service = ApiClient.getApiClient().create(ApiInterface.class);
@@ -117,39 +156,119 @@ public class ChangePassword extends AppCompatActivity {
             @Override
             public void onResponse(Call<MSG> call, Response<MSG> response) {
                 hidepDialog();
+                Log.d("SUKSERNYA", "SUKSESNYA APA: " + response.body().getSuccess());
 
-                if(response.body().getSuccess() == 1) {
-                    String text = "" + response.body().getMessage();
-                    Spannable centeredText = new SpannableString(text);
-                    centeredText.setSpan(new AlignmentSpan.Standard(Layout.Alignment.ALIGN_CENTER),
-                            0, text.length() - 1,
-                            Spannable.SPAN_INCLUSIVE_INCLUSIVE);
-                    Toast.makeText(ChangePassword.this,centeredText, Toast.LENGTH_LONG).show();
 
-                    Intent intent = new Intent(ChangePassword.this, AkunFragment.class);
+//                if(response.body().getSuccess() == 1) {
+//                    Intent intent = new Intent(ChangePassword.this, MainActivity.class);
+//                    intent.putExtra(TAG_NAMA, nama);
+//                    intent.putExtra(TAG_NIPNIK, nipnik);
+//                    finish();
+//                    startActivity(intent);
+//
+//                    String text = "" + response.body().getMessage();
+//                    Spannable centeredText = new SpannableString(text);
+//                    centeredText.setSpan(new AlignmentSpan.Standard(Layout.Alignment.ALIGN_CENTER),
+//                            0, text.length() - 1,
+//                            Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+//                    Toast.makeText(getApplicationContext(),centeredText, Toast.LENGTH_LONG).show();
+//                }else {
+//                    String text = "" + response.body().getMessage();
+//                    Spannable centeredText = new SpannableString(text);
+//                    centeredText.setSpan(new AlignmentSpan.Standard(Layout.Alignment.ALIGN_CENTER),
+//                            0, text.length() - 1,
+//                            Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+//                    Toast.makeText(getApplicationContext(),centeredText, Toast.LENGTH_LONG).show();
+//                }
+
+                switch (response.body().getSuccess()) {
+                    case 1:
+                    Intent intent = new Intent(ChangePassword.this, MainActivityAdmin.class);
                     intent.putExtra(TAG_NAMA, nama);
                     intent.putExtra(TAG_NIPNIK, nipnik);
                     finish();
                     startActivity(intent);
-                }else {
+
                     String text = "" + response.body().getMessage();
                     Spannable centeredText = new SpannableString(text);
                     centeredText.setSpan(new AlignmentSpan.Standard(Layout.Alignment.ALIGN_CENTER),
                             0, text.length() - 1,
                             Spannable.SPAN_INCLUSIVE_INCLUSIVE);
-                    Toast.makeText(ChangePassword.this,centeredText, Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(),centeredText, Toast.LENGTH_LONG).show();
+                    break;
+
+                    case 2:
+                    intent = new Intent(ChangePassword.this, MainActivity.class);
+                    intent.putExtra(TAG_NAMA, nama);
+                    intent.putExtra(TAG_NIPNIK, nipnik);
+                    finish();
+                    startActivity(intent);
+
+                    text = "" + response.body().getMessage();
+                    centeredText = new SpannableString(text);
+                    centeredText.setSpan(new AlignmentSpan.Standard(Layout.Alignment.ALIGN_CENTER),
+                            0, text.length() - 1,
+                            Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+                    Toast.makeText(getApplicationContext(),centeredText, Toast.LENGTH_LONG).show();
+                    break;
+
+                    case 3:
+                    intent = new Intent(ChangePassword.this, MainActivityMhs.class);
+                    intent.putExtra(TAG_NAMA, nama);
+                    intent.putExtra(TAG_NIPNIK, nipnik);
+                    finish();
+                    startActivity(intent);
+
+                    text = "" + response.body().getMessage();
+                    centeredText = new SpannableString(text);
+                    centeredText.setSpan(new AlignmentSpan.Standard(Layout.Alignment.ALIGN_CENTER),
+                            0, text.length() - 1,
+                            Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+                    Toast.makeText(getApplicationContext(),centeredText, Toast.LENGTH_LONG).show();
+                    break;
+
+                    default:
+                        text = "" + response.body().getMessage();
+                        centeredText = new SpannableString(text);
+                        centeredText.setSpan(new AlignmentSpan.Standard(Layout.Alignment.ALIGN_CENTER), 0, text.length() - 1, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+                        Toast.makeText(getApplicationContext(),centeredText, Toast.LENGTH_LONG).show();
+
                 }
+
             }
 
             @Override
             public void onFailure(Call<MSG> call, Throwable t) {
-                hidepDialog();
+//                hidepDialog();
                 Log.d("onFailure", t.toString());
             }
         });
     }
 
-    public void onLoginFailed() {
+    public static void setDefaultString(String key, String value, Context context) {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString(key, value);
+        editor.commit();
+    }
+
+
+
+    public static void setDefaultBoolean(String key, Boolean value, Context context) {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putBoolean(key, value);
+        editor.commit();
+    }
+
+    public static void setDefaultInteger(String key, Integer value, Context context) {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putInt(key, value);
+        editor.commit();
+    }
+
+    public void onChangeFailed() {
         Toast.makeText(getBaseContext(), "Mohon isi dengan benar", Toast.LENGTH_LONG).show();
         save.setEnabled(true);
     }
@@ -170,12 +289,30 @@ public class ChangePassword extends AppCompatActivity {
         String password_baru = _passwordbaru.getText().toString();
         String ulpassword_baru = _ulangipasswordbaru.getText().toString();
 
-        if (!password_baru.equals(ulpassword_baru)) {
-            _passwordbaru.setError("Password tidak sama");
+        Pattern UpperCasePatten = Pattern.compile("[A-Z ]");
+        Pattern lowerCasePatten = Pattern.compile("[a-z ]");
+        Pattern digitCasePatten = Pattern.compile("[0-9 ]");
+
+        if (!UpperCasePatten.matcher(password_baru).find()) {
+            _passwordbaru.setError("Password harus terdapat huruf besar", null);
             requestFocus(_passwordbaru);
             valid = false;
-        } else {
-            _passwordbaru.setError(null);
+        } if (!lowerCasePatten.matcher(password_baru).find()) {
+            _passwordbaru.setError("Password harus terdapat huruf kecil", null);
+            requestFocus(_passwordbaru);
+            valid = false;
+        } if (!digitCasePatten.matcher(password_baru).find()) {
+            _passwordbaru.setError("Password harus terdapat angka", null);
+            requestFocus(_passwordbaru);
+            valid = false;
+        }if (password_baru.length() < 10) {
+            _passwordbaru.setError("Password minimal 10 karakter", null);
+            requestFocus(_passwordbaru);
+            valid = false;
+        }if (!password_baru.equals(ulpassword_baru)) {
+            _passwordbaru.setError("Password tidak sama", null);
+            requestFocus(_passwordbaru);
+            valid = false;
         }
         return valid;
     }

@@ -15,7 +15,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".pengaturan.ChangePassword"
+        <activity android:name=".admin.UserActivity"
+            android:theme="@style/NoActionBar" />
+        <activity
+            android:name=".pengaturan.ChangePassword"
             android:theme="@style/NoActionBar" />
         <activity
             android:name=".pengaturan.EmailVerifikasiActivity"

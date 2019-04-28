@@ -29,19 +29,21 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/copyright"
+            android:text="@string/unair"
             android:textAlignment="center"
             android:textColor="@color/colorPrimaryDark"
-            android:textSize="14sp" />
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/unair"
+            android:text="@string/motto"
             android:textAlignment="center"
             android:textColor="@color/colorPrimaryDark"
-            android:textSize="17sp"
-            android:textStyle="bold" />
+            android:textSize="14sp" />
+
+
     </LinearLayout>
 
 </LinearLayout>

@@ -11,6 +11,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -44,7 +45,7 @@ import retrofit2.Response;
  */
 public class AgendaAdminFragment extends Fragment {
 
-
+    private SwipeRefreshLayout swipeContainer;
     private Toolbar mToolbar;
     private Spinner mSpinner;
     FragmentActivity mActivity;
@@ -96,6 +97,13 @@ public class AgendaAdminFragment extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHasFixedSize(true);
 
+        swipeContainer = view.findViewById(R.id.swipeContainer);
+        swipeContainer.setColorSchemeResources(android.R.color.holo_blue_bright,
+                android.R.color.holo_green_light,
+                android.R.color.holo_orange_light,
+                android.R.color.holo_red_light);
+
+
         mSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
             public void onClick(View v) {
@@ -111,30 +119,77 @@ public class AgendaAdminFragment extends Fragment {
                     case 0:
                         progressBar.setVisibility(View.VISIBLE);
                         fetchAgendaAdmin("agendaadmin", "monday");
+                        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+                            @Override
+                            public void onRefresh() {
+                                fetchAgendaAdmin("agendaadmin", "monday");
+                            }
+                        });
                         break;
                     case 1:
                         progressBar.setVisibility(View.VISIBLE);
                         fetchAgendaAdmin("agendaadmin", "tuesday");
+                        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+                            @Override
+                            public void onRefresh() {
+                                fetchAgendaAdmin("agendaadmin", "tuesday");
+                            }
+                        });
                         break;
                     case 2:
                         progressBar.setVisibility(View.VISIBLE);
                         fetchAgendaAdmin("agendaadmin", "wednesday");
+                        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+                            @Override
+                            public void onRefresh() {
+                                fetchAgendaAdmin("agendaadmin", "wednesday");
+
+                            }
+                        });
                         break;
                     case 3:
                         progressBar.setVisibility(View.VISIBLE);
                         fetchAgendaAdmin("agendaadmin", "thursday");
+                        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+                            @Override
+                            public void onRefresh() {
+                                fetchAgendaAdmin("agendaadmin", "thursday");
+
+                            }
+                        });
                         break;
                     case 4:
                         progressBar.setVisibility(View.VISIBLE);
                         fetchAgendaAdmin("agendaadmin", "friday");
+                        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+                            @Override
+                            public void onRefresh() {
+                                fetchAgendaAdmin("agendaadmin", "friday");
+
+                            }
+                        });
                         break;
                     case 5:
                         progressBar.setVisibility(View.VISIBLE);
                         fetchAgendaAdmin("agendaadmin", "saturday");
+                        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+                            @Override
+                            public void onRefresh() {
+                                fetchAgendaAdmin("agendaadmin", "saturday");
+
+                            }
+                        });
                         break;
                     case 6:
                         progressBar.setVisibility(View.VISIBLE);
                         fetchAgendaAdmin("agendaadmin", "sunday");
+                        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+                            @Override
+                            public void onRefresh() {
+                                fetchAgendaAdmin("agendaadmin", "sunday");
+
+                            }
+                        });
                         break;
 
                 }
@@ -166,19 +221,12 @@ public class AgendaAdminFragment extends Fragment {
             public void onResponse(@NonNull Call<List<Agenda>> call, @NonNull Response<List<Agenda>> response) {
                 progressBar.setVisibility(View.GONE);
                 agendaList = response.body();
+                swipeContainer.setRefreshing(false);
+                //agendaList.clear();
                 adapter = new Adapter(getActivity(), agendaList);
                 recyclerView.setAdapter(adapter);
                 adapter.notifyDataSetChanged();
-//                    adapter.SetOnItemClickListener(new Adapter.OnItemClickListener() {
-//
-//                        @Override
-//                        public void onItemClick(View v , int position) {
-//                            Intent i = new Intent(getActivity(), DetailAgenda.class);
-//                            i.putExtra("namaKegiatan",);
-//                            startActivity(i);
-//                        }
-//                    });
-                Log.e("tesGudangBerhasil", new Gson().toJson(response.body()));
+                Log.e("tesAgendaBerhasil", new Gson().toJson(response.body()));
             }
 
             @Override

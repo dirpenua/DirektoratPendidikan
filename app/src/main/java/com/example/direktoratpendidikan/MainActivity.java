@@ -129,7 +129,8 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         // kita set default nya Home Fragment
         loadFragment(new BerandaFragment());
 
-        // inisialisasi BottomNavigaionView
+
+            // inisialisasi BottomNavigaionView
         BottomNavigationView bottomNavigationView = findViewById(R.id.bn_main);
 
         // beri listener pada saat item/menu bottomnavigation terpilih

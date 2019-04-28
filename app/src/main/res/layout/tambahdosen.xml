@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_gravity="center"
+    android:gravity="center">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical"
+        android:layout_width="350dp"
+        android:layout_height="350dp"
+        android:background="@drawable/whiteround"
+        android:padding="5dp"
+        android:layout_gravity="center"
+        android:elevation="8dp">
+
+        <ImageView
+            android:id="@+id/dialogclose"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="end"
+            android:layout_margin="5dp"
+            android:gravity="center"
+            android:src="@drawable/ic_cancel"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="DAFTARKAN DOSEN"
+                android:gravity="center"
+                android:textSize="20dp"
+                android:textColor="@color/colorPrimaryDark"
+                android:textStyle="bold"/>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp">
+
+                <EditText
+                    android:id="@+id/tnipnik"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:hint="NIP/NIK"
+                    android:inputType="number"
+                    android:singleLine="true"
+                    android:textColorHint="@color/colorPrimaryDark"
+                    android:drawableTint="@color/colorPrimaryDark"/>
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp">
+
+                <EditText
+                    android:id="@+id/tnamadosen"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:hint="Nama lengkap dan Gelar"
+                    android:inputType="text"
+                    android:singleLine="true"
+                    android:textColorHint="@color/colorPrimaryDark"
+                    android:drawableTint="@color/colorPrimaryDark"/>
+            </android.support.design.widget.TextInputLayout>
+
+
+            <TextView
+                android:id="@+id/simpandosen"
+                android:layout_width="100dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="30dp"
+                android:layout_gravity="center"
+                android:text="SIMPAN"
+                android:textSize="16dp"
+                android:textColor="#FFF"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:elevation="3dp"
+                android:textAlignment="center"
+                android:background="@drawable/rounddark"/>
+
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>
