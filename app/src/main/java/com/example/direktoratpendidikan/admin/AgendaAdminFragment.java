@@ -43,7 +43,7 @@ import retrofit2.Response;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class AgendaAdminFragment extends Fragment {
+public class  AgendaAdminFragment extends Fragment {
 
     private SwipeRefreshLayout swipeContainer;
     private Toolbar mToolbar;
@@ -98,10 +98,9 @@ public class AgendaAdminFragment extends Fragment {
         recyclerView.setHasFixedSize(true);
 
         swipeContainer = view.findViewById(R.id.swipeContainer);
-        swipeContainer.setColorSchemeResources(android.R.color.holo_blue_bright,
-                android.R.color.holo_green_light,
-                android.R.color.holo_orange_light,
-                android.R.color.holo_red_light);
+        swipeContainer.setColorSchemeResources(android.R.color.holo_blue_dark,
+                android.R.color.holo_blue_light,
+                android.R.color.holo_blue_bright);
 
 
         mSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {

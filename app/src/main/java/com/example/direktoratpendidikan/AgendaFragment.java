@@ -10,6 +10,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -43,6 +44,7 @@ import retrofit2.Response;
  */
 public class AgendaFragment extends Fragment{
 
+    private SwipeRefreshLayout swipeContainer;
     private Toolbar mToolbar;
     private Spinner mSpinner;
     FragmentActivity mActivity;
@@ -94,6 +96,12 @@ public class AgendaFragment extends Fragment{
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHasFixedSize(true);
 
+        swipeContainer = view.findViewById(R.id.swipeContainer);
+        swipeContainer.setColorSchemeResources(android.R.color.holo_blue_dark,
+                                                android.R.color.holo_blue_light,
+                                                android.R.color.holo_blue_bright);
+
+
         mSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
             public void onClick(View v) {
@@ -110,32 +118,73 @@ public class AgendaFragment extends Fragment{
                     case 0:
                         progressBar.setVisibility(View.VISIBLE);
                         fetchAgenda("agenda", "monday", nipnik);
+                        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+                            @Override
+                            public void onRefresh() {
+                                fetchAgenda("agenda", "monday", nipnik);
+                            }
+                        });
                         break;
                     case 1:
                         progressBar.setVisibility(View.VISIBLE);
                         fetchAgenda("agenda", "tuesday", nipnik);
+                        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+                            @Override
+                            public void onRefresh() {
+                                fetchAgenda("agenda", "tuesday", nipnik);
+                            }
+                        });
                         break;
                     case 2:
                         progressBar.setVisibility(View.VISIBLE);
                         fetchAgenda("agenda", "wednesday", nipnik);
+                        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+                            @Override
+                            public void onRefresh() {
+                                fetchAgenda("agenda", "wednesday", nipnik);
+                            }
+                        });
                         break;
                     case 3:
                         progressBar.setVisibility(View.VISIBLE);
                         fetchAgenda("agenda", "thursday", nipnik);
+                        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+                            @Override
+                            public void onRefresh() {
+                                fetchAgenda("agenda", "thursday", nipnik);
+                            }
+                        });
                         break;
                     case 4:
                         progressBar.setVisibility(View.VISIBLE);
                         fetchAgenda("agenda", "friday", nipnik);
+                        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+                            @Override
+                            public void onRefresh() {
+                                fetchAgenda("agenda", "friday", nipnik);
+                            }
+                        });
                         break;
                     case 5:
                         progressBar.setVisibility(View.VISIBLE);
                         fetchAgenda("agenda", "saturday", nipnik);
+                        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+                            @Override
+                            public void onRefresh() {
+                                fetchAgenda("agenda", "saturday", nipnik);
+                            }
+                        });
                         break;
                     case 6:
                         progressBar.setVisibility(View.VISIBLE);
                         fetchAgenda("agenda", "sunday", nipnik);
+                        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+                            @Override
+                            public void onRefresh() {
+                                fetchAgenda("agenda", "sunday", nipnik);
+                            }
+                        });
                         break;
-
                 }
 
             }
@@ -160,12 +209,13 @@ public class AgendaFragment extends Fragment{
             Call<List<Agenda>> call = apiInterface.getAgenda(type,hari,nipnik);
             Log.e("tipe", type);
             Log.e("hari", hari);
-            Log.e("hari", nipnik);
+            Log.e("nipnik", nipnik);
             call.enqueue(new Callback<List<Agenda>>() {
                 @Override
                 public void onResponse(@NonNull Call<List<Agenda>> call, @NonNull Response<List<Agenda>> response) {
                     progressBar.setVisibility(View.GONE);
                     agendaList = response.body();
+                    swipeContainer.setRefreshing(false);
                     adapter = new Adapter(getActivity(), agendaList);
                     recyclerView.setAdapter(adapter);
                     adapter.notifyDataSetChanged();

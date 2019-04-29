@@ -7,4 +7,9 @@
     <color name="Background">#E4E4E4</color>
     <color name="Abu">#E4E4E4</color>
     <color name="RedWarning">#FF3333</color>
+
+    <color name="Swipe1">#332744</color>
+    <color name="Swipe2">#624a89</color>
+    <color name="Swipe3">#345278</color>
+    <color name="Swipe4">#b0c4de</color>
 </resources>

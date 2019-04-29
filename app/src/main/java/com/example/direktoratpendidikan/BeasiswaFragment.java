@@ -11,6 +11,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.MenuItemCompat;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -51,6 +52,7 @@ public class BeasiswaFragment extends Fragment implements SearchView.OnQueryText
         // Required empty public constructor
     }
 
+    private SwipeRefreshLayout swipeContainer;
     private SearchView cariBeasiswa;
     private Spinner bSpinner;
     FragmentActivity mActivity;
@@ -105,6 +107,11 @@ public class BeasiswaFragment extends Fragment implements SearchView.OnQueryText
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHasFixedSize(true);
 
+        swipeContainer = view.findViewById(R.id.swipeContainer);
+//        swipeContainer.setColorSchemeResources(android.R.color.holo_blue_dark,
+////                                                android.R.color.holo_blue_light,
+////                                                android.R.color.holo_blue_bright);
+
         bSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
             public void onClick(View v) {
@@ -119,20 +126,43 @@ public class BeasiswaFragment extends Fragment implements SearchView.OnQueryText
                 switch(position){
                     case 0:
                         progressBar.setVisibility(View.VISIBLE);
-                        fetchBeasiswa(position);
+                        fetchBeasiswa(0);
+                        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+                            @Override
+                            public void onRefresh() {
+                                fetchBeasiswa(0);
+                            }
+                        });
                         break;
                     case 1:
                         progressBar.setVisibility(View.VISIBLE);
-                        fetchBeasiswa(position);
+                        fetchBeasiswa(1);
+                        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+                            @Override
+                            public void onRefresh() {
+                                fetchBeasiswa(1);
+                            }
+                        });
                         break;
                     case 2:
                         progressBar.setVisibility(View.VISIBLE);
-                        fetchBeasiswa(position);
+                        fetchBeasiswa(2);
+                        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+                            @Override
+                            public void onRefresh() {
+                                fetchBeasiswa(2);
+                            }
+                        });
                         break;
                     default:
                         progressBar.setVisibility(View.VISIBLE);
                         fetchBeasiswa(0);
-
+                        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+                            @Override
+                            public void onRefresh() {
+                                fetchBeasiswa(0);
+                            }
+                        });
                 }
 
             }
@@ -160,6 +190,7 @@ public class BeasiswaFragment extends Fragment implements SearchView.OnQueryText
             public void onResponse(@NonNull Call<List<Beasiswa>> call, @NonNull Response<List<Beasiswa>> response) {
                 progressBar.setVisibility(View.GONE);
                 beasiswaList = response.body();
+                swipeContainer.setRefreshing(false);
                 adapter = new AdapterBeasiswa(getActivity(), beasiswaList);
                 recyclerView.setAdapter(adapter);
                 adapter.notifyDataSetChanged();
