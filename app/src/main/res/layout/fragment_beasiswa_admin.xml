@@ -1,14 +1,95 @@
-<?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/fragment_beasiswaadmin"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".admin.BeasiswaAdminFragment">
+    android:fitsSystemWindows="true"
+    android:orientation="vertical"
+    >
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@color/colorPrimaryDark"
+        android:elevation="8dp">
+
+        <SearchView
+            android:id="@+id/cari_beasiswa"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:background="@drawable/whiteround">
+
+        </SearchView>
+
+        <Spinner
+            android:id="@+id/spinner_beasiswa"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="?android:selectableItemBackground"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginBottom="10dp"
+            android:theme="@style/ThemeOverlay.AppCompat.Light" />
+
+    </LinearLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ProgressBar
+            android:id="@+id/prograss"
+            android:layout_centerInParent="true"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"/>
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/tambahagenda"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="30dp"
+            android:layout_below="@id/toolbar"
+            android:layout_alignEnd="@id/swipeContainer"
+            android:layout_alignBottom="@id/swipeContainer"
+            android:layout_above="@id/bn_main"
+            android:layout_marginBottom="20dp"
+            android:backgroundTint="@color/colorPrimaryDark"
+            android:src="@drawable/ic_tambah"
+            app:elevation="8dp"
+            app:fabSize="normal"
+            app:maxImageSize="35dp"/>
+
+        <android.support.v4.widget.SwipeRefreshLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/swipeContainer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/toolbar"
+            android:layout_above="@id/bn_main"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="70dp">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recyclerViewBeasiswa"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+        </android.support.v4.widget.SwipeRefreshLayout>
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text=" ini fragment beasiswa ADMIN " />
+        >
 
-</FrameLayout>
+    </RelativeLayout>
+
+
+
+</LinearLayout>

@@ -46,7 +46,7 @@
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".MainActivity"
+            android:name=".dosen.MainActivity"
             android:theme="@style/NoActionBar"
             android:windowSoftInputMode="adjustPan" />
         <activity

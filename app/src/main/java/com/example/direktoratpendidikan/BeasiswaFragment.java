@@ -108,9 +108,9 @@ public class BeasiswaFragment extends Fragment implements SearchView.OnQueryText
         recyclerView.setHasFixedSize(true);
 
         swipeContainer = view.findViewById(R.id.swipeContainer);
-//        swipeContainer.setColorSchemeResources(android.R.color.holo_blue_dark,
-////                                                android.R.color.holo_blue_light,
-////                                                android.R.color.holo_blue_bright);
+        swipeContainer.setColorSchemeResources(android.R.color.holo_blue_dark,
+                                                android.R.color.holo_blue_light,
+                                                android.R.color.holo_blue_bright);
 
         bSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 

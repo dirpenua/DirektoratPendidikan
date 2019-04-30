@@ -5,6 +5,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
+import android.text.Layout;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.style.AlignmentSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +17,7 @@ import android.widget.Toast;
 
 import com.example.direktoratpendidikan.DetailAgenda;
 import com.example.direktoratpendidikan.DownloadActivity;
+import com.example.direktoratpendidikan.LoginActivity;
 import com.example.direktoratpendidikan.R;
 import com.example.direktoratpendidikan.data.Download;
 
@@ -81,7 +86,12 @@ public class AdapterDownload extends RecyclerView.Adapter<AdapterDownload.MyView
                         v.getContext().startActivity(i);
                         v.getContext().startActivity(i);
                     } catch (ActivityNotFoundException e) {
-                        Toast.makeText(v.getContext(), "File tidak ditemukan. Harap hubungi admin.",  Toast.LENGTH_LONG).show();
+                        String text = "File tidak ditemukan. Harap hubungi admin melalui menu BANTUAN";
+                        Spannable centeredText = new SpannableString(text);
+                        centeredText.setSpan(new AlignmentSpan.Standard(Layout.Alignment.ALIGN_CENTER),
+                                0, text.length() - 1,
+                                Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+                        Toast.makeText(v.getContext(),centeredText, Toast.LENGTH_LONG).show();
                         e.printStackTrace();
                     }
                 }

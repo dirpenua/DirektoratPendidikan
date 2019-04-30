@@ -1,9 +1,8 @@
-package com.example.direktoratpendidikan;
+package com.example.direktoratpendidikan.dosen;
 
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
@@ -19,18 +18,20 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-import com.example.direktoratpendidikan.admin.MainActivityAdmin;
+import com.example.direktoratpendidikan.AgendaFragment;
+import com.example.direktoratpendidikan.AkunFragment;
+import com.example.direktoratpendidikan.BeasiswaFragment;
+import com.example.direktoratpendidikan.BerandaFragment;
+import com.example.direktoratpendidikan.LoginActivity;
+import com.example.direktoratpendidikan.ProsedurFragment;
+import com.example.direktoratpendidikan.R;
 import com.example.direktoratpendidikan.api.ApiClient;
 import com.example.direktoratpendidikan.api.ApiInterface;
-import com.example.direktoratpendidikan.data.MSG;
 import com.example.direktoratpendidikan.data.Notif;
-import com.example.direktoratpendidikan.mahasiswa.MainActivityMhs;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.InstanceIdResult;
-import com.google.firebase.messaging.FirebaseMessaging;
 
 import butterknife.ButterKnife;
 import retrofit2.Call;
@@ -127,7 +128,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
                 });
 
         // kita set default nya Home Fragment
-        loadFragment(new BerandaFragment());
+        loadFragment(new BerandaDosenFragment());
 
 
             // inisialisasi BottomNavigaionView
@@ -187,7 +188,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 
         switch (item.getItemId()) {
             case R.id.beranda:
-                fragment = new BerandaFragment();
+                fragment = new BerandaDosenFragment();
                 break;
             case R.id.prosedur:
                 fragment = new ProsedurFragment();

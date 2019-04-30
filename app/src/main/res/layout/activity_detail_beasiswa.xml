@@ -108,14 +108,16 @@ tools:context=".DetailBeasiswa">
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="5dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="5dp"
         android:layout_marginBottom="20dp">
 
     <TextView
         android:id="@+id/kontenbeasiswadetail"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:gravity="fill_horizontal"
+        android:layout_marginRight="15dp"
         android:text="Di isi konten panjang"
         android:textSize="13dp"
         android:textColor="@color/colorAccent"

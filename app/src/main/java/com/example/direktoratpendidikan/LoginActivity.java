@@ -7,7 +7,6 @@ import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.os.Handler;
 import android.preference.PreferenceManager;
-import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Layout;
@@ -31,9 +30,8 @@ import com.example.direktoratpendidikan.admin.MainActivityAdmin;
 import com.example.direktoratpendidikan.api.ApiClient;
 import com.example.direktoratpendidikan.api.ApiInterface;
 import com.example.direktoratpendidikan.data.MSG;
+import com.example.direktoratpendidikan.dosen.MainActivity;
 import com.example.direktoratpendidikan.mahasiswa.MainActivityMhs;
-
-import org.w3c.dom.Text;
 
 
 public class LoginActivity extends AppCompatActivity {

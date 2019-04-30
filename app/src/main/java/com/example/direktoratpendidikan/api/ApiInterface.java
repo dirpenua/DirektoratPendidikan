@@ -6,6 +6,7 @@ import com.example.direktoratpendidikan.data.Cari;
 import com.example.direktoratpendidikan.data.Download;
 import com.example.direktoratpendidikan.data.MSG;
 import com.example.direktoratpendidikan.data.Notif;
+import com.example.direktoratpendidikan.data.Prosedur;
 
 import java.util.List;
 import retrofit2.Call;
@@ -33,6 +34,11 @@ public interface ApiInterface {
 
     @GET("getbeasiswa.php?")
     Call < List<Beasiswa>> getBeasiswa(
+            @Query("kategori") Integer kategori
+    );
+
+    @GET("getprosedur.php?")
+    Call < List<Prosedur>> getProsedur(
             @Query("kategori") Integer kategori
     );
 

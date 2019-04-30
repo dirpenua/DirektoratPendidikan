@@ -14,17 +14,12 @@ import android.text.style.AlignmentSpan;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.direktoratpendidikan.AkunFragment;
-import com.example.direktoratpendidikan.LoginActivity;
-import com.example.direktoratpendidikan.MainActivity;
+import com.example.direktoratpendidikan.dosen.MainActivity;
 import com.example.direktoratpendidikan.R;
-import com.example.direktoratpendidikan.UbahPWUserBaru;
 import com.example.direktoratpendidikan.admin.MainActivityAdmin;
 import com.example.direktoratpendidikan.api.ApiClient;
 import com.example.direktoratpendidikan.api.ApiInterface;

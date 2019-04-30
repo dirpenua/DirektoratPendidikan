@@ -25,9 +25,11 @@ import android.widget.SearchView;
 import android.widget.Spinner;
 
 import com.example.direktoratpendidikan.adapter.Adapter;
+import com.example.direktoratpendidikan.adapter.AdapterProsedur;
 import com.example.direktoratpendidikan.api.ApiClient;
 import com.example.direktoratpendidikan.api.ApiInterface;
 import com.example.direktoratpendidikan.data.Agenda;
+import com.example.direktoratpendidikan.data.Prosedur;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
@@ -53,8 +55,8 @@ public class ProsedurFragment extends Fragment {
     FragmentActivity mActivity;
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
-    private List agendaList;
-    private Adapter adapter;
+    private List prosedurList;
+    private AdapterProsedur adapterpro;
     private ApiInterface apiInterface;
     ProgressBar progressBar;
 
@@ -94,9 +96,9 @@ public class ProsedurFragment extends Fragment {
 
         SpinnerCariAdapter spinneradapter = new SpinnerCariAdapter(((AppCompatActivity) getActivity()), spinnerItems);
         pSpinner.setAdapter(spinneradapter);
-//        layoutManager = new LinearLayoutManager(getActivity());
-//        recyclerView.setLayoutManager(layoutManager);
-//        recyclerView.setHasFixedSize(true);
+        layoutManager = new LinearLayoutManager(getActivity());
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setHasFixedSize(true);
 
             pSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
@@ -112,7 +114,7 @@ public class ProsedurFragment extends Fragment {
                 switch(position){
                     case 0:
                         progressBar.setVisibility(View.VISIBLE);
-
+                        fetchProsedur(0);
                         break;
                     case 1:
                         progressBar.setVisibility(View.VISIBLE);
@@ -141,32 +143,23 @@ public class ProsedurFragment extends Fragment {
         return view;
     }
 
-    public void fetchProsedur (String type, String hari, String nipnik){
+    public void fetchProsedur (Integer kategori){
         apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
-        Call<List<Agenda>> call = apiInterface.getAgenda(type,hari,nipnik);
-        call.enqueue(new Callback<List<Agenda>>() {
+        Call<List<Prosedur>> call = apiInterface.getProsedur(kategori);
+        call.enqueue(new Callback<List<Prosedur>>() {
             @Override
-            public void onResponse(@NonNull Call<List<Agenda>> call, @NonNull Response<List<Agenda>> response) {
+            public void onResponse(@NonNull Call<List<Prosedur>> call, @NonNull Response<List<Prosedur>> response) {
                 progressBar.setVisibility(View.GONE);
-                agendaList = response.body();
-                adapter = new Adapter(getActivity(), agendaList);
-                recyclerView.setAdapter(adapter);
-                adapter.notifyDataSetChanged();
-//                    adapter.SetOnItemClickListener(new Adapter.OnItemClickListener() {
-//
-//                        @Override
-//                        public void onItemClick(View v , int position) {
-//                            Intent i = new Intent(getActivity(), DetailAgenda.class);
-//                            i.putExtra("namaKegiatan",);
-//                            startActivity(i);
-//                        }
-//                    });
-                Log.e("tesGudangBerhasil", new Gson().toJson(response.body()));
+                prosedurList = response.body();
+                adapterpro = new AdapterProsedur(getActivity(), prosedurList);
+                recyclerView.setAdapter(adapterpro);
+                adapterpro.notifyDataSetChanged();
+                Log.e("tesProsedurBerhasil", new Gson().toJson(response.body()));
             }
 
             @Override
-            public void onFailure(@NonNull Call<List<Agenda>> call, @NonNull Throwable t) {
-                Log.e("tesAgendaGagal", "Gagal");
+            public void onFailure(@NonNull Call<List<Prosedur>> call, @NonNull Throwable t) {
+                Log.e("tesProsedurGagal", "Gagal");
                 progressBar.setVisibility(View.GONE);
             }
         });

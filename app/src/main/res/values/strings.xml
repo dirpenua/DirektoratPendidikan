@@ -37,9 +37,11 @@
     </string-array>
 
     <string-array name="kategoriprosedur">
-        <item>Tampilkan semua</item>
         <item>Administrasi Pendidikan</item>
         <item>Pengembangan Pendidikan</item>
+        <item>Aturan Akademik</item>
+        <item>ACTS</item>
+        <item>SKPI</item>
     </string-array>
 
     <string-array name="kategoribeasiswa">

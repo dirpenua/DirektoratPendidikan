@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/agenda_id"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginLeft="10dp"
@@ -19,19 +18,19 @@
             android:layout_weight="2">
 
         <TextView
-            android:id="@+id/judulbeasiswa"
+            android:id="@+id/judulprosedur"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:layout_gravity="center_vertical"
-            android:text="Judul Beasiswa"
+            android:text="Judul Prosedur"
             android:textSize="15sp"
             android:textStyle="bold"/>
 
         <TextView
-            android:id="@+id/kontenpendek"
+            android:id="@+id/kontenpendekpro"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="5dp"
@@ -42,7 +41,7 @@
             android:textSize="13sp"/>
 
                 <TextView
-                    android:id="@+id/hideid"
+                    android:id="@+id/hideidpro"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:visibility="invisible"
@@ -51,7 +50,7 @@
                     android:layout_weight="0"/>
 
                 <TextView
-                    android:id="@+id/hidetgl"
+                    android:id="@+id/hidetglpro"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:visibility="invisible"
@@ -60,7 +59,7 @@
                     android:layout_weight="0"/>
 
                 <TextView
-                    android:id="@+id/hidekonten"
+                    android:id="@+id/hidekontenpro"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:visibility="invisible"
@@ -76,7 +75,7 @@
             android:orientation="vertical"
             android:layout_weight="1">
         <TextView
-            android:id="@+id/baca"
+            android:id="@+id/bacapro"
             android:layout_width="70dp"
             android:layout_height="30dp"
             android:layout_gravity="end"

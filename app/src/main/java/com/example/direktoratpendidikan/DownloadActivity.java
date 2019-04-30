@@ -3,6 +3,7 @@ package com.example.direktoratpendidikan;
 import android.app.Activity;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -29,6 +30,7 @@ import retrofit2.Response;
 public class DownloadActivity extends AppCompatActivity {
 
     public ImageView onback;
+    private SwipeRefreshLayout swipeContainer;
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
     private List downloadList;
@@ -53,11 +55,22 @@ public class DownloadActivity extends AppCompatActivity {
             }
         });
 
+        swipeContainer = findViewById(R.id.swipeContainer);
+        swipeContainer.setColorSchemeResources(android.R.color.holo_blue_dark,
+                android.R.color.holo_blue_light,
+                android.R.color.holo_blue_bright);
+
         layoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHasFixedSize(true);
 
         fetchDownload("download");
+        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                fetchDownload("download");
+            }
+        });
     }
 
     public void fetchDownload (String type){
@@ -69,18 +82,10 @@ public class DownloadActivity extends AppCompatActivity {
             public void onResponse(@NonNull Call<List<Download>> call, @NonNull Response<List<Download>> response) {
                 progressBar.setVisibility(View.GONE);
                 downloadList = response.body();
+                swipeContainer.setRefreshing(false);
                 adapter = new AdapterDownload(getApplicationContext(), downloadList);
                 recyclerView.setAdapter(adapter);
                 adapter.notifyDataSetChanged();
-//                    adapter.SetOnItemClickListener(new Adapter.OnItemClickListener() {
-//
-//                        @Override
-//                        public void onItemClick(View v , int position) {
-//                            Intent i = new Intent(getActivity(), DetailAgenda.class);
-//                            i.putExtra("namaKegiatan",);
-//                            startActivity(i);
-//                        }
-//                    });
                 Log.e("tesDownloadBerhasil", new Gson().toJson(response.body()));
             }
 
