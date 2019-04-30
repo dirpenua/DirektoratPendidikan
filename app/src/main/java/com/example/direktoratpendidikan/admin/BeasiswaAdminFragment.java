@@ -218,10 +218,11 @@ public class BeasiswaAdminFragment extends Fragment implements SearchView.OnQuer
 
     @Override
     public boolean onQueryTextChange(String newText) {
+        String kategori = bSpinner.getSelectedItem().toString();
         recyclerView.setVisibility(View.GONE);
         progressBar.setVisibility(View.VISIBLE);
         apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
-        Call<Cari> call = apiInterface.searchBeasiswa(newText);
+        Call<Cari> call = apiInterface.searchBeasiswa(newText, kategori);
         Log.e("Newtext ", newText);
         call.enqueue(new Callback<Cari>() {
             @Override
@@ -230,14 +231,37 @@ public class BeasiswaAdminFragment extends Fragment implements SearchView.OnQuer
                 Log.e("Value ", value);
                 progressBar.setVisibility(View.GONE);
                 recyclerView.setVisibility(View.VISIBLE);
-                if (value.equals("1")) {
-                    fetchCari = response.body().getListBeasiswa();
-                    adapter = new AdapterBeasiswa(getActivity(), fetchCari);
-                    recyclerView.setAdapter(adapter);
-                    adapter.notifyDataSetChanged();
-                }else {
-                    //View v = LayoutInflater.from(getLayoutInflater().getContext()).inflate(R.layout.noresults, parent, false);
+                switch(value){
+                    case "0":
+                        fetchCari = response.body().getListBeasiswa();
+                        adapter = new AdapterBeasiswa(getActivity(), fetchCari);
+                        recyclerView.setAdapter(adapter);
+                        adapter.notifyDataSetChanged();
+                        break;
+
+                    case "1":
+                        fetchCari = response.body().getListBeasiswa();
+                        adapter = new AdapterBeasiswa(getActivity(), fetchCari);
+                        recyclerView.setAdapter(adapter);
+                        adapter.notifyDataSetChanged();
+                        break;
+
+                    case "2":
+                        fetchCari = response.body().getListBeasiswa();
+                        adapter = new AdapterBeasiswa(getActivity(), fetchCari);
+                        recyclerView.setAdapter(adapter);
+                        adapter.notifyDataSetChanged();
+                        break;
                 }
+
+//                if (value.equals("1")) {
+//                    fetchCari = response.body().getListBeasiswa();
+//                    adapter = new AdapterBeasiswa(getActivity(), fetchCari);
+//                    recyclerView.setAdapter(adapter);
+//                    adapter.notifyDataSetChanged();
+//                }else {
+//                    //View v = LayoutInflater.from(getLayoutInflater().getContext()).inflate(R.layout.noresults, parent, false);
+//                }
             }
 
             @Override

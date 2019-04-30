@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.example.direktoratpendidikan.DetailBeasiswa;
 import com.example.direktoratpendidikan.R;
+import com.example.direktoratpendidikan.data.Download;
 import com.example.direktoratpendidikan.data.Prosedur;
 
 import java.util.ArrayList;

@@ -27,7 +27,7 @@
             android:layout_marginRight="10dp"
             android:layout_gravity="center_vertical"
             android:text="Judul Beasiswa"
-            android:textSize="15sp"
+            android:textSize="14sp"
             android:textStyle="bold"/>
 
         <TextView
@@ -39,7 +39,7 @@
             android:layout_marginRight="10dp"
             android:justificationMode="inter_word"
             android:text="kontenhahahahahahahahahahahahahahahahahahahahahahahahahahahahhahahahahahahahahahahahaha..."
-            android:textSize="13sp"/>
+            android:textSize="12sp"/>
 
                 <TextView
                     android:id="@+id/hideid"

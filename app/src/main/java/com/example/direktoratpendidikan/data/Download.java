@@ -4,6 +4,7 @@ import com.google.gson.annotations.SerializedName;
 
 
 public class Download {
+    @SerializedName("kontenpendek") private String kontenpendek;
     @SerializedName("namafile") private String namafile;
     @SerializedName("linkfile") private String linkfile;
 
@@ -15,6 +16,11 @@ public class Download {
     public String getLink() { return linkfile; }
 
     public void setLink(String link) { this.linkfile = link;
+    }
+
+    public String getKonten() { return kontenpendek; }
+
+    public void setKonten(String konten) { this.kontenpendek = konten;
     }
 
 }

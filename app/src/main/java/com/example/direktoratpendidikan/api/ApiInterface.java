@@ -42,9 +42,22 @@ public interface ApiInterface {
             @Query("kategori") Integer kategori
     );
 
+    @GET("getprosedur.php?")
+    Call < List<Download>> getDw(
+            @Query("kategori") Integer kategori
+    );
+
+
     @FormUrlEncoded
     @POST("searchbeasiswa.php")
-    Call<Cari> searchBeasiswa(@Field("search") String search
+    Call<Cari> searchBeasiswa(@Field("search") String search,
+                              @Field("kategori") String kategori
+    );
+
+    @FormUrlEncoded
+    @POST("searchprosedur.php")
+    Call<Cari> searchProsedur(@Field("search") String search,
+                              @Field("kategori") String kategori
     );
 
     @GET("getlistadmin.php?")
@@ -57,6 +70,7 @@ public interface ApiInterface {
     Call < List<Download>> getDownload(
             @Query("item_type") String item_type
     );
+
 
     @FormUrlEncoded
     @POST("login.php")
