@@ -83,6 +83,15 @@ public class BerandaFragment extends Fragment {
             }
         });
 
+        ImageView kalender = view.findViewById(R.id.ic_kalender);
+        kalender.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent kalender = new Intent(getActivity(), KalenderAkademik.class);
+                startActivity(kalender);
+            }
+        });
+
         ImageView download = view.findViewById(R.id.ic_download);
         download.setOnClickListener(new View.OnClickListener() {
             @Override

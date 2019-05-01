@@ -53,6 +53,11 @@ public interface ApiInterface {
             @Query("kategori") Integer kategori
     );
 
+    @GET("getkalender.php?")
+    Call < List<Download>> getKalender(
+            @Query("kategori") String id
+    );
+
 
     @FormUrlEncoded
     @POST("searchbeasiswa.php")
