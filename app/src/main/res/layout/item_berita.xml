@@ -1,73 +1,121 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/agenda_id"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginLeft="20dp"
+    android:layout_marginLeft="10dp"
     android:layout_marginTop="10dp"
-    android:layout_marginRight="20dp"
-    android:layout_marginBottom="3dp"
+    android:layout_marginRight="10dp"
+    android:layout_marginBottom="5dp"
     android:orientation="vertical"
-    android:elevation="3dp"
+    android:elevation="5dp"
     android:background="@drawable/whiteround">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        <ImageView
+            android:id="@+id/gambarberita"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/slider1"/>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top"
+                    android:orientation="vertical">
+                        <TextView
+                            android:id="@+id/tanggalberita"
+                            android:layout_width="60dp"
+                            android:layout_height="45dp"
+                            android:text="20"
+                            android:textSize="28dp"
+                            android:gravity="center"
+                            android:textAlignment="center"
+                            android:background="@color/colorPrimary"
+                            android:textStyle="bold"
+                            android:textColor="@color/colorPrimaryDark" />
+                        <TextView
+                            android:layout_width="60dp"
+                            android:layout_height="3dp"
+                            android:gravity="center"
+                            android:textAlignment="center"
+                            android:background="@color/colorPrimaryDark"
+                            android:textStyle="bold"
+                            android:textColor="#fff" />
+                        <TextView
+                            android:id="@+id/bulanberita"
+                            android:layout_width="60dp"
+                            android:layout_height="wrap_content"
+                            android:text="JUN"
+                            android:textSize="14dp"
+                            android:textAlignment="center"
+                            android:background="@color/colorPrimaryDark"
+                            android:textStyle="bold"
+                            android:textColor="#fff"
+                            android:layout_gravity="top"/>
+                        <TextView
+                            android:layout_width="60dp"
+                            android:layout_height="3dp"
+                            android:gravity="center"
+                            android:textAlignment="center"
+                            android:background="@color/colorPrimaryDark"
+                            android:textStyle="bold"
+                            android:textColor="#fff" />
+                </LinearLayout>
+
+        </RelativeLayout>
+
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical"
-            android:layout_weight="2">
+            android:layout_weight="0">
 
         <TextView
-            android:id="@+id/judulbeasiswa"
+            android:id="@+id/judulberita"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
+            android:layout_marginBottom="10dp"
             android:layout_gravity="center_vertical"
-            android:text="Judul Beasiswa"
-            android:textSize="15sp"
+            android:text="Judul Berita"
+            android:textSize="14sp"
             android:textStyle="bold"/>
 
         <TextView
-            android:id="@+id/kontenpendek"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="5dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:text="kontenhahahahahahahahahahahahahahahahahahahahahahahahahahahahhahahahahahahahahahahahaha..."
-            android:textSize="13sp"/>
+            android:id="@+id/hideid"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:visibility="invisible"
+            android:text="hide id berita"
+            android:textSize="0sp"
+            android:layout_weight="0"/>
 
-                <TextView
-                    android:id="@+id/hideid"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:visibility="invisible"
-                    android:text="hide id beasiswa"
-                    android:textSize="0sp"
-                    android:layout_weight="0"/>
+        <TextView
+            android:id="@+id/hidetgl"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:visibility="invisible"
+            android:text="hide tgl publish"
+            android:textSize="0sp"
+            android:layout_weight="0"/>
 
-                <TextView
-                    android:id="@+id/hidetgl"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:visibility="invisible"
-                    android:text="hide tgl publish"
-                    android:textSize="0sp"
-                    android:layout_weight="0"/>
-
-                <TextView
-                    android:id="@+id/hidekonten"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:visibility="invisible"
-                    android:text="hide konten beasiswa"
-                    android:textSize="0sp"
-                    android:layout_weight="0"/>
-
+        <TextView
+            android:id="@+id/hidekonten"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:visibility="invisible"
+            android:text="hide konten berita"
+            android:textSize="0sp"
+            android:layout_weight="0"/>
         </LinearLayout>
+
 </LinearLayout>
 
 
