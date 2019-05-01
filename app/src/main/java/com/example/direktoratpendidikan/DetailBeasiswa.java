@@ -41,9 +41,11 @@ public class DetailBeasiswa extends AppCompatActivity {
             judulbeasiswa.setTextIsSelectable(true);
 //            String id =(String) b.get("idbeasiswa");
 //            idbeasiswa.setText(id);
+
             String konten =(String) b.get("kontenpanjangbeasiswa");
             kontenbeasiswa.setText(konten);
             kontenbeasiswa.setTextIsSelectable(true);
+
             String tgl =(String) b.get("tglpublish");
             tglpublish.setText(tgl);
 

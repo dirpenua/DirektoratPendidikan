@@ -28,17 +28,7 @@ public class BeritaActivity extends AppCompatActivity {
         cariBerita = findViewById(R.id.cari_berita);
         cariBerita.setQueryHint("Cari berita...");
         cariBerita.setIconified(false);
-        cariBerita.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                Log.i("well", " this worked");
-                return false;
-            }
-        });
+        //cariBerita.setOnQueryTextListener(this);
     }
+
 }

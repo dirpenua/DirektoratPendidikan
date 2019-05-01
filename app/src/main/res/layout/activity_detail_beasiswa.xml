@@ -91,18 +91,6 @@ tools:context=".DetailBeasiswa">
         android:textStyle="italic"/>
 
     </LinearLayout>
-    <!--<TextView-->
-        <!--android:id="@+id/idbeasiswa"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_marginTop="5dp"-->
-        <!--android:layout_marginLeft="20dp"-->
-        <!--android:layout_marginRight="20dp"-->
-        <!--android:text="Id beasiswa"-->
-        <!--android:textSize="13dp"-->
-        <!--android:layout_gravity="center"-->
-        <!--android:textAlignment="center"-->
-        <!--android:textColor="@color/colorAccent"/>-->
 
     <ScrollView
         android:layout_width="match_parent"

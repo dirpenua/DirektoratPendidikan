@@ -1,5 +1,6 @@
 package com.example.direktoratpendidikan.api;
 
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -10,7 +11,11 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class ApiClient {
 
 //    public static final String BASE_URL = "https://bbeasiswa.unair.ac.id/dirpenapp/";
+
+
     public static final String BASE_URL = "https://dirpenunair.000webhostapp.com/";
+    public static final String IMAGE_URL = "https://dirpenunair.000webhostapp.com/image/";
+
     public static Retrofit retrofit;
 
     public static Retrofit getApiClient(){
@@ -25,4 +30,5 @@ public class ApiClient {
         }
         return retrofit;
     }
+
 }

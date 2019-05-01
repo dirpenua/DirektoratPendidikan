@@ -6,12 +6,14 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.direktoratpendidikan.DetailBeasiswa;
+import com.example.direktoratpendidikan.DetailProsedur;
 import com.example.direktoratpendidikan.R;
-import com.example.direktoratpendidikan.data.Download;
+import com.example.direktoratpendidikan.api.ApiClient;
 import com.example.direktoratpendidikan.data.Prosedur;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,8 +42,9 @@ public class AdapterProsedur extends RecyclerView.Adapter<AdapterProsedur.MyView
         holder.konten_prosedur.setText(prosedurList.get(position).getKontenPendek());
         holder.kontenpanjangpro.setText(prosedurList.get(position).getKontenPanjang());
         holder.tglpublish.setText(prosedurList.get(position).getTanggal());
-
-
+        //Picasso.with(context).load(ApiClient.getApiImage()+prosedurList.get(position).getGambar()).error(R.mipmap.ic_launcher).into(holder.gambarprosedur);
+        //Picasso.with(context).load(ApiClient.getApiImage()+"alurwisuda.jpg").error(R.mipmap.ic_launcher).into(holder.gambarprosedur);
+        Picasso.with(context).load(ApiClient.IMAGE_URL+prosedurList.get(position).getGambarPro()).error(R.drawable.ic_progress).into(holder.gambarprosedur);
     }
 
     @Override
@@ -60,6 +63,7 @@ public class AdapterProsedur extends RecyclerView.Adapter<AdapterProsedur.MyView
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         TextView idprosedur, judulprosedur, konten_prosedur, kontenpanjangpro, tglpublish;
+        ImageView gambarprosedur;
 
         public MyViewHolder(final View itemView) {
             super(itemView);
@@ -68,16 +72,18 @@ public class AdapterProsedur extends RecyclerView.Adapter<AdapterProsedur.MyView
             konten_prosedur = itemView.findViewById(R.id.kontenpendekpro);
             kontenpanjangpro = itemView.findViewById(R.id.hidekontenpro);
             tglpublish = itemView.findViewById(R.id.hidetglpro);
+            gambarprosedur = itemView.findViewById(R.id.hidegambarprosedur);
             itemView.setTag(itemView);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-//                    Intent i = new Intent(v.getContext(), DetailBeasiswa.class); //Detail Beasiswa
-//                    i.putExtra("idbeasiswa",prosedurList.get(getAdapterPosition()).getIdPro());
-//                    i.putExtra("judulbeasiswa",prosedurList.get(getAdapterPosition()).getJudul());
-//                    i.putExtra("kontenpanjangbeasiswa",prosedurList.get(getAdapterPosition()).getKontenPanjang());
-//                    i.putExtra("tglpublish",prosedurList.get(getAdapterPosition()).getTanggal());
-//                    v.getContext().startActivity(i);
+                    Intent i = new Intent(v.getContext(), DetailProsedur.class); //Detail Prosedur
+                    i.putExtra("idprosedur",prosedurList.get(getAdapterPosition()).getIdPro());
+                    i.putExtra("judulprosedur",prosedurList.get(getAdapterPosition()).getJudul());
+                    i.putExtra("kontenpanjangprosedur",prosedurList.get(getAdapterPosition()).getKontenPanjang());
+                    i.putExtra("tglpublish",prosedurList.get(getAdapterPosition()).getTanggal());
+                    i.putExtra("gambarprosedur",prosedurList.get(getAdapterPosition()).getGambarPro());
+                    v.getContext().startActivity(i);
                 }
 
             });

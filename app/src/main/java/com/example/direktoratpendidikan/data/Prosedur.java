@@ -16,7 +16,7 @@ public class Prosedur {
     public String getJudul() { return judul; }
     public String getKontenPendek() { return kontenpendek; }
     public String getKontenPanjang() { return kontenpanjang; }
-    public String getGambar() { return kontenpanjang; }
+    public String getGambarPro() { return gambarprosedur; }
     public String getTanggal() { return tgl_publish; }
     public String getLinkPro() { return linkprosedur; }
 
