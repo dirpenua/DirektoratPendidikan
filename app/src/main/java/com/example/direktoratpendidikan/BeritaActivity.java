@@ -18,15 +18,17 @@ import com.example.direktoratpendidikan.api.ApiClient;
 import com.example.direktoratpendidikan.api.ApiInterface;
 import com.example.direktoratpendidikan.data.Beasiswa;
 import com.example.direktoratpendidikan.data.Berita;
+import com.example.direktoratpendidikan.data.Cari;
 import com.google.gson.Gson;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class BeritaActivity extends AppCompatActivity {
+public class BeritaActivity extends AppCompatActivity implements SearchView.OnQueryTextListener {
 
     private SwipeRefreshLayout swipeContainer;
     private SearchView cariBerita;
@@ -37,6 +39,7 @@ public class BeritaActivity extends AppCompatActivity {
     private AdapterBerita adapter;
     private ApiInterface apiInterface;
     ProgressBar progressBar;
+    private List<Berita> fetchCari = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +60,7 @@ public class BeritaActivity extends AppCompatActivity {
         cariBerita = findViewById(R.id.cari_berita);
         cariBerita.setQueryHint("Cari berita...");
         cariBerita.setIconified(false);
+        cariBerita.setOnQueryTextListener(this);
 
         layoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(layoutManager);
@@ -97,15 +101,61 @@ public class BeritaActivity extends AppCompatActivity {
 //                            startActivity(i);
 //                        }
 //                    });
-                Log.e("tesBeasiswaBerhasil", new Gson().toJson(response.body()));
+                Log.e("tesBeritaBerhasil", new Gson().toJson(response.body()));
             }
 
             @Override
             public void onFailure(@NonNull Call<List<Berita>> call, @NonNull Throwable t) {
-                Log.e("tesBeasiswaGagal", "Gagal");
+                Log.e("tesBeritaGagal", "Gagal");
                 progressBar.setVisibility(View.GONE);
             }
         });
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        recyclerView.setVisibility(View.GONE);
+        progressBar.setVisibility(View.VISIBLE);
+        apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
+        Call<Cari> call = apiInterface.searchBerita(newText);
+        Log.e("NEWTEXT ", newText);
+        call.enqueue(new Callback<Cari>() {
+            @Override
+            public void onResponse(Call<Cari> call, Response<Cari> response) {
+                String value = response.body().getValue();
+                Log.e("Value ", value);
+                if (value.equals("1")) {
+                    progressBar.setVisibility(View.GONE);
+                    recyclerView.setVisibility(View.VISIBLE);
+                    fetchCari = response.body().getListBerita();
+                    adapter = new AdapterBerita(getApplicationContext(), fetchCari);
+                    recyclerView.setAdapter(adapter);
+                    adapter.notifyDataSetChanged();
+                }else {
+                    //View v = LayoutInflater.from(getLayoutInflater().getContext()).inflate(R.layout.noresults, parent, false);
+                }
+
+                }
+//                if (value.equals("1")) {
+//                    fetchCari = response.body().getListBeasiswa();
+//                    adapter = new AdapterBeasiswa(getActivity(), fetchCari);
+//                    recyclerView.setAdapter(adapter);
+//                    adapter.notifyDataSetChanged();
+//                }else {
+//                    //View v = LayoutInflater.from(getLayoutInflater().getContext()).inflate(R.layout.noresults, parent, false);
+//                }
+
+            @Override
+            public void onFailure(Call<Cari> call, Throwable t) {
+                progressBar.setVisibility(View.GONE);
+            }
+        });
+        return true;
     }
 
 }

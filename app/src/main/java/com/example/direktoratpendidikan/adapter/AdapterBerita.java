@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.direktoratpendidikan.DetailBeasiswa;
+import com.example.direktoratpendidikan.DetailBerita;
 import com.example.direktoratpendidikan.R;
 import com.example.direktoratpendidikan.api.ApiClient;
 import com.example.direktoratpendidikan.data.Beasiswa;
@@ -78,10 +79,11 @@ public class AdapterBerita extends RecyclerView.Adapter<AdapterBerita.MyViewHold
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent i = new Intent(v.getContext(), DetailBeasiswa.class); //Detail Beasiswa
+                    Intent i = new Intent(v.getContext(), DetailBerita.class);
                     i.putExtra("judulberita",beritaList.get(getAdapterPosition()).getJudulB());
                     i.putExtra("kontenberita",beritaList.get(getAdapterPosition()).getKontenB());
                     i.putExtra("tglpublish",beritaList.get(getAdapterPosition()).getTanggalPublishB());
+                    i.putExtra("gambarberita",beritaList.get(getAdapterPosition()).getGambarB());
                     v.getContext().startActivity(i);
                 }
 

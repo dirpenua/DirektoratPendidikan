@@ -8,6 +8,7 @@ public class Cari {
     List<Beasiswa> result;
     List<Prosedur> resultpro;
     List<Download> resultdw;
+    List<Berita> resultbr;
 
     public String getValue() {
         return value;
@@ -27,5 +28,9 @@ public class Cari {
 
     public List<Download> getListDownload() {
         return resultdw;
+    }
+
+    public List<Berita> getListBerita() {
+        return resultbr;
     }
 }
