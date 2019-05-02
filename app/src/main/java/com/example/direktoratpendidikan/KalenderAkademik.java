@@ -34,7 +34,7 @@ public class KalenderAkademik extends AppCompatActivity {
         klikdetail = findViewById(R.id.klikdetail);
 
 
-        final String gambar = "KL01.jpg";
+        final String gambar = "kalenderakademik.jpg";
         Picasso.with(getApplicationContext()).load(ApiClient.IMAGE_URL+gambar).into(gambarkalender, new Callback() {
             @Override
             public void onSuccess() {

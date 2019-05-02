@@ -5,6 +5,7 @@ import com.example.direktoratpendidikan.data.Beasiswa;
 import com.example.direktoratpendidikan.data.Berita;
 import com.example.direktoratpendidikan.data.Cari;
 import com.example.direktoratpendidikan.data.Download;
+import com.example.direktoratpendidikan.data.Fakultas;
 import com.example.direktoratpendidikan.data.MSG;
 import com.example.direktoratpendidikan.data.Notif;
 import com.example.direktoratpendidikan.data.Prosedur;
@@ -43,6 +44,11 @@ public interface ApiInterface {
             @Query("kategori") Integer kategori
     );
 
+    @GET("getfakultas.php?")
+    Call < List<Fakultas>> getFakultas(
+            @Query("kategori") Integer kategori
+    );
+
     @GET("getprosedur.php?")
     Call < List<Prosedur>> getProsedur(
             @Query("kategori") Integer kategori
@@ -58,6 +64,10 @@ public interface ApiInterface {
             @Query("kategori") String id
     );
 
+    @GET("getprodi.php?")
+    Call < List<Fakultas>> getProdi(
+            @Query("idfakultas") String idfakultas
+    );
 
     @FormUrlEncoded
     @POST("searchbeasiswa.php")
@@ -74,6 +84,11 @@ public interface ApiInterface {
     @POST("searchprosedur.php")
     Call<Cari> searchProsedur(@Field("search") String search,
                               @Field("kategori") String kategori
+    );
+
+    @FormUrlEncoded
+    @POST("searchfakultas.php")
+    Call<Cari> searchFakultas(@Field("search") String search
     );
 
     @GET("getlistadmin.php?")

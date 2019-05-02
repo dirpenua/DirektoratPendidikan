@@ -15,7 +15,16 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".KalenderAkademik"
+        <activity android:name=".AkreditasiActivity"
+            android:theme="@style/NoActionBar" />
+        <activity
+            android:name=".ProgramStudi"
+            android:theme="@style/NoActionBar" />
+        <activity
+            android:name=".FakultasActivity"
+            android:theme="@style/NoActionBar" />
+        <activity
+            android:name=".KalenderAkademik"
             android:theme="@style/NoActionBar" />
         <activity
             android:name=".DetailBerita"
