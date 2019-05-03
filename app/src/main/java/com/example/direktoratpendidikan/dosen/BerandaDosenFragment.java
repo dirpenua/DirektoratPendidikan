@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.direktoratpendidikan.AkreditasiActivity;
 import com.example.direktoratpendidikan.BeritaActivity;
 import com.example.direktoratpendidikan.DownloadActivity;
 import com.example.direktoratpendidikan.FakultasActivity;
@@ -102,6 +103,15 @@ public class BerandaDosenFragment extends Fragment {
             public void onClick(View v) {
                 Intent prodi = new Intent(getActivity(), FakultasActivity.class);
                 startActivity(prodi);
+            }
+        });
+
+        ImageView akreditasi = view.findViewById(R.id.ic_akreditasi);
+        akreditasi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent akreditasi = new Intent(getActivity(), AkreditasiActivity.class);
+                startActivity(akreditasi);
             }
         });
 

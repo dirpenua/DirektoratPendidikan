@@ -106,6 +106,15 @@ public class BerandaFragment extends Fragment {
             }
         });
 
+        ImageView akreditasi = view.findViewById(R.id.ic_akreditasi);
+        akreditasi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent akreditasi = new Intent(getActivity(), AkreditasiActivity.class);
+                startActivity(akreditasi);
+            }
+        });
+
         ImageView download = view.findViewById(R.id.ic_download);
         download.setOnClickListener(new View.OnClickListener() {
             @Override

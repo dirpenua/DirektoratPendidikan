@@ -1,6 +1,7 @@
 package com.example.direktoratpendidikan.api;
 
 import com.example.direktoratpendidikan.data.Agenda;
+import com.example.direktoratpendidikan.data.Akreditasi;
 import com.example.direktoratpendidikan.data.Beasiswa;
 import com.example.direktoratpendidikan.data.Berita;
 import com.example.direktoratpendidikan.data.Cari;
@@ -8,6 +9,7 @@ import com.example.direktoratpendidikan.data.Download;
 import com.example.direktoratpendidikan.data.Fakultas;
 import com.example.direktoratpendidikan.data.MSG;
 import com.example.direktoratpendidikan.data.Notif;
+import com.example.direktoratpendidikan.data.Profil;
 import com.example.direktoratpendidikan.data.Prosedur;
 
 import java.util.List;
@@ -44,6 +46,11 @@ public interface ApiInterface {
             @Query("kategori") Integer kategori
     );
 
+    @GET("getakreditasi.php?")
+    Call < List<Akreditasi>> getAkreditasi(
+            @Query("kategori") Integer kategori
+    );
+
     @GET("getfakultas.php?")
     Call < List<Fakultas>> getFakultas(
             @Query("kategori") Integer kategori
@@ -67,6 +74,11 @@ public interface ApiInterface {
     @GET("getprodi.php?")
     Call < List<Fakultas>> getProdi(
             @Query("idfakultas") String idfakultas
+    );
+
+    @FormUrlEncoded
+    @POST("displayakun.php")
+    Call<Profil> userPic (@Field("nipnik") String nipnik
     );
 
     @FormUrlEncoded

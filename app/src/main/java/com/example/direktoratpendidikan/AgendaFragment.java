@@ -219,6 +219,10 @@ public class AgendaFragment extends Fragment{
                     adapter = new Adapter(getActivity(), agendaList);
                     recyclerView.setAdapter(adapter);
                     adapter.notifyDataSetChanged();
+                    if (adapter.getItemCount() == 0)
+                    {
+                        Toast.makeText(getContext(), "Tidak ada agenda hari ini",Toast.LENGTH_SHORT).show();
+                    }
 //                    adapter.SetOnItemClickListener(new Adapter.OnItemClickListener() {
 //
 //                        @Override

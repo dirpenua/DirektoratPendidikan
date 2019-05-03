@@ -11,16 +11,39 @@ import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.text.Layout;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.style.AlignmentSpan;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.direktoratpendidikan.adapter.Adapter;
 import com.example.direktoratpendidikan.adapter.AdapterAkun;
+import com.example.direktoratpendidikan.admin.MainActivityAdmin;
+import com.example.direktoratpendidikan.api.ApiClient;
+import com.example.direktoratpendidikan.api.ApiInterface;
+import com.example.direktoratpendidikan.data.Agenda;
+import com.example.direktoratpendidikan.data.MSG;
+import com.example.direktoratpendidikan.data.Profil;
+import com.example.direktoratpendidikan.dosen.MainActivity;
+import com.example.direktoratpendidikan.mahasiswa.MainActivityMhs;
+import com.google.gson.Gson;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 /**
@@ -29,14 +52,17 @@ import java.util.ArrayList;
 public class AkunFragment extends Fragment {
 
     SharedPreferences sharedpreferences;
+    SharedPreferences akun_sharepref;
     public final static String TAG_NAMA = "nama_user";
     public final static String TAG_NIPNIK = "nipnik";
+    ImageView _fotoprofil;
     String nama, nipnik;
     TextView _namauser,_nipnik;
     Button btnLogout;
     private String[] nama_pengaturan = {"Profil", "Email verifikasi", "Ubah password", "Bantuan", "Tentang DirpenUA"};
     private Integer[] logo = {R.drawable.ic_akun, R.drawable.ic_email, R.drawable.ic_password, R.drawable.ic_bantuan, R.drawable.ic_tentangaplikasi};
     private ListView lvakun;
+    private ApiInterface apiInterface;
 
     public AkunFragment() {
         // Required empty public constructor
@@ -79,10 +105,16 @@ public class AkunFragment extends Fragment {
 
         _namauser = view.findViewById(R.id.akun_namauser);
         _nipnik = view.findViewById(R.id.akun_nipnik);
+        _fotoprofil = view.findViewById(R.id.fotoprofil);
         btnLogout = (Button) view.findViewById(R.id.btn_logout);
 
-        _namauser.setText(nama);
+        //_namauser.setText(nama);
+        //fetchAkun(nipnik);
         _nipnik.setText(nipnik);
+
+
+
+
         btnLogout.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -126,6 +158,37 @@ public class AkunFragment extends Fragment {
 
         return view;
     }
+
+//    public void fetchAkun (String nipnik){
+//        apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
+//        Call<Profil> userCall = apiInterface.userPic(nipnik);
+//        Log.d("nipnik",nipnik);
+//        userCall.enqueue(new Callback<Profil>() {
+//            @Override
+//            public void onResponse(Call<Profil> call, Response<Profil> response) {
+//                //Log.d("onResponse", "" + response.body().getMessage());
+//                Log.d("Nama", "" + response.body().getNamaProfil());
+//                Log.d("Foto", "" + response.body().getFotoProfil());
+//                String namadb = response.body().getNamaProfil();
+//                String fotoprofil = response.body().getFotoProfil();
+//                _namauser.setText(namadb);
+//                Picasso.with(getContext()).load(ApiClient.USER_PIC+fotoprofil).error(R.drawable.userpic).into(_fotoprofil);
+//
+//            }
+//
+//            @Override
+//            public void onFailure(Call<Profil> call, Throwable t) {
+//                Log.d("onFailure", t.toString());
+//                String text = "Sistem sedang bermasalah menampilkan halaman profil. Harap laporkan pada admin ";
+//                SpannableString centeredText = new SpannableString(text);
+//                centeredText.setSpan(new AlignmentSpan.Standard(Layout.Alignment.ALIGN_CENTER),
+//                        0, text.length() - 1,
+//                        Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+//                Toast.makeText(getContext(),centeredText, Toast.LENGTH_LONG).show();
+//            }
+//        });
+//    }
+
 
     public static void setDefaultString(String key, String value, Context context) {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
