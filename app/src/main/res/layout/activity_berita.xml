@@ -59,7 +59,7 @@
             android:layout_below="@id/toolbar"
             android:layout_above="@id/bn_main"
             android:layout_marginTop="100dp"
-            android:layout_marginBottom="70dp">
+            android:layout_marginBottom="8dp">
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/recyclerViewBerita"

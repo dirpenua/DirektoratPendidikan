@@ -44,10 +44,11 @@ public class MainActivityMhs extends AppCompatActivity implements BottomNavigati
 
     SharedPreferences sharedpreferences;
     public final static String TAG_NAMA = "nama_user";
+    public final static String TAG_FOTO = "foto_user";
     public final static String TAG_NIPNIK = "nipnik";
     ImageView _hidefotoprofil;
     TextView _hidenamauser;
-    String nama, nipnik;
+    String nama, foto, nipnik;
     private ApiInterface apiInterface;
     public static final String CHANNEL_ID = "DirpenUA";
     private static final String CHANNEL_NAME = "DirpenUA Uswanto";
@@ -59,6 +60,7 @@ public class MainActivityMhs extends AppCompatActivity implements BottomNavigati
         setContentView(R.layout.activity_main_mhs);
         sharedpreferences = this.getSharedPreferences(LoginActivity.my_shared_preferences, Context.MODE_PRIVATE);
         nama = this.getIntent().getStringExtra(TAG_NAMA);
+        foto = this.getIntent().getStringExtra(TAG_FOTO);
         nipnik = this.getIntent().getStringExtra(TAG_NIPNIK);
 
         _hidenamauser = findViewById(R.id.hide_namauser);

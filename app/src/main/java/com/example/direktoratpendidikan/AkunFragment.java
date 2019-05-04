@@ -54,9 +54,10 @@ public class AkunFragment extends Fragment {
     SharedPreferences sharedpreferences;
     SharedPreferences akun_sharepref;
     public final static String TAG_NAMA = "nama_user";
+    public final static String TAG_FOTO = "foto_user";
     public final static String TAG_NIPNIK = "nipnik";
     ImageView _fotoprofil;
-    String nama, nipnik;
+    String nama, foto, nipnik;
     TextView _namauser,_nipnik;
     Button btnLogout;
     private String[] nama_pengaturan = {"Profil", "Email verifikasi", "Ubah password", "Bantuan", "Tentang DirpenUA"};
@@ -89,6 +90,7 @@ public class AkunFragment extends Fragment {
 
         sharedpreferences = this.getActivity().getSharedPreferences(LoginActivity.my_shared_preferences, Context.MODE_PRIVATE);
         nama = getActivity().getIntent().getStringExtra(TAG_NAMA);
+        foto = getActivity().getIntent().getStringExtra(TAG_FOTO);
         nipnik = getActivity().getIntent().getStringExtra(TAG_NIPNIK);
 
         setDefaultString(TAG_NAMA, nama,getContext());
@@ -108,7 +110,8 @@ public class AkunFragment extends Fragment {
         _fotoprofil = view.findViewById(R.id.fotoprofil);
         btnLogout = (Button) view.findViewById(R.id.btn_logout);
 
-        //_namauser.setText(nama);
+        _namauser.setText(nama);
+        Picasso.with(getContext()).load(ApiClient.USER_PIC+foto).error(R.drawable.userpic).into(_fotoprofil);
         //fetchAkun(nipnik);
         _nipnik.setText(nipnik);
 
@@ -133,6 +136,7 @@ public class AkunFragment extends Fragment {
                                 SharedPreferences.Editor editor = sharedpreferences.edit();
                                 editor.putBoolean(LoginActivity.session_status, false);
                                 editor.putString(TAG_NAMA, null);
+                                editor.putString(TAG_FOTO, null);
                                 editor.putString(TAG_NIPNIK, null);
                                 editor.commit();
 

@@ -1,10 +1,13 @@
 package com.example.direktoratpendidikan.data;
 
+import com.google.gson.annotations.SerializedName;
+
 public class MSG {
 
     private Integer success;
     private String message;
     private String nama_user;
+    private String foto_user;
     private Integer status_user;
 
     /**
@@ -46,6 +49,8 @@ public class MSG {
     public void setNamaUser(String nama_user) {
         this.nama_user = nama_user;
     }
+
+    public String getFotoUser() { return foto_user; }
 
     public Integer getStatus() {
         return status_user;

@@ -2,13 +2,18 @@ package com.example.direktoratpendidikan.admin;
 
 
 import android.app.Activity;
+import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -21,8 +26,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.direktoratpendidikan.LoginActivity;
 import com.example.direktoratpendidikan.R;
@@ -34,6 +43,7 @@ import com.example.direktoratpendidikan.data.Agenda;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import retrofit2.Call;
@@ -55,6 +65,14 @@ public class  AgendaAdminFragment extends Fragment {
     private Adapter adapter;
     private ApiInterface apiInterface;
     ProgressBar progressBar;
+    private FloatingActionButton fab;
+    ImageView close;
+    Dialog dTambahAgenda;
+    private ProgressDialog pDialog;
+    EditText _nipnik;
+    EditText _nama;
+    TextView _simpan;
+    Calendar myAgenda;
 
     SharedPreferences sharedpreferences;
     public final static String TAG_NIPNIK = "nipnik";
@@ -70,6 +88,39 @@ public class  AgendaAdminFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_agenda_admin, container, false);
+
+        fab = (FloatingActionButton) view.findViewById(R.id.tambahagenda);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dTambahAgenda = new Dialog(getContext());
+                dTambahAgenda.setContentView(R.layout.tambahagenda);
+
+                close = dTambahAgenda.findViewById(R.id.dialogclose);
+                close.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dTambahAgenda.dismiss();
+                    }
+                });
+
+                _nipnik = dTambahAgenda.findViewById(R.id.tnipnik);
+                _nama =dTambahAgenda.findViewById(R.id.tnamadosen);
+                _simpan = dTambahAgenda.findViewById(R.id.buatagenda);
+//                _simpan.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//                        if (validate() == false) {
+//                            onSimpanFailed();
+//                            return;
+//                        }
+//                        simpanDosen();
+//                    }
+//                });
+                dTambahAgenda.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                dTambahAgenda.show();
+            }
+        });
 
         progressBar = view.findViewById(R.id.prograss);
         recyclerView = view.findViewById(R.id.recyclerViewAdmin);
@@ -225,6 +276,10 @@ public class  AgendaAdminFragment extends Fragment {
                 adapter = new Adapter(getActivity(), agendaList);
                 recyclerView.setAdapter(adapter);
                 adapter.notifyDataSetChanged();
+                if (adapter.getItemCount() == 0)
+                {
+                    Toast.makeText(getContext(), "Tidak ada agenda hari ini",Toast.LENGTH_SHORT).show();
+                }
                 Log.e("tesAgendaBerhasil", new Gson().toJson(response.body()));
             }
 

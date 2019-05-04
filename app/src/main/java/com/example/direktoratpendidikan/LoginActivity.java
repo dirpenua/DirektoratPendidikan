@@ -46,9 +46,10 @@ public class LoginActivity extends AppCompatActivity {
     public static final String session_status = "session_status";
     Boolean session = false;
     public final static String TAG_NAMA = "nama_user";
+    public final static String TAG_FOTO = "foto_user";
     public final static String TAG_NIPNIK = "nipnik";
     public final static Integer TAG_RULE = 0;
-    String nama, nipnik;
+    String nama, foto, nipnik;
     int rule;
 
     @BindView(R.id.nipnik) EditText _nipnik;
@@ -75,6 +76,7 @@ public class LoginActivity extends AppCompatActivity {
         session = sharedpreferences.getBoolean(session_status, false);
 
         nama = sharedpreferences.getString(TAG_NAMA, null);
+        foto = sharedpreferences.getString(TAG_FOTO, null);
         nipnik = sharedpreferences.getString(TAG_NIPNIK, null);
         rule = sharedpreferences.getInt("TAG_RULE", 0);
         ButterKnife.bind(this);
@@ -84,6 +86,7 @@ public class LoginActivity extends AppCompatActivity {
                 case 1:
                     Intent rule1 = new Intent(LoginActivity.this, MainActivityAdmin.class);
                     rule1.putExtra(TAG_NAMA, nama);
+                    rule1.putExtra(TAG_FOTO, foto);
                     rule1.putExtra(TAG_NIPNIK, nipnik);
                     finish();
                     startActivity(rule1);
@@ -91,6 +94,7 @@ public class LoginActivity extends AppCompatActivity {
                 case 2:
                     Intent rule2 = new Intent(LoginActivity.this, MainActivity.class);
                     rule2.putExtra(TAG_NAMA, nama);
+                    rule2.putExtra(TAG_FOTO, foto);
                     rule2.putExtra(TAG_NIPNIK, nipnik);
                     finish();
                     startActivity(rule2);
@@ -98,6 +102,7 @@ public class LoginActivity extends AppCompatActivity {
                 case 3:
                     Intent rule3 = new Intent(LoginActivity.this, MainActivityMhs.class);
                     rule3.putExtra(TAG_NAMA, nama);
+                    rule3.putExtra(TAG_FOTO, foto);
                     rule3.putExtra(TAG_NIPNIK, nipnik);
                     finish();
                     startActivity(rule3);
@@ -155,6 +160,7 @@ public class LoginActivity extends AppCompatActivity {
                 switch (response.body().getSuccess()) {
                     case 1:
                         String nama = response.body().getNamaUser();
+                        String foto = response.body().getFotoUser();
                         String text = response.body().getMessage();
                         Spannable centeredText = new SpannableString(text);
                         centeredText.setSpan(new AlignmentSpan.Standard(Layout.Alignment.ALIGN_CENTER),
@@ -165,6 +171,7 @@ public class LoginActivity extends AppCompatActivity {
                                 //Login pertama kali reset paswword
                                 Intent intent = new Intent(LoginActivity.this, UbahPWUserBaru.class);
                                 intent.putExtra(TAG_NAMA, nama);
+                                intent.putExtra(TAG_FOTO, foto);
                                 intent.putExtra(TAG_NIPNIK, nipnik);
                                 finish();
                                 startActivity(intent);
@@ -172,6 +179,7 @@ public class LoginActivity extends AppCompatActivity {
                                 // Sudah pernah login
                                 Intent intent = new Intent(LoginActivity.this, MainActivityAdmin.class);
                                 intent.putExtra(TAG_NAMA, nama);
+                                intent.putExtra(TAG_FOTO, foto);
                                 intent.putExtra(TAG_NIPNIK, nipnik);
                                 finish();
                                 startActivity(intent);
@@ -180,6 +188,7 @@ public class LoginActivity extends AppCompatActivity {
                                 SharedPreferences.Editor editor = sharedpreferences.edit();
                                 editor.putBoolean(session_status, true);
                                 editor.putString(TAG_NAMA, nama);
+                                editor.putString(TAG_FOTO, foto);
                                 editor.putString(TAG_NIPNIK, nipnik);
                                 editor.putInt("TAG_RULE", 1);
                                 editor.commit();
@@ -187,6 +196,7 @@ public class LoginActivity extends AppCompatActivity {
                                 // menyimpan login ke session dengan default
                                 setDefaultBoolean(session_status, true, getApplicationContext());
                                 setDefaultString(TAG_NAMA, nama,getApplicationContext());
+                                setDefaultString(TAG_FOTO, foto,getApplicationContext());
                                 setDefaultString(TAG_NIPNIK, nipnik,getApplicationContext());
                                 setDefaultInteger("TAG_RULE",1,getApplicationContext());
                             }
@@ -194,6 +204,7 @@ public class LoginActivity extends AppCompatActivity {
                     case 2:
                         nama = response.body().getNamaUser();
                         //startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                        foto = response.body().getFotoUser();
                         text = response.body().getMessage();
                         centeredText = new SpannableString(text);
                         centeredText.setSpan(new AlignmentSpan.Standard(Layout.Alignment.ALIGN_CENTER),
@@ -204,6 +215,7 @@ public class LoginActivity extends AppCompatActivity {
                             //Login pertama kali reset paswword
                             Intent intent = new Intent(LoginActivity.this, UbahPWUserBaru.class);
                             intent.putExtra(TAG_NAMA, nama);
+                            intent.putExtra(TAG_FOTO, foto);
                             intent.putExtra(TAG_NIPNIK, nipnik);
                             finish();
                             startActivity(intent);
@@ -211,6 +223,7 @@ public class LoginActivity extends AppCompatActivity {
                             // Sudah pernah login
                             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                             intent.putExtra(TAG_NAMA, nama);
+                            intent.putExtra(TAG_FOTO, foto);
                             intent.putExtra(TAG_NIPNIK, nipnik);
                             finish();
                             startActivity(intent);
@@ -219,6 +232,7 @@ public class LoginActivity extends AppCompatActivity {
                             SharedPreferences.Editor editor = sharedpreferences.edit();
                             editor.putBoolean(session_status, true);
                             editor.putString(TAG_NAMA, nama);
+                            editor.putString(TAG_FOTO, foto);
                             editor.putString(TAG_NIPNIK, nipnik);
                             editor.putInt("TAG_RULE", 2);
                             editor.commit();
@@ -226,12 +240,15 @@ public class LoginActivity extends AppCompatActivity {
                             // menyimpan login ke session dengan default
                             setDefaultBoolean(session_status, true, getApplicationContext());
                             setDefaultString(TAG_NAMA, nama,getApplicationContext());
+                            setDefaultString(TAG_FOTO, foto,getApplicationContext());
                             setDefaultString(TAG_NIPNIK, nipnik,getApplicationContext());
                             setDefaultInteger("TAG_RULE",2,getApplicationContext());
                         }
                         break;
                     case 3:
                         nama = response.body().getNamaUser();
+                        foto = response.body().getFotoUser();
+                        Log.d("Foto user", foto);
                         //startActivity(new Intent(LoginActivity.this, MainActivity.class));
                         text = response.body().getMessage();
                         centeredText = new SpannableString(text);
@@ -243,6 +260,7 @@ public class LoginActivity extends AppCompatActivity {
                             //Login pertama kali reset paswword
                             Intent intent = new Intent(LoginActivity.this, UbahPWUserBaru.class);
                             intent.putExtra(TAG_NAMA, nama);
+                            intent.putExtra(TAG_FOTO, foto);
                             intent.putExtra(TAG_NIPNIK, nipnik);
                             finish();
                             startActivity(intent);
@@ -250,6 +268,7 @@ public class LoginActivity extends AppCompatActivity {
                             // Sudah pernah login
                             Intent intent = new Intent(LoginActivity.this, MainActivityMhs.class);
                             intent.putExtra(TAG_NAMA, nama);
+                            intent.putExtra(TAG_FOTO, foto);
                             intent.putExtra(TAG_NIPNIK, nipnik);
                             finish();
                             startActivity(intent);
@@ -258,6 +277,7 @@ public class LoginActivity extends AppCompatActivity {
                             SharedPreferences.Editor editor = sharedpreferences.edit();
                             editor.putBoolean(session_status, true);
                             editor.putString(TAG_NAMA, nama);
+                            editor.putString(TAG_FOTO, foto);
                             editor.putString(TAG_NIPNIK, nipnik);
                             editor.putInt("TAG_RULE", 3);
                             editor.commit();
@@ -265,12 +285,13 @@ public class LoginActivity extends AppCompatActivity {
                             // menyimpan login ke session dengan default
                             setDefaultBoolean(session_status, true, getApplicationContext());
                             setDefaultString(TAG_NAMA, nama,getApplicationContext());
+                            setDefaultString(TAG_FOTO, foto,getApplicationContext());
                             setDefaultString(TAG_NIPNIK, nipnik,getApplicationContext());
                             setDefaultInteger("TAG_RULE",3,getApplicationContext());
                         }
                         break;
                     default:
-                        text = "NIM/NIP/NIK atau Password anda SALAH";
+                        text = response.body().getMessage();
                         centeredText = new SpannableString(text);
                         centeredText.setSpan(new AlignmentSpan.Standard(Layout.Alignment.ALIGN_CENTER),
                                 0, text.length() - 1,

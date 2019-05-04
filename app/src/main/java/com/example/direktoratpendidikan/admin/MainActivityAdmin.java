@@ -19,6 +19,7 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.example.direktoratpendidikan.AkunFragment;
+import com.example.direktoratpendidikan.BerandaFragment;
 import com.example.direktoratpendidikan.LoginActivity;
 import com.example.direktoratpendidikan.R;
 import com.example.direktoratpendidikan.api.ApiClient;
@@ -79,7 +80,7 @@ public class MainActivityAdmin extends AppCompatActivity implements BottomNaviga
                 });
 
         // kita set default nya Home Fragment
-        loadFragment(new BerandaAdminFragment());
+        loadFragment(new BerandaFragment());
 
         // inisialisasi BottomNavigaionView
         BottomNavigationView bottomNavigationView = findViewById(R.id.bn_main_admin);
@@ -138,7 +139,7 @@ public class MainActivityAdmin extends AppCompatActivity implements BottomNaviga
 
         switch (item.getItemId()) {
             case R.id.beranda:
-                fragment = new BerandaAdminFragment();
+                fragment = new BerandaFragment();
                 break;
             case R.id.prosedur:
                 fragment = new ProsedurAdminFragment();
