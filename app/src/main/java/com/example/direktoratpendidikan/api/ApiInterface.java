@@ -141,6 +141,18 @@ public interface ApiInterface {
     );
 
 
+    @FormUrlEncoded
+    @POST("tambahagenda.php")
+    Call<MSG> tambahAgenda (@Field("namakegiatan") String namakegiatan,
+                            @Field("tempat") String tempat,
+                            @Field("jumlah") String jumlah,
+                            @Field("narahubung") String narahubung,
+                            @Field("tgljammulai") String tgljammulai,
+                            @Field("tgljamselesai") String tgljamselesai
+    );
+
+
+
 
 
 

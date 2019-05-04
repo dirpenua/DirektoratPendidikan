@@ -24,11 +24,16 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
+import android.text.Layout;
+import android.text.Spannable;
+import android.text.SpannableString;
 import android.text.TextWatcher;
+import android.text.style.AlignmentSpan;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -39,13 +44,16 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.example.direktoratpendidikan.DetailAkreditasi;
 import com.example.direktoratpendidikan.LoginActivity;
 import com.example.direktoratpendidikan.R;
 import com.example.direktoratpendidikan.SpinnerAdapter;
+import com.example.direktoratpendidikan.TambahPeserta;
 import com.example.direktoratpendidikan.adapter.Adapter;
 import com.example.direktoratpendidikan.api.ApiClient;
 import com.example.direktoratpendidikan.api.ApiInterface;
 import com.example.direktoratpendidikan.data.Agenda;
+import com.example.direktoratpendidikan.data.MSG;
 import com.google.gson.Gson;
 
 import java.text.SimpleDateFormat;
@@ -241,22 +249,23 @@ public class  AgendaAdminFragment extends Fragment {
                     }
                 });
 
-                _buatagenda.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Toast.makeText(getContext(),_tglmulai.getText().toString() +" "+_jammulai.getText().toString() +":00" +"\n" +_tglselesai.getText().toString() +" "+ _jamselesai.getText().toString() +":00", Toast.LENGTH_SHORT).show();
-                    }
-                });
-//                _simpan.setOnClickListener(new View.OnClickListener() {
+//                _buatagenda.setOnClickListener(new View.OnClickListener() {
 //                    @Override
-//                    public void onClick(View v) {
-//                        if (validate() == false) {
-//                            onSimpanFailed();
-//                            return;
-//                        }
-//                        simpanDosen();
+//                    public void onClick(View view) {
+//                        Toast.makeText(getContext(),_tglmulai.getText().toString() +" "+_jammulai.getText().toString() +":00" +"\n" +_tglselesai.getText().toString() +" "+ _jamselesai.getText().toString() +":00", Toast.LENGTH_SHORT).show();
 //                    }
 //                });
+
+                _buatagenda.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (validate() == false) {
+                            onSimpanFailed();
+                            return;
+                        }
+                        simpanAgenda();
+                    }
+                });
                 dTambahAgenda.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 dTambahAgenda.show();
             }
@@ -445,5 +454,148 @@ public class  AgendaAdminFragment extends Fragment {
         _tglselesai.setText(sdf.format(myAgenda.getTime()));
     }
 
+    private void simpanAgenda() {
+        pDialog = new ProgressDialog(getContext());
+        pDialog.setIndeterminate(true);
+        pDialog.setMessage("Sedang membuat agenda...");
+        pDialog.setCancelable(false);
+
+        showpDialog();
+
+        String namakegiatan = _namakegiatan.getText().toString();
+        String tempatkegiatan = _tempat.getText().toString();
+        String jumlahundangan = _jumlahundangan.getText().toString();
+        String narahubung = _nohp.getText().toString();
+        String tgljammulai = _tglmulai.getText().toString() +" "+_jammulai.getText().toString() +":00";
+        String tgljamselesai = _tglselesai.getText().toString() +" "+_jamselesai.getText().toString() +":00";
+
+        ApiInterface service = ApiClient.getApiClient().create(ApiInterface.class);
+
+        Call<MSG> userCall = service.tambahAgenda(namakegiatan,tempatkegiatan,jumlahundangan,narahubung,tgljammulai,tgljamselesai);
+
+        userCall.enqueue(new Callback<MSG>() {
+            @Override
+            public void onResponse(Call<MSG> call, Response<MSG> response) {
+                hidepDialog();
+                Log.d("SUKSERNYA", "SUKSESNYA APA: " + response.body().getSuccess());
+                if(response.body().getSuccess() == 1) {
+                    dTambahAgenda.dismiss();
+                    Intent i = new Intent(getContext(), TambahPeserta.class);
+//                    i.putExtra("judulakreditasi",akreditasiList.get(getAdapterPosition()).getJudulAk());
+//                    i.putExtra("linkwebview",akreditasiList.get(getAdapterPosition()).getLinkAk());
+                    getContext().startActivity(i);
+                    //NANTI KASIH REFRESH ADAPTER DISINI YAAAAA
+                    String text = "" + response.body().getMessage();
+                    Spannable centeredText = new SpannableString(text);
+                    centeredText.setSpan(new AlignmentSpan.Standard(Layout.Alignment.ALIGN_CENTER),
+                            0, text.length() - 1,
+                            Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+                    Toast.makeText(getContext(),centeredText, Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<MSG> call, Throwable t) {
+                hidepDialog();
+                String text = "Agenda gagal dibuat. Harap hubungi admin melalui menu BANTUAN";
+                Spannable centeredText = new SpannableString(text);
+                centeredText.setSpan(new AlignmentSpan.Standard(Layout.Alignment.ALIGN_CENTER),
+                        0, text.length() - 1,
+                        Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+                Toast.makeText(getContext(),centeredText, Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
+    public void onSimpanFailed() {
+        Toast.makeText(getContext(), "Mohon isi dengan benar", Toast.LENGTH_LONG).show();
+        _buatagenda.setEnabled(true);
+    }
+
+    private void showpDialog() {
+        if (!pDialog.isShowing())
+            pDialog.show();
+    }
+
+    private void hidepDialog() {
+        if (pDialog.isShowing())
+            pDialog.dismiss();
+    }
+
+    public boolean validate() {
+        boolean valid = true;
+
+        String namakegiatan = _namakegiatan.getText().toString();
+        String tempatkegiatan = _tempat.getText().toString();
+        String jumlahundangan = _jumlahundangan.getText().toString();
+        String tglmulai = _tglmulai.getText().toString();
+        String jammulai =_jammulai.getText().toString();
+        String tglselesai = _tglselesai.getText().toString();
+        String jamselesai = _jamselesai.getText().toString();
+
+        if (namakegiatan.isEmpty()) {
+            _namakegiatan.setError("Nama kegiatan harus diisi");
+            requestFocus(_namakegiatan);
+            valid = false;
+        } else {
+            _namakegiatan.setError(null);
+        }
+
+        if (tempatkegiatan.isEmpty()) {
+            _tempat.setError("Tempat kegiatan harus diisi");
+            requestFocus(_tempat);
+            valid = false;
+        } else {
+            _tempat.setError(null);
+        }
+
+        if (jumlahundangan.isEmpty()) {
+            _jumlahundangan.setError("Jumlah undangan harus diisi");
+            requestFocus(_jumlahundangan);
+            valid = false;
+        } else {
+            _jumlahundangan.setError(null);
+        }
+
+        if (tglmulai.isEmpty()) {
+            _tglmulai.setError("Tanggal mulai harus diisi");
+            requestFocus(_tglmulai);
+            valid = false;
+        } else {
+            _tglmulai.setError(null);
+        }
+
+        if (tglselesai.isEmpty()) {
+            _tglselesai.setError("Tanggal selesai harus diisi");
+            requestFocus(_tglselesai);
+            valid = false;
+        } else {
+            _tglselesai.setError(null);
+        }
+
+        if (jammulai.isEmpty()) {
+            _jammulai.setError("Jam mulai harus diisi");
+            requestFocus(_jammulai);
+            valid = false;
+        } else {
+            _jammulai.setError(null);
+        }
+
+        if (jamselesai.isEmpty()) {
+            _jamselesai.setError("Jam selesai harus diisi");
+            requestFocus(_jamselesai);
+            valid = false;
+        } else {
+            _jamselesai.setError(null);
+        }
+
+        return valid;
+    }
+
+    private void requestFocus(View view) {
+        if (view.requestFocus()) {
+            dTambahAgenda.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
+        }
+    }
 
 }
