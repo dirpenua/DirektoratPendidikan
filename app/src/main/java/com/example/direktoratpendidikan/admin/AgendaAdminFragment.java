@@ -2,8 +2,10 @@ package com.example.direktoratpendidikan.admin;
 
 
 import android.app.Activity;
+import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -21,16 +23,20 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.example.direktoratpendidikan.LoginActivity;
@@ -42,9 +48,11 @@ import com.example.direktoratpendidikan.api.ApiInterface;
 import com.example.direktoratpendidikan.data.Agenda;
 import com.google.gson.Gson;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -69,9 +77,9 @@ public class  AgendaAdminFragment extends Fragment {
     ImageView close;
     Dialog dTambahAgenda;
     private ProgressDialog pDialog;
-    EditText _nipnik;
-    EditText _nama;
-    TextView _simpan;
+    TextView _buatagenda;
+    EditText _namakegiatan, _tempat, _jumlahundangan, _nohp, _tglmulai, _tglselesai, _jammulai, _jamselesai;
+    DatePickerDialog.OnDateSetListener tglmulai, tglselesai;
     Calendar myAgenda;
 
     SharedPreferences sharedpreferences;
@@ -104,9 +112,141 @@ public class  AgendaAdminFragment extends Fragment {
                     }
                 });
 
-                _nipnik = dTambahAgenda.findViewById(R.id.tnipnik);
-                _nama =dTambahAgenda.findViewById(R.id.tnamadosen);
-                _simpan = dTambahAgenda.findViewById(R.id.buatagenda);
+                _namakegiatan = dTambahAgenda.findViewById(R.id.tnamakegiatan);
+                _tempat =dTambahAgenda.findViewById(R.id.ttempat);
+                _jumlahundangan = dTambahAgenda.findViewById(R.id.tjumlahundangan);
+                _nohp = dTambahAgenda.findViewById(R.id.tnohp);
+                _tglmulai = dTambahAgenda.findViewById(R.id.ttglmulai);
+                _tglselesai = dTambahAgenda.findViewById(R.id.ttglselesai);
+                _jammulai = dTambahAgenda.findViewById(R.id.tjammulai);
+                _jamselesai = dTambahAgenda.findViewById(R.id.tjamselesai);
+                _buatagenda = dTambahAgenda.findViewById(R.id.buatagenda);
+
+
+
+                _nohp.addTextChangedListener(new TextWatcher() {
+
+                    boolean changing = false;
+                    @Override
+                    public void afterTextChanged(Editable s) {
+                        if (!changing && _nohp.getText().toString().startsWith("0")){
+                            changing = true;
+                            _nohp.setText(_nohp.getText().toString().replace("0", ""));
+                        }
+                        changing = false;
+                    }
+
+                    @Override
+                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                    }
+
+                    @Override
+                    public void onTextChanged(CharSequence s, int start, int before, int count) {
+                    }
+
+                });
+
+                myAgenda = Calendar.getInstance();
+                tglmulai = new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int monthOfYear,
+                                          int dayOfMonth) {
+                        // TODO Auto-generated method stub
+                        myAgenda.set(Calendar.YEAR, year);
+                        myAgenda.set(Calendar.MONTH, monthOfYear);
+                        myAgenda.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                        updateLabelMulai();
+                    }
+                };
+                tglselesai = new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int monthOfYear,
+                                          int dayOfMonth) {
+                        // TODO Auto-generated method stub
+                        myAgenda.set(Calendar.YEAR, year);
+                        myAgenda.set(Calendar.MONTH, monthOfYear);
+                        myAgenda.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                        updateLabelSelesai();
+                    }
+                };
+
+
+                _tglmulai.setOnClickListener(new View.OnClickListener() {
+
+                    @Override
+                    public void onClick(View v) {
+                        // TODO Auto-generated method stub
+                        new DatePickerDialog(getContext(), tglmulai, myAgenda
+                                .get(Calendar.YEAR), myAgenda.get(Calendar.MONTH),
+                                myAgenda.get(Calendar.DAY_OF_MONTH)).show();
+                    }
+                });
+
+                _tglselesai.setOnClickListener(new View.OnClickListener() {
+
+                    @Override
+                    public void onClick(View v) {
+                        // TODO Auto-generated method stub
+                        new DatePickerDialog(getContext(), tglselesai, myAgenda
+                                .get(Calendar.YEAR), myAgenda.get(Calendar.MONTH),
+                                myAgenda.get(Calendar.DAY_OF_MONTH)).show();
+                    }
+                });
+
+
+
+                _jammulai.setOnClickListener(new View.OnClickListener() {
+
+                    @Override
+                    public void onClick(View v) {
+                        // TODO Auto-generated method stub
+                        Calendar mcurrentTime = Calendar.getInstance();
+                        int hour = mcurrentTime.get(Calendar.HOUR_OF_DAY);
+                        int minute = mcurrentTime.get(Calendar.MINUTE);
+                        TimePickerDialog mTimePicker;
+                        mTimePicker = new TimePickerDialog(getContext(), new TimePickerDialog.OnTimeSetListener() {
+
+                            @Override
+                            public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
+                                //_jammulai.setText(selectedHour + ":" + selectedMinute);
+                                _jammulai.setText(String.format("%02d:%02d", selectedHour, selectedMinute));
+                            }
+                        }, hour, minute, true);//Yes 24 hour time
+                        mTimePicker.setTitle("Select Time");
+                        mTimePicker.show();
+
+                    }
+                });
+
+                _jamselesai.setOnClickListener(new View.OnClickListener() {
+
+                    @Override
+                    public void onClick(View v) {
+                        // TODO Auto-generated method stub
+                        Calendar mcurrentTime = Calendar.getInstance();
+                        int hour = mcurrentTime.get(Calendar.HOUR_OF_DAY);
+                        int minute = mcurrentTime.get(Calendar.MINUTE);
+                        TimePickerDialog mTimePicker;
+                        mTimePicker = new TimePickerDialog(getContext(), new TimePickerDialog.OnTimeSetListener() {
+
+                            @Override
+                            public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
+                                //_jamselesai.setText(selectedHour + ":" + selectedMinute);
+                                _jamselesai.setText(String.format("%02d:%02d", selectedHour, selectedMinute));
+                            }
+                        }, hour, minute, true);//Yes 24 hour time
+                        mTimePicker.setTitle("Select Time");
+                        mTimePicker.show();
+
+                    }
+                });
+
+                _buatagenda.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Toast.makeText(getContext(),_tglmulai.getText().toString() +" "+_jammulai.getText().toString() +":00" +"\n" +_tglselesai.getText().toString() +" "+ _jamselesai.getText().toString() +":00", Toast.LENGTH_SHORT).show();
+                    }
+                });
 //                _simpan.setOnClickListener(new View.OnClickListener() {
 //                    @Override
 //                    public void onClick(View v) {
@@ -121,6 +261,8 @@ public class  AgendaAdminFragment extends Fragment {
                 dTambahAgenda.show();
             }
         });
+
+
 
         progressBar = view.findViewById(R.id.prograss);
         recyclerView = view.findViewById(R.id.recyclerViewAdmin);
@@ -289,6 +431,18 @@ public class  AgendaAdminFragment extends Fragment {
                 progressBar.setVisibility(View.GONE);
             }
         });
+    }
+
+    private void updateLabelMulai() {
+        String myFormat = "yyyy-MM-dd";
+        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+        _tglmulai.setText(sdf.format(myAgenda.getTime()));
+    }
+
+    private void updateLabelSelesai() {
+        String myFormat = "yyyy-MM-dd";
+        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+        _tglselesai.setText(sdf.format(myAgenda.getTime()));
     }
 
 

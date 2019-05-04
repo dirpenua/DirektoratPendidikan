@@ -68,21 +68,27 @@ public class DetailAgenda extends AppCompatActivity {
             String jmlund =(String) b.get("jumlahUndangan");
             jumlahundangan.setText(jmlund);
             final String nrhb =(String) b.get("nohpNarahubung");
-            narahubung.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    try {
-                        String url = "https://wa.me/" + nrhb;
-                        Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-                        startActivity(i);
-                    } catch (ActivityNotFoundException e) {
-                        Toast.makeText(v.getContext(), "Nomor ini tidak terhubung dengan akun WhatsApp manapun",  Toast.LENGTH_LONG).show();
-                        e.printStackTrace();
+            if(nrhb!=null){
+                narahubung.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        try {
+                                String url = "https://wa.me/" + nrhb;
+                                Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                                startActivity(i);
+                        } catch (ActivityNotFoundException e) {
+                            Toast.makeText(v.getContext(), "Nomor ini tidak terhubung dengan akun WhatsApp manapun",  Toast.LENGTH_LONG).show();
+                            e.printStackTrace();
+                        }
                     }
-                }
-            });
-            narahubung.setText("+"+nrhb);
-            narahubung.setTextIsSelectable(true);
+                });
+                narahubung.setText("+"+nrhb);
+                narahubung.setTextIsSelectable(true);
+            }
+            else{
+                narahubung.setText("Narahubung tidak tersedia");
+            }
+
 
         }
 
