@@ -12,6 +12,7 @@
     android:elevation="3dp"
     android:background="@drawable/whiteround">
 
+
         <TextView
             android:id="@+id/tanggal"
             android:layout_width="wrap_content"
@@ -29,62 +30,18 @@
             android:layout_height="match_parent"
             android:layout_margin="10dp"
             android:layout_gravity="center_vertical"
+            android:gravity="center_vertical"
             android:text="Nama Kegiatan"
             android:textSize="15sp"
             android:textStyle="bold"
             android:layout_weight="1"/>
 
         <TextView
-            android:id="@+id/bultahun"
+            android:id="@+id/idagenda"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:visibility="invisible"
-            android:text="hide bulan tahun"
-            android:textSize="0sp"
-            android:layout_weight="0"/>
-
-        <TextView
-            android:id="@+id/jmulai"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:visibility="invisible"
-            android:text="hide jam mulai"
-            android:textSize="0sp"
-            android:layout_weight="0"/>
-
-        <TextView
-            android:id="@+id/jselesai"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:visibility="invisible"
-            android:text="hide jam selesai"
-            android:textSize="0sp"
-            android:layout_weight="0"/>
-
-        <TextView
-            android:id="@+id/tempat"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:visibility="invisible"
-            android:text="hide tempat"
-            android:textSize="0sp"
-            android:layout_weight="0"/>
-
-        <TextView
-            android:id="@+id/jumundangan"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:visibility="invisible"
-            android:text="hide jumlah undangan"
-            android:textSize="0sp"
-            android:layout_weight="0"/>
-
-        <TextView
-            android:id="@+id/narahubung"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:visibility="invisible"
-            android:text="hide narahubung"
+            android:text="hide id"
             android:textSize="0sp"
             android:layout_weight="0"/>
 

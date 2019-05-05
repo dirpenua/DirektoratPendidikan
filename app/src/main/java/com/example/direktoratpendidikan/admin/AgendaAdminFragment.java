@@ -87,7 +87,7 @@ public class  AgendaAdminFragment extends Fragment {
     Dialog dTambahAgenda;
     private ProgressDialog pDialog;
     TextView _buatagenda;
-    EditText _namakegiatan, _tempat, _jumlahundangan, _nohp, _tglmulai, _tglselesai, _jammulai, _jamselesai;
+    EditText _namakegiatan, _tempat, _nohp, _tglmulai, _jammulai, _jamselesai;
     DatePickerDialog.OnDateSetListener tglmulai, tglselesai;
     Calendar myAgenda;
 
@@ -123,10 +123,8 @@ public class  AgendaAdminFragment extends Fragment {
 
                 _namakegiatan = dTambahAgenda.findViewById(R.id.tnamakegiatan);
                 _tempat =dTambahAgenda.findViewById(R.id.ttempat);
-                _jumlahundangan = dTambahAgenda.findViewById(R.id.tjumlahundangan);
                 _nohp = dTambahAgenda.findViewById(R.id.tnohp);
                 _tglmulai = dTambahAgenda.findViewById(R.id.ttglmulai);
-                _tglselesai = dTambahAgenda.findViewById(R.id.ttglselesai);
                 _jammulai = dTambahAgenda.findViewById(R.id.tjammulai);
                 _jamselesai = dTambahAgenda.findViewById(R.id.tjamselesai);
                 _buatagenda = dTambahAgenda.findViewById(R.id.buatagenda);
@@ -167,17 +165,6 @@ public class  AgendaAdminFragment extends Fragment {
                         updateLabelMulai();
                     }
                 };
-                tglselesai = new DatePickerDialog.OnDateSetListener() {
-                    @Override
-                    public void onDateSet(DatePicker view, int year, int monthOfYear,
-                                          int dayOfMonth) {
-                        // TODO Auto-generated method stub
-                        myAgenda.set(Calendar.YEAR, year);
-                        myAgenda.set(Calendar.MONTH, monthOfYear);
-                        myAgenda.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-                        updateLabelSelesai();
-                    }
-                };
 
 
                 _tglmulai.setOnClickListener(new View.OnClickListener() {
@@ -186,17 +173,6 @@ public class  AgendaAdminFragment extends Fragment {
                     public void onClick(View v) {
                         // TODO Auto-generated method stub
                         new DatePickerDialog(getContext(), tglmulai, myAgenda
-                                .get(Calendar.YEAR), myAgenda.get(Calendar.MONTH),
-                                myAgenda.get(Calendar.DAY_OF_MONTH)).show();
-                    }
-                });
-
-                _tglselesai.setOnClickListener(new View.OnClickListener() {
-
-                    @Override
-                    public void onClick(View v) {
-                        // TODO Auto-generated method stub
-                        new DatePickerDialog(getContext(), tglselesai, myAgenda
                                 .get(Calendar.YEAR), myAgenda.get(Calendar.MONTH),
                                 myAgenda.get(Calendar.DAY_OF_MONTH)).show();
                     }
@@ -449,11 +425,6 @@ public class  AgendaAdminFragment extends Fragment {
         _tglmulai.setText(sdf.format(myAgenda.getTime()));
     }
 
-    private void updateLabelSelesai() {
-        String myFormat = "yyyy-MM-dd";
-        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
-        _tglselesai.setText(sdf.format(myAgenda.getTime()));
-    }
 
     private void simpanAgenda() {
         pDialog = new ProgressDialog(getContext());
@@ -465,14 +436,13 @@ public class  AgendaAdminFragment extends Fragment {
 
         String namakegiatan = _namakegiatan.getText().toString();
         String tempatkegiatan = _tempat.getText().toString();
-        String jumlahundangan = _jumlahundangan.getText().toString();
         String narahubung = _nohp.getText().toString();
         String tgljammulai = _tglmulai.getText().toString() +" "+_jammulai.getText().toString() +":00";
-        String tgljamselesai = _tglselesai.getText().toString() +" "+_jamselesai.getText().toString() +":00";
+        String tgljamselesai = _tglmulai.getText().toString() +" "+_jamselesai.getText().toString() +":00";
 
         ApiInterface service = ApiClient.getApiClient().create(ApiInterface.class);
 
-        Call<MSG> userCall = service.tambahAgenda(namakegiatan,tempatkegiatan,jumlahundangan,narahubung,tgljammulai,tgljamselesai);
+        Call<MSG> userCall = service.tambahAgenda(namakegiatan,tempatkegiatan,narahubung,tgljammulai,tgljamselesai);
 
         userCall.enqueue(new Callback<MSG>() {
             @Override
@@ -481,10 +451,9 @@ public class  AgendaAdminFragment extends Fragment {
                 Log.d("SUKSERNYA", "SUKSESNYA APA: " + response.body().getSuccess());
                 if(response.body().getSuccess() == 1) {
                     dTambahAgenda.dismiss();
-                    Intent i = new Intent(getContext(), TambahPeserta.class);
 //                    i.putExtra("judulakreditasi",akreditasiList.get(getAdapterPosition()).getJudulAk());
 //                    i.putExtra("linkwebview",akreditasiList.get(getAdapterPosition()).getLinkAk());
-                    getContext().startActivity(i);
+
                     //NANTI KASIH REFRESH ADAPTER DISINI YAAAAA
                     String text = "" + response.body().getMessage();
                     Spannable centeredText = new SpannableString(text);
@@ -528,10 +497,8 @@ public class  AgendaAdminFragment extends Fragment {
 
         String namakegiatan = _namakegiatan.getText().toString();
         String tempatkegiatan = _tempat.getText().toString();
-        String jumlahundangan = _jumlahundangan.getText().toString();
         String tglmulai = _tglmulai.getText().toString();
         String jammulai =_jammulai.getText().toString();
-        String tglselesai = _tglselesai.getText().toString();
         String jamselesai = _jamselesai.getText().toString();
 
         if (namakegiatan.isEmpty()) {
@@ -550,14 +517,6 @@ public class  AgendaAdminFragment extends Fragment {
             _tempat.setError(null);
         }
 
-        if (jumlahundangan.isEmpty()) {
-            _jumlahundangan.setError("Jumlah undangan harus diisi");
-            requestFocus(_jumlahundangan);
-            valid = false;
-        } else {
-            _jumlahundangan.setError(null);
-        }
-
         if (tglmulai.isEmpty()) {
             _tglmulai.setError("Tanggal mulai harus diisi");
             requestFocus(_tglmulai);
@@ -566,13 +525,6 @@ public class  AgendaAdminFragment extends Fragment {
             _tglmulai.setError(null);
         }
 
-        if (tglselesai.isEmpty()) {
-            _tglselesai.setError("Tanggal selesai harus diisi");
-            requestFocus(_tglselesai);
-            valid = false;
-        } else {
-            _tglselesai.setError(null);
-        }
 
         if (jammulai.isEmpty()) {
             _jammulai.setError("Jam mulai harus diisi");

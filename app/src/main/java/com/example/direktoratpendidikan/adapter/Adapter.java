@@ -11,6 +11,7 @@ import android.widget.AdapterView;
 import android.widget.TextView;
 
 import com.example.direktoratpendidikan.DetailAgenda;
+import com.example.direktoratpendidikan.DetailAgendaAdmin;
 import com.example.direktoratpendidikan.R;
 import com.example.direktoratpendidikan.data.Agenda;
 
@@ -39,13 +40,8 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder> {
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
         holder.tanggal.setText(agendaList.get(position).getTanggal());
-        holder.jammulai.setText(agendaList.get(position).getJammulai());
-        holder.jamselesai.setText(agendaList.get(position).getJamselesai());
         holder.nama_kegiatan.setText(agendaList.get(position).getNama());
-        holder.bulantahun.setText(agendaList.get(position).getBulantahun());
-        holder.tempat.setText(agendaList.get(position).getTempat());
-        holder.jumlahundangan.setText(agendaList.get(position).getJumlahUndangan());
-        holder.narahubung.setText(agendaList.get(position).getNarahubung());
+        holder.idagenda.setText(agendaList.get(position).getId());
 
     }
 
@@ -64,31 +60,19 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder> {
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        TextView tanggal, jammulai, jamselesai, nama_kegiatan, tempat, jumlahundangan, narahubung, bulantahun;
+        TextView tanggal, idagenda, nama_kegiatan;
 
         public MyViewHolder(final View itemView) {
             super(itemView);
             tanggal = itemView.findViewById(R.id.tanggal);
-            jammulai = itemView.findViewById(R.id.jmulai);
-            jamselesai = itemView.findViewById(R.id.jselesai);
+            idagenda = itemView.findViewById(R.id.idagenda);
             nama_kegiatan = itemView.findViewById(R.id.nama_kegiatan);
-            bulantahun = itemView.findViewById(R.id.bultahun);
-            tempat = itemView.findViewById(R.id.tempat);
-            jumlahundangan = itemView.findViewById(R.id.jumundangan);
-            narahubung = itemView.findViewById(R.id.narahubung);
             itemView.setTag(itemView);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Intent i = new Intent(v.getContext(), DetailAgenda.class);
-                    i.putExtra("tanggalKegiatan",agendaList.get(getAdapterPosition()).getTanggal());
-                    i.putExtra("jamMulai",agendaList.get(getAdapterPosition()).getJammulai());
-                    i.putExtra("jamSelesai",agendaList.get(getAdapterPosition()).getJamselesai());
-                    i.putExtra("bulanTahun",agendaList.get(getAdapterPosition()).getBulantahun());
-                    i.putExtra("namaKegiatan",agendaList.get(getAdapterPosition()).getNama());
-                    i.putExtra("tempatKegiatan",agendaList.get(getAdapterPosition()).getTempat());
-                    i.putExtra("jumlahUndangan",agendaList.get(getAdapterPosition()).getJumlahUndangan());
-                    i.putExtra("nohpNarahubung",agendaList.get(getAdapterPosition()).getNarahubung());
+                    i.putExtra("idagenda",agendaList.get(getAdapterPosition()).getId());
                     v.getContext().startActivity(i);
                 }
 

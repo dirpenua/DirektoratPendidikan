@@ -114,6 +114,10 @@ public interface ApiInterface {
             @Query("item_type") String item_type
     );
 
+    @FormUrlEncoded
+    @POST("detailagenda.php")
+    Call<Agenda> getDetailAgenda(  @Field("idagenda") String idagenda
+    );
 
     @FormUrlEncoded
     @POST("login.php")
@@ -145,7 +149,6 @@ public interface ApiInterface {
     @POST("tambahagenda.php")
     Call<MSG> tambahAgenda (@Field("namakegiatan") String namakegiatan,
                             @Field("tempat") String tempat,
-                            @Field("jumlah") String jumlah,
                             @Field("narahubung") String narahubung,
                             @Field("tgljammulai") String tgljammulai,
                             @Field("tgljamselesai") String tgljamselesai

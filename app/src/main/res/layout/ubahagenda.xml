@@ -33,7 +33,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="BUAT AGENDA"
+                android:text="UBAH AGENDA"
                 android:gravity="center"
                 android:textSize="20dp"
                 android:textColor="@color/colorPrimaryDark"
@@ -47,7 +47,7 @@
                 android:layout_marginRight="10dp">
 
                 <EditText
-                    android:id="@+id/tnamakegiatan"
+                    android:id="@+id/unamakegiatan"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
@@ -66,7 +66,7 @@
                 android:layout_marginRight="10dp">
 
                 <EditText
-                    android:id="@+id/ttempat"
+                    android:id="@+id/utempat"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
@@ -104,7 +104,7 @@
                     android:layout_weight="0.5">
 
                     <EditText
-                        android:id="@+id/tnohp"
+                        android:id="@+id/unohp"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_gravity="center"
@@ -132,7 +132,7 @@
                     android:layout_weight="1">
 
                     <EditText
-                        android:id="@+id/ttglmulai"
+                        android:id="@+id/utglmulai"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_gravity="center"
@@ -158,12 +158,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginTop="8dp"
+                    android:layout_marginRight="10dp"
                     android:layout_marginLeft="10dp"
-                    android:layout_marginRight="15dp"
                     android:layout_weight="1">
 
                     <EditText
-                        android:id="@+id/tjammulai"
+                        android:id="@+id/ujammulai"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_gravity="center"
@@ -183,7 +183,7 @@
                     android:layout_weight="1">
 
                     <EditText
-                        android:id="@+id/tjamselesai"
+                        android:id="@+id/ujamselesai"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_gravity="center"
@@ -200,12 +200,12 @@
 
 
             <TextView
-                android:id="@+id/buatagenda"
+                android:id="@+id/ubahagenda"
                 android:layout_width="100dp"
                 android:layout_height="40dp"
                 android:layout_marginTop="20dp"
                 android:layout_gravity="center"
-                android:text="BUAT"
+                android:text="UBAH"
                 android:textSize="16dp"
                 android:textColor="#FFF"
                 android:gravity="center"

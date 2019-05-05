@@ -5,6 +5,7 @@ import com.google.gson.annotations.SerializedName;
 
 public class Agenda {
     @SerializedName("id") private String id;
+    @SerializedName("tanggallengkap") private String tanggallengkap;
     @SerializedName("tanggal") private String tanggal;
     @SerializedName("jammulai") private String jammulai;
     @SerializedName("jamselesai") private String jamselesai;
@@ -20,6 +21,7 @@ public class Agenda {
     public String getId() { return id; }
 
     public String getTanggal() { return tanggal; }
+    public String getTanggalLengkap() { return tanggallengkap; }
 
     public void setTanggal(String tanggal) { this.tanggal = tanggal;
     }
