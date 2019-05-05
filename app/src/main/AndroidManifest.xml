@@ -15,7 +15,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".TambahPeserta"
+        <activity android:name=".DetailAgendaAdmin"
+            android:theme="@style/NoActionBar" />
+        <activity
+            android:name=".TambahPeserta"
             android:theme="@style/NoActionBar" />
         <activity
             android:name=".DetailAkreditasi"

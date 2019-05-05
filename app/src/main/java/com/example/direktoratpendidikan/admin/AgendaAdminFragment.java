@@ -50,6 +50,7 @@ import com.example.direktoratpendidikan.R;
 import com.example.direktoratpendidikan.SpinnerAdapter;
 import com.example.direktoratpendidikan.TambahPeserta;
 import com.example.direktoratpendidikan.adapter.Adapter;
+import com.example.direktoratpendidikan.adapter.AdapterAgendaAdmin;
 import com.example.direktoratpendidikan.api.ApiClient;
 import com.example.direktoratpendidikan.api.ApiInterface;
 import com.example.direktoratpendidikan.data.Agenda;
@@ -78,7 +79,7 @@ public class  AgendaAdminFragment extends Fragment {
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
     private List agendaList;
-    private Adapter adapter;
+    private AdapterAgendaAdmin adapter;
     private ApiInterface apiInterface;
     ProgressBar progressBar;
     private FloatingActionButton fab;
@@ -424,7 +425,7 @@ public class  AgendaAdminFragment extends Fragment {
                 agendaList = response.body();
                 swipeContainer.setRefreshing(false);
                 //agendaList.clear();
-                adapter = new Adapter(getActivity(), agendaList);
+                adapter = new AdapterAgendaAdmin(getActivity(), agendaList);
                 recyclerView.setAdapter(adapter);
                 adapter.notifyDataSetChanged();
                 if (adapter.getItemCount() == 0)

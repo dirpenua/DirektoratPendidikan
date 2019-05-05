@@ -94,7 +94,4 @@ public class DetailAgenda extends AppCompatActivity {
 
     }
 
-    public String getId_agenda(){
-        return this.agenda_id;
-    }
 }
