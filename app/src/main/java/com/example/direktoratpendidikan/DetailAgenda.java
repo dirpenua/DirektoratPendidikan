@@ -105,12 +105,17 @@ public class DetailAgenda extends AppCompatActivity {
                 tempat.setText(response.body().getTempat());
                 jumlahundangan.setText(response.body().getJumlahUndangan());
                 final String nrhb =response.body().getNarahubung();
-                if(nrhb!=null){
+                if(nrhb.length() == 0){
+                    narahubung.setText("Narahubung tidak tersedia");
+                }
+                else{
+                    narahubung.setText("0"+nrhb);
+                    narahubung.setTextIsSelectable(true);
                     narahubung.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
                             try {
-                                String url = "https://wa.me/" + nrhb;
+                                String url = "https://wa.me/62" + nrhb;
                                 Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
                                 startActivity(i);
                             } catch (ActivityNotFoundException e) {
@@ -119,11 +124,6 @@ public class DetailAgenda extends AppCompatActivity {
                             }
                         }
                     });
-                    narahubung.setText("+"+nrhb);
-                    narahubung.setTextIsSelectable(true);
-                }
-                else{
-                    narahubung.setText("Narahubung tidak tersedia");
                 }
 
             }

@@ -21,6 +21,7 @@ import android.text.TextWatcher;
 import android.text.style.AlignmentSpan;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -32,6 +33,7 @@ import android.widget.Toast;
 import com.example.direktoratpendidikan.api.ApiClient;
 import com.example.direktoratpendidikan.api.ApiInterface;
 import com.example.direktoratpendidikan.data.Agenda;
+import com.example.direktoratpendidikan.data.MSG;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -43,8 +45,8 @@ import retrofit2.Response;
 
 public class DetailAgendaAdmin extends AppCompatActivity {
 
-    public String agenda_id, nohape;
-    private TextView tgllengkap, tanggal_kegiatan, jam_mulai, jam_selesai, nama_kegiatan, bulantahun, tempat, jumlahundangan, narahubung;
+    public String agenda_id, nohape, nohpdb;
+    private TextView tgllengkap, tanggal_kegiatan, jam_mulai, jam_selesai, nama_kegiatan, bulantahun, tempat, jumlahundangan, narahubung, hidenarahubung;
     public ImageView onback, tambahpeserta, edit, close;
     private SwipeRefreshLayout swipeContainer;
     private ApiInterface apiInterface;
@@ -103,13 +105,11 @@ public class DetailAgendaAdmin extends AppCompatActivity {
                 Selection.setSelection(tempat,_tempat.getText().toString().length());
 
                 nohape = narahubung.getText().toString();
+                nohpdb = hidenarahubung.getText().toString();
                 if (nohape == "Narahubung tidak tersedia"){
-                    _nohp.setText("Belum diisi");
+                    _nohp.setText("belum diisi");
                 }else{
-                    String subsnohp = nohape.substring(3);
-                    _nohp.setText(subsnohp);
-                    Editable nrhb = _nohp.getText();
-                    Selection.setSelection(nrhb,_nohp.getText().toString().length());
+                    _nohp.setText(nohpdb);
                 }
 
                 _tglmulai.setText(tgllengkap.getText());
@@ -223,16 +223,17 @@ public class DetailAgendaAdmin extends AppCompatActivity {
 //                    }
 //                });
 
-//                _buatagenda.setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-//                        if (validate() == false) {
-//                            onSimpanFailed();
-//                            return;
-//                        }
-//                        simpanAgenda();
-//                   }
-//                });
+                _ubahagenda.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (validate() == false) {
+                            onSimpanFailed();
+                            return;
+                        }
+                        ubahAgenda();
+
+                   }
+                });
                 dUbahAgenda.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 dUbahAgenda.show();
             }
@@ -263,6 +264,7 @@ public class DetailAgendaAdmin extends AppCompatActivity {
         tempat = findViewById(R.id.tempatdetail);
         jumlahundangan = findViewById(R.id.jumlahundangan);
         narahubung = findViewById(R.id.narahubungdetail);
+        hidenarahubung = findViewById(R.id.hideubahnohp);
         Intent iin= getIntent();
         Bundle b = iin.getExtras();
 
@@ -297,13 +299,17 @@ public class DetailAgendaAdmin extends AppCompatActivity {
                 nama_kegiatan.setText(response.body().getNama());
                 tempat.setText(response.body().getTempat());
                 jumlahundangan.setText(response.body().getJumlahUndangan());
+                hidenarahubung.setText(response.body().getNarahubung());
                 final String nrhb =response.body().getNarahubung();
-                if(nrhb!=null ){
+                if(nrhb.length() == 0 || nrhb == null){
+                    narahubung.setText("Narahubung tidak tersedia");
+                }
+                else{
                     narahubung.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
                             try {
-                                String url = "https://wa.me/" + nrhb;
+                                String url = "https://wa.me/62" + nrhb;
                                 Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
                                 startActivity(i);
                             } catch (ActivityNotFoundException e) {
@@ -312,11 +318,8 @@ public class DetailAgendaAdmin extends AppCompatActivity {
                             }
                         }
                     });
-                    narahubung.setText("+"+nrhb);
+                    narahubung.setText("0"+nrhb);
                     narahubung.setTextIsSelectable(true);
-                }
-                else{
-                    narahubung.setText("Narahubung tidak tersedia");
                 }
 
             }
@@ -338,6 +341,133 @@ public class DetailAgendaAdmin extends AppCompatActivity {
         String myFormat = "yyyy-MM-dd";
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
         _tglmulai.setText(sdf.format(myAgenda.getTime()));
+    }
+
+    private void ubahAgenda() {
+        pDialog = new ProgressDialog(DetailAgendaAdmin.this);
+        pDialog.setIndeterminate(true);
+        pDialog.setMessage("Sedang membuat agenda...");
+        pDialog.setCancelable(false);
+
+        showpDialog();
+
+        final String agendaid = getIntent().getStringExtra("idagenda");
+        String namakegiatan = _namakegiatan.getText().toString();
+        String tempatkegiatan = _tempat.getText().toString();
+        String narahubung = _nohp.getText().toString();
+        String tgljammulai = _tglmulai.getText().toString() +" "+_jammulai.getText().toString() +":00";
+        String tgljamselesai = _tglmulai.getText().toString() +" "+_jamselesai.getText().toString() +":00";
+
+        ApiInterface service = ApiClient.getApiClient().create(ApiInterface.class);
+
+        Call<MSG> userCall = service.ubahAgenda(agendaid, namakegiatan,tempatkegiatan,narahubung,tgljammulai,tgljamselesai);
+
+        userCall.enqueue(new Callback<MSG>() {
+            @Override
+            public void onResponse(Call<MSG> call, Response<MSG> response) {
+                hidepDialog();
+                Log.d("SUKSERNYA", "SUKSESNYA APA: " + response.body().getSuccess());
+                if(response.body().getSuccess() == 1) {
+                    dUbahAgenda.dismiss();
+                    fetchDetailAgenda(agendaid);
+//                    i.putExtra("judulakreditasi",akreditasiList.get(getAdapterPosition()).getJudulAk());
+//                    i.putExtra("linkwebview",akreditasiList.get(getAdapterPosition()).getLinkAk());
+
+                    //NANTI KASIH REFRESH ADAPTER DISINI YAAAAA
+                    String text = "" + response.body().getMessage();
+                    Spannable centeredText = new SpannableString(text);
+                    centeredText.setSpan(new AlignmentSpan.Standard(Layout.Alignment.ALIGN_CENTER),
+                            0, text.length() - 1,
+                            Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+                    Toast.makeText(getApplicationContext(),centeredText, Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<MSG> call, Throwable t) {
+                hidepDialog();
+                String text = "Agenda gagal dibuat. Harap hubungi admin melalui menu BANTUAN";
+                Spannable centeredText = new SpannableString(text);
+                centeredText.setSpan(new AlignmentSpan.Standard(Layout.Alignment.ALIGN_CENTER),
+                        0, text.length() - 1,
+                        Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+                Toast.makeText(getApplicationContext(),centeredText, Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
+    public void onSimpanFailed() {
+        Toast.makeText(getApplicationContext(), "Mohon isi dengan benar", Toast.LENGTH_LONG).show();
+        _ubahagenda.setEnabled(true);
+    }
+
+    private void showpDialog() {
+        if (!pDialog.isShowing())
+            pDialog.show();
+    }
+
+    private void hidepDialog() {
+        if (pDialog.isShowing())
+            pDialog.dismiss();
+    }
+
+    public boolean validate() {
+        boolean valid = true;
+
+        String namakegiatan = _namakegiatan.getText().toString();
+        String tempatkegiatan = _tempat.getText().toString();
+        String tglmulai = _tglmulai.getText().toString();
+        String jammulai =_jammulai.getText().toString();
+        String jamselesai = _jamselesai.getText().toString();
+
+        if (namakegiatan.isEmpty()) {
+            _namakegiatan.setError("Nama kegiatan harus diisi");
+            requestFocus(_namakegiatan);
+            valid = false;
+        } else {
+            _namakegiatan.setError(null);
+        }
+
+        if (tempatkegiatan.isEmpty()) {
+            _tempat.setError("Tempat kegiatan harus diisi");
+            requestFocus(_tempat);
+            valid = false;
+        } else {
+            _tempat.setError(null);
+        }
+
+        if (tglmulai.isEmpty()) {
+            _tglmulai.setError("Tanggal mulai harus diisi");
+            requestFocus(_tglmulai);
+            valid = false;
+        } else {
+            _tglmulai.setError(null);
+        }
+
+
+        if (jammulai.isEmpty()) {
+            _jammulai.setError("Jam mulai harus diisi");
+            requestFocus(_jammulai);
+            valid = false;
+        } else {
+            _jammulai.setError(null);
+        }
+
+        if (jamselesai.isEmpty()) {
+            _jamselesai.setError("Jam selesai harus diisi");
+            requestFocus(_jamselesai);
+            valid = false;
+        } else {
+            _jamselesai.setError(null);
+        }
+
+        return valid;
+    }
+
+    private void requestFocus(View view) {
+        if (view.requestFocus()) {
+            dUbahAgenda.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
+        }
     }
 
 }

@@ -154,10 +154,15 @@ public interface ApiInterface {
                             @Field("tgljamselesai") String tgljamselesai
     );
 
-
-
-
-
+    @FormUrlEncoded
+    @POST("ubahagenda.php")
+    Call<MSG> ubahAgenda   (@Field("agendaid") String agendaid,
+                            @Field("namakegiatan") String namakegiatan,
+                            @Field("tempat") String tempat,
+                            @Field("narahubung") String narahubung,
+                            @Field("tgljammulai") String tgljammulai,
+                            @Field("tgljamselesai") String tgljamselesai
+    );
 
 
 //    @FormUrlEncoded
