@@ -36,7 +36,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/toolbar"
-        android:layout_above="@id/bn_main"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="70dp">
 

@@ -45,7 +45,7 @@ import retrofit2.Response;
 
 public class DetailAgendaAdmin extends AppCompatActivity {
 
-    public String agenda_id, nohape, nohpdb;
+    public String agenda_id, nohpdb;
     private TextView tgllengkap, tanggal_kegiatan, jam_mulai, jam_selesai, nama_kegiatan, bulantahun, tempat, jumlahundangan, narahubung, hidenarahubung;
     public ImageView onback, tambahpeserta, edit, close;
     private SwipeRefreshLayout swipeContainer;
@@ -104,13 +104,9 @@ public class DetailAgendaAdmin extends AppCompatActivity {
                 Editable tempat = _tempat.getText();
                 Selection.setSelection(tempat,_tempat.getText().toString().length());
 
-                nohape = narahubung.getText().toString();
                 nohpdb = hidenarahubung.getText().toString();
-                if (nohape == "Narahubung tidak tersedia"){
-                    _nohp.setText("belum diisi");
-                }else{
-                    _nohp.setText(nohpdb);
-                }
+                _nohp.setText(nohpdb);
+
 
                 _tglmulai.setText(tgllengkap.getText());
                 _jammulai.setText(jam_mulai.getText());
@@ -244,14 +240,7 @@ public class DetailAgendaAdmin extends AppCompatActivity {
                 android.R.color.holo_blue_light,
                 android.R.color.holo_blue_bright);
 
-        tambahpeserta = findViewById(R.id.tambahpeserta);
-        tambahpeserta.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(v.getContext(), TambahPeserta.class);
-                startActivity(i);
-            }
-        });
+
 
 
 
@@ -265,6 +254,7 @@ public class DetailAgendaAdmin extends AppCompatActivity {
         jumlahundangan = findViewById(R.id.jumlahundangan);
         narahubung = findViewById(R.id.narahubungdetail);
         hidenarahubung = findViewById(R.id.hideubahnohp);
+        tambahpeserta = findViewById(R.id.tambahpeserta);
         Intent iin= getIntent();
         Bundle b = iin.getExtras();
 
@@ -279,8 +269,20 @@ public class DetailAgendaAdmin extends AppCompatActivity {
                     fetchDetailAgenda(idagenda);
                 }
             });
+            tambahpeserta.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent i = new Intent(v.getContext(), TambahPeserta.class);
+                    i.putExtra("idagenda",idagenda);
+                    startActivity(i);
+                }
+            });
 
         }
+
+
+
+
     }
 
     public void fetchDetailAgenda (String idagenda){

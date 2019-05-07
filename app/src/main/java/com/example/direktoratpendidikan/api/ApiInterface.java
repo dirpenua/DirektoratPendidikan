@@ -5,6 +5,7 @@ import com.example.direktoratpendidikan.data.Akreditasi;
 import com.example.direktoratpendidikan.data.Beasiswa;
 import com.example.direktoratpendidikan.data.Berita;
 import com.example.direktoratpendidikan.data.Cari;
+import com.example.direktoratpendidikan.data.Dosen;
 import com.example.direktoratpendidikan.data.Download;
 import com.example.direktoratpendidikan.data.Fakultas;
 import com.example.direktoratpendidikan.data.MSG;
@@ -49,6 +50,19 @@ public interface ApiInterface {
     @GET("getakreditasi.php?")
     Call < List<Akreditasi>> getAkreditasi(
             @Query("kategori") Integer kategori
+    );
+
+    @FormUrlEncoded
+    @POST("getpeserta.php?")
+    Call < List<Dosen>> getListPeserta(
+            @Field("kategori") String kategori,
+            @Field("agendaid") String agendaid
+    );
+
+    @FormUrlEncoded
+    @POST("tambahpeserta.php")
+    Call<MSG> tambahPeserta (@Field("agendaid") String agendaid,
+                             @Field("nipnik") String nipnik
     );
 
     @GET("getfakultas.php?")
