@@ -128,7 +128,7 @@ public class AkunFragment extends Fragment {
                 //alertDialogBuilder.setTitle("Logout akun?");
 
                 alertDialogBuilder
-                        .setMessage("Anda yakin ingin keluar dari akun anda?")
+                        .setMessage("Anda yakin ingin keluar?")
                         .setCancelable(false)
                         .setPositiveButton("Ya", new DialogInterface.OnClickListener() {
                             @Override

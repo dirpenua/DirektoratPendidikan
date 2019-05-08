@@ -72,6 +72,12 @@ public interface ApiInterface {
                              @Field("nipnik") String nipnik
     );
 
+    @FormUrlEncoded
+    @POST("hapuspeserta.php")
+    Call<MSG> hapusPeserta (@Field("agendaid") String agendaid,
+                             @Field("nipnik") String nipnik
+    );
+
     @GET("getfakultas.php?")
     Call < List<Fakultas>> getFakultas(
             @Query("kategori") Integer kategori

@@ -104,39 +104,4 @@ public class TabTambahPeserta extends Fragment {
         });
     }
 
-    public void tambahPeserta(String agendaid, String nipnik){
-        ApiInterface service = ApiClient.getApiClient().create(ApiInterface.class);
-        Call<MSG> userCall = service.tambahPeserta(agendaid, nipnik);
-        userCall.enqueue(new Callback<MSG>() {
-            @Override
-            public void onResponse(Call<MSG> call, Response<MSG> response) {
-                Log.d("SUKSERNYA", "SUKSESNYA APA: " + response.body().getSuccess());
-                if(response.body().getSuccess() == 1) {
-                    String text = response.body().getMessage();
-                    Spannable centeredText = new SpannableString(text);
-                    centeredText.setSpan(new AlignmentSpan.Standard(Layout.Alignment.ALIGN_CENTER),
-                            0, text.length() - 1,
-                            Spannable.SPAN_INCLUSIVE_INCLUSIVE);
-                    Toast.makeText(getContext(),centeredText, Toast.LENGTH_LONG).show();
-                }else {
-                    String text = "" + response.body().getMessage();
-                    Spannable centeredText = new SpannableString(text);
-                    centeredText.setSpan(new AlignmentSpan.Standard(Layout.Alignment.ALIGN_CENTER),
-                            0, text.length() - 1,
-                            Spannable.SPAN_INCLUSIVE_INCLUSIVE);
-                    Toast.makeText(getContext(),centeredText, Toast.LENGTH_LONG).show();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<MSG> call, Throwable t) {
-//                hidepDialog();
-                Log.d("onFailure", t.toString());
-            }
-        });
-    }
-
-
-
-
 }
