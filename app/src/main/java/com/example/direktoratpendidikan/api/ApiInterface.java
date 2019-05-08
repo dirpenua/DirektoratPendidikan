@@ -60,6 +60,13 @@ public interface ApiInterface {
     );
 
     @FormUrlEncoded
+    @POST("getpesertaada.php?")
+    Call < List<Dosen>> getPesertaAda(
+            @Field("kategori") String kategori,
+            @Field("agendaid") String agendaid
+    );
+
+    @FormUrlEncoded
     @POST("tambahpeserta.php")
     Call<MSG> tambahPeserta (@Field("agendaid") String agendaid,
                              @Field("nipnik") String nipnik
