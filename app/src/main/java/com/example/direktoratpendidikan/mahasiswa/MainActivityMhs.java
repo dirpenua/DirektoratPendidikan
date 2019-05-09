@@ -51,8 +51,8 @@ public class MainActivityMhs extends AppCompatActivity implements BottomNavigati
     String nama, foto, nipnik;
     private ApiInterface apiInterface;
     public static final String CHANNEL_ID = "DirpenUA";
-    private static final String CHANNEL_NAME = "DirpenUA Uswanto";
-    private static final String CHANNEL_DESC = "DirpenUA Uswanto Notifications";
+    private static final String CHANNEL_NAME = "Reminder Agenda";
+    private static final String CHANNEL_DESC = "Reminder Agenda Notifications";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

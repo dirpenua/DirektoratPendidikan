@@ -38,9 +38,9 @@ public class MainActivityAdmin extends AppCompatActivity implements BottomNaviga
     SharedPreferences sharedpreferences;
     public final static String TAG_NIPNIK = "nipnik";
     String nipnik;
-    public static final String CHANNEL_ID = "simplified_coding";
-    private static final String CHANNEL_NAME = "Simplified Coding";
-    private static final String CHANNEL_DESC = "Simplified Coding Notifications";
+    public static final String CHANNEL_ID = "DirpenUA";
+    private static final String CHANNEL_NAME = "Reminder Agenda";
+    private static final String CHANNEL_DESC = "Reminder Agenda Notifications";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

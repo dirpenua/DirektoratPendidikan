@@ -7,6 +7,11 @@ import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationManagerCompat;
 
 import com.example.direktoratpendidikan.dosen.MainActivity;
+import com.google.firebase.messaging.RemoteMessage;
+
+import static android.app.Notification.DEFAULT_LIGHTS;
+import static android.app.Notification.DEFAULT_SOUND;
+import static android.app.Notification.DEFAULT_VIBRATE;
 
 public class NotificationHelper {
 
@@ -28,7 +33,8 @@ public class NotificationHelper {
                         .setContentText(body)
                         .setContentIntent(pendingIntent)
                         .setAutoCancel(true)
-                        .setPriority(NotificationCompat.PRIORITY_HIGH);
+                        .setDefaults(DEFAULT_SOUND | DEFAULT_VIBRATE | DEFAULT_LIGHTS   )
+                        .setPriority(NotificationCompat.PRIORITY_MAX);
 
         NotificationManagerCompat mNotificationMgr = NotificationManagerCompat.from(context);
         mNotificationMgr.notify(1, mBuilder.build());
