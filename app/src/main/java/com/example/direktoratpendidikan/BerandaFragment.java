@@ -16,7 +16,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.direktoratpendidikan.admin.DisabilitasAdm;
 import com.example.direktoratpendidikan.api.ApiClient;
+import com.example.direktoratpendidikan.mahasiswa.DisabilitasMhs;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -112,6 +114,15 @@ public class BerandaFragment extends Fragment {
             public void onClick(View v) {
                 Intent akreditasi = new Intent(getActivity(), AkreditasiActivity.class);
                 startActivity(akreditasi);
+            }
+        });
+
+        ImageView disabilitas = view.findViewById(R.id.ic_disabilitas);
+        disabilitas.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent disabilitas = new Intent(getActivity(), DisabilitasMhs.class);
+                startActivity(disabilitas);
             }
         });
 

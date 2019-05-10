@@ -12,8 +12,11 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.direktoratpendidikan.AkreditasiActivity;
 import com.example.direktoratpendidikan.BeritaActivity;
 import com.example.direktoratpendidikan.DownloadActivity;
+import com.example.direktoratpendidikan.FakultasActivity;
+import com.example.direktoratpendidikan.KalenderAkademik;
 import com.example.direktoratpendidikan.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -61,12 +64,57 @@ public class BerandaAdminFragment extends Fragment {
         carouselView.setPageCount(sampleImages.length);
         carouselView.setImageListener(imageListener);
 
-        ImageView user = view.findViewById(R.id.ic_user);
-        user.setOnClickListener(new View.OnClickListener() {
+//        ImageView user = view.findViewById(R.id.ic_user);
+//        user.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent user = new Intent(getActivity(), UserActivity.class);
+//                startActivity(user);
+//            }
+//        });
+
+        ImageView berita = view.findViewById(R.id.ic_berita);
+        berita.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent user = new Intent(getActivity(), UserActivity.class);
-                startActivity(user);
+                Intent berita = new Intent(getActivity(), BeritaActivity.class);
+                startActivity(berita);
+            }
+        });
+
+        ImageView kalender = view.findViewById(R.id.ic_kalender);
+        kalender.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent kalender = new Intent(getActivity(), KalenderAkademik.class);
+                startActivity(kalender);
+            }
+        });
+
+        ImageView prodi = view.findViewById(R.id.ic_prodi);
+        prodi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent prodi = new Intent(getActivity(), FakultasActivity.class);
+                startActivity(prodi);
+            }
+        });
+
+        ImageView akreditasi = view.findViewById(R.id.ic_akreditasi);
+        akreditasi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent akreditasi = new Intent(getActivity(), AkreditasiActivity.class);
+                startActivity(akreditasi);
+            }
+        });
+
+        ImageView disabilitas = view.findViewById(R.id.ic_disabilitas);
+        disabilitas.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent disabilitas = new Intent(getActivity(), DisabilitasAdm.class);
+                startActivity(disabilitas);
             }
         });
 
@@ -78,6 +126,7 @@ public class BerandaAdminFragment extends Fragment {
                 startActivity(download);
             }
         });
+
 
         return view;
     }

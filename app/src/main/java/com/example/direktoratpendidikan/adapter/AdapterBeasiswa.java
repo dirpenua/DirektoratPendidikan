@@ -59,7 +59,7 @@ public class AdapterBeasiswa extends RecyclerView.Adapter<AdapterBeasiswa.MyView
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        TextView idbeasiswa, judulbeasiswa, kontenbeasiswa, kontenpanjang, tglpublish;
+        TextView idbeasiswa, judulbeasiswa, kontenbeasiswa, kontenpanjang, tglpublish, baca;
 
         public MyViewHolder(final View itemView) {
             super(itemView);
@@ -68,8 +68,9 @@ public class AdapterBeasiswa extends RecyclerView.Adapter<AdapterBeasiswa.MyView
             kontenbeasiswa = itemView.findViewById(R.id.kontenpendek);
             kontenpanjang = itemView.findViewById(R.id.hidekonten);
             tglpublish = itemView.findViewById(R.id.hidetgl);
+            baca = itemView.findViewById(R.id.baca);
             itemView.setTag(itemView);
-            itemView.setOnClickListener(new View.OnClickListener() {
+            baca.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Intent i = new Intent(v.getContext(), DetailBeasiswa.class); //Detail Beasiswa

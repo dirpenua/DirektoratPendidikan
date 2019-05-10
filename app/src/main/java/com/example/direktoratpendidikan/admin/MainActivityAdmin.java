@@ -80,7 +80,7 @@ public class MainActivityAdmin extends AppCompatActivity implements BottomNaviga
                 });
 
         // kita set default nya Home Fragment
-        loadFragment(new BerandaFragment());
+        loadFragment(new BerandaAdminFragment());
 
         // inisialisasi BottomNavigaionView
         BottomNavigationView bottomNavigationView = findViewById(R.id.bn_main_admin);
@@ -139,7 +139,7 @@ public class MainActivityAdmin extends AppCompatActivity implements BottomNaviga
 
         switch (item.getItemId()) {
             case R.id.beranda:
-                fragment = new BerandaFragment();
+                fragment = new BerandaAdminFragment();
                 break;
             case R.id.prosedur:
                 fragment = new ProsedurAdminFragment();

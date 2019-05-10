@@ -62,7 +62,7 @@ public class AdapterProsedur extends RecyclerView.Adapter<AdapterProsedur.MyView
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        TextView idprosedur, judulprosedur, konten_prosedur, kontenpanjangpro, tglpublish;
+        TextView idprosedur, judulprosedur, konten_prosedur, kontenpanjangpro, tglpublish, bacapro;
         ImageView gambarprosedur;
 
         public MyViewHolder(final View itemView) {
@@ -73,8 +73,9 @@ public class AdapterProsedur extends RecyclerView.Adapter<AdapterProsedur.MyView
             kontenpanjangpro = itemView.findViewById(R.id.hidekontenpro);
             tglpublish = itemView.findViewById(R.id.hidetglpro);
             gambarprosedur = itemView.findViewById(R.id.hidegambarprosedur);
+            bacapro = itemView.findViewById(R.id.bacapro);
             itemView.setTag(itemView);
-            itemView.setOnClickListener(new View.OnClickListener() {
+            bacapro.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Intent i = new Intent(v.getContext(), DetailProsedur.class); //Detail Prosedur
