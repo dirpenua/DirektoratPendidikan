@@ -50,6 +50,11 @@
         <item>Luar Negeri</item>
     </string-array>
 
+    <string-array name="kategoripeserta">
+        <item>Berdasarkan nama</item>
+        <item>Berdasarkan NIP/NIK</item>
+    </string-array>
+
     <string-array name="listakun">
         <item>Profil</item>
         <item>Email verifikasi</item>

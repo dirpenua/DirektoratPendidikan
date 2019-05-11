@@ -10,6 +10,7 @@ public class Cari {
     List<Download> resultdw;
     List<Berita> resultbr;
     List<Fakultas> resultfk;
+    List<Dosen> resulttb;
 
     public String getValue() {
         return value;
@@ -37,5 +38,9 @@ public class Cari {
 
     public List<Fakultas> getListFakultas() {
         return resultfk;
+    }
+
+    public List<Dosen> getListTambahPeserta() {
+        return resulttb;
     }
 }

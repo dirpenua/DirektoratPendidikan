@@ -115,6 +115,13 @@ public interface ApiInterface {
     );
 
     @FormUrlEncoded
+    @POST("searchtambahpeserta.php")
+    Call<Cari> searchTambahDsn(@Field("search") String search,
+                               @Field("idagenda") String idagenda,
+                               @Field("kategori") String kategori
+    );
+
+    @FormUrlEncoded
     @POST("searchberita.php")
     Call<Cari> searchBerita(@Field("search") String search
     );

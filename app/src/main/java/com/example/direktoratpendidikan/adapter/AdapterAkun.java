@@ -14,9 +14,11 @@ import android.widget.TextView;
 import com.example.direktoratpendidikan.DetailAgenda;
 import com.example.direktoratpendidikan.LoginActivity;
 import com.example.direktoratpendidikan.R;
+import com.example.direktoratpendidikan.pengaturan.Bantuan;
 import com.example.direktoratpendidikan.pengaturan.ChangePassword;
 import com.example.direktoratpendidikan.pengaturan.EmailVerifikasiActivity;
 import com.example.direktoratpendidikan.pengaturan.ProfilActivity;
+import com.example.direktoratpendidikan.pengaturan.TentangDirpen;
 
 public class AdapterAkun extends BaseAdapter {
     private String[] namapengaturan;
@@ -89,13 +91,12 @@ public class AdapterAkun extends BaseAdapter {
                         v.getContext().startActivity(password);
                     break;
                     case 3:
-
+                        Intent bantuan = new Intent(v.getContext(), Bantuan.class);
+                        v.getContext().startActivity(bantuan);
                     break;
                     case 4:
-
-                    break;
-                    case 5:
-
+                        Intent tentang = new Intent(v.getContext(), TentangDirpen.class);
+                        v.getContext().startActivity(tentang);
                     break;
                 }
             }

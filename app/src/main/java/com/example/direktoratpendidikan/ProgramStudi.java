@@ -137,7 +137,7 @@ public class ProgramStudi extends AppCompatActivity {
                     try {
                         startActivity(intent);
                     } catch (android.content.ActivityNotFoundException ex) {
-                        String text = "Tidak dapat menemukan lokasi. Harap hubungi admin melalui menu BANTUAN";
+                        String text = "Tidak dapat menemukan nomor telepon. Harap hubungi admin melalui menu BANTUAN";
                         Spannable centeredText = new SpannableString(text);
                         centeredText.setSpan(new AlignmentSpan.Standard(Layout.Alignment.ALIGN_CENTER),
                                 0, text.length() - 1,
@@ -158,7 +158,7 @@ public class ProgramStudi extends AppCompatActivity {
                     try {
                         startActivity(Intent.createChooser(intent, "Email via..."));
                     } catch (android.content.ActivityNotFoundException ex) {
-                        String text = "Tidak dapat menemukan lokasi. Harap hubungi admin melalui menu BANTUAN";
+                        String text = "Tidak dapat menemukan email. Harap hubungi admin melalui menu BANTUAN";
                         Spannable centeredText = new SpannableString(text);
                         centeredText.setSpan(new AlignmentSpan.Standard(Layout.Alignment.ALIGN_CENTER),
                                 0, text.length() - 1,

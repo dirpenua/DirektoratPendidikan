@@ -90,7 +90,7 @@ public class AkunFragment extends Fragment {
 
         sharedpreferences = this.getActivity().getSharedPreferences(LoginActivity.my_shared_preferences, Context.MODE_PRIVATE);
         nama = getActivity().getIntent().getStringExtra(TAG_NAMA);
-        foto = getActivity().getIntent().getStringExtra(TAG_FOTO);
+//        foto = getActivity().getIntent().getStringExtra(TAG_FOTO);
         nipnik = getActivity().getIntent().getStringExtra(TAG_NIPNIK);
 
         setDefaultString(TAG_NAMA, nama,getContext());
@@ -111,7 +111,7 @@ public class AkunFragment extends Fragment {
         btnLogout = (Button) view.findViewById(R.id.btn_logout);
 
         _namauser.setText(nama);
-        Picasso.with(getContext()).load(ApiClient.USER_PIC+foto).error(R.drawable.userpic).into(_fotoprofil);
+//        Picasso.with(getContext()).load(ApiClient.USER_PIC+foto).error(R.drawable.userpic).into(_fotoprofil);
         //fetchAkun(nipnik);
         _nipnik.setText(nipnik);
 

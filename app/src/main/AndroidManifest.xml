@@ -15,8 +15,15 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".admin.DisabilitasAdm"></activity>
-        <activity android:name=".mahasiswa.DisabilitasMhs" />
+
+        <activity android:name=".pengaturan.TentangDirpen"
+            android:theme="@style/NoActionBar" />
+        <activity android:name=".pengaturan.Bantuan"
+            android:theme="@style/NoActionBar" />
+        <activity android:name=".admin.DisabilitasAdm"
+            android:theme="@style/NoActionBar" />
+        <activity android:name=".mahasiswa.DisabilitasMhs"
+            android:theme="@style/NoActionBar" />
         <activity
             android:name=".DetailAgendaAdmin"
             android:theme="@style/NoActionBar" />
