@@ -122,6 +122,13 @@ public interface ApiInterface {
     );
 
     @FormUrlEncoded
+    @POST("searchpesertaada.php")
+    Call<Cari> searchPesertaAda(@Field("search") String search,
+                               @Field("idagenda") String idagenda,
+                               @Field("kategori") String kategori
+    );
+
+    @FormUrlEncoded
     @POST("searchberita.php")
     Call<Cari> searchBerita(@Field("search") String search
     );

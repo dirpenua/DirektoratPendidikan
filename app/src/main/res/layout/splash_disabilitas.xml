@@ -12,19 +12,20 @@
         android:layout_margin="30dp"
         android:textAlignment="center"
         android:fontFamily="@font/roboto_black"
-        android:textSize="22dp"
+        android:textSize="18dp"
         android:textColor="#fff"
         android:elevation="5dp"
         android:textStyle="bold"
         android:text="Airlangga Inclusive Learning"/>
 
         <TextView
-            android:layout_width="180dp"
-            android:layout_height="50dp"
+            android:layout_width="160dp"
+            android:layout_height="40dp"
             android:gravity="center"
             android:layout_margin="30dp"
             android:layout_gravity="center"
-            android:textSize="16dp"
+            android:textSize="14dp"
+            android:onClick="removeSplash"
             android:fontFamily="@font/alegreya_sans_bold"
             android:textColor="#fff"
             android:elevation="5dp"
@@ -61,13 +62,13 @@
                         android:fontFamily="@font/alegreya_sans_bold"
                         android:textColor="#fff"
                         android:layout_marginLeft="10dp"
-                        android:textSize="18dp"
+                        android:textSize="14dp"
                         android:gravity="center"
-                        android:text="Kesempatan berkontribusi lebih dengan menjadi relawan disabilitas dalam program Airlangga Inclusive Learning" />
+                        android:text="Kesempatan berkontribusi lebih dengan menjadi relawan dalam program Airlangga Inclusive Learning" />
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="horizontal">
@@ -77,7 +78,7 @@
                         android:fontFamily="@font/alegreya_sans_bold"
                         android:layout_weight="1"
                         android:textColor="#fff"
-                        android:textSize="18dp"
+                        android:textSize="14dp"
                         android:gravity="center"
                         android:layout_gravity="center"
                         android:text="Mendampingi teman kita yang berkebutuhan khusus di dunia perkuliahan" />
@@ -91,7 +92,7 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical">
@@ -106,7 +107,7 @@
                         android:layout_height="80dp"
                         android:fontFamily="@font/alegreya_sans_bold"
                         android:textColor="#fff"
-                        android:textSize="18dp"
+                        android:textSize="14dp"
                         android:gravity="center"
                         android:text="Belajar dan mendapatkan pengetahuan baru tentang bahasa isyarat dan disability awareness" />
                 </LinearLayout>

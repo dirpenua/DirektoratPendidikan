@@ -101,7 +101,7 @@ public class BeasiswaFragment extends Fragment implements SearchView.OnQueryText
             spinnerItems.add(items[i]);
         }
 
-        SpinnerAdapter spinneradapter = new SpinnerAdapter(((AppCompatActivity) getActivity()), spinnerItems);
+        SpinnerCariAdapter spinneradapter = new SpinnerCariAdapter(((AppCompatActivity) getActivity()), spinnerItems);
         bSpinner.setAdapter(spinneradapter);
         layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
