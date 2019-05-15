@@ -36,6 +36,7 @@
                     android:layout_weight="0"/>
 
                 <TextView
+                    android:id="@+id/replacenipnik"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
@@ -45,13 +46,38 @@
                     android:textSize="18sp"
                     android:layout_weight="1"/>
 
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0"
+                    android:gravity="center"
+                    android:layout_gravity="center">
+
                 <ImageView
+                    android:id="@+id/ic_pengumuman"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_marginRight="20dp"
                     android:src="@drawable/ic_pengumuman"
                     app:layout_collapseMode="parallax"
-                    android:layout_weight="0"/>
+                    />
+
+                <TextView
+                    android:id="@+id/cart_badge"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="right|end|top"
+                    android:layout_marginEnd="-5dp"
+                    android:layout_marginRight="-5dp"
+                    android:layout_marginTop="3dp"
+                    android:background="@drawable/badge_background"
+                    android:gravity="center"
+                    android:padding="3dp"
+                    android:textColor="@android:color/white"
+                    android:text="0"
+                    android:textSize="10sp"/>
+                </RelativeLayout>
+
             </LinearLayout>
 
         </android.support.v7.widget.Toolbar>

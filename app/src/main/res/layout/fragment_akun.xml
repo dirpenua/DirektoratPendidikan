@@ -87,8 +87,7 @@
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
             android:background="@drawable/whiteround"
-            android:elevation="3dp"
-            android:layout_weight="1">
+            android:elevation="3dp">
 
             <ListView
                 android:id="@+id/lvakun"

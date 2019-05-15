@@ -17,7 +17,6 @@
         android:id="@+id/bn_main_admin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/recyclerView"
         android:layout_marginTop="8dp"
         android:layout_alignParentBottom="true"
         android:background="@color/colorPrimary"

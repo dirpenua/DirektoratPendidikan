@@ -53,10 +53,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="30dp"
-            android:layout_below="@id/toolbar"
             android:layout_alignEnd="@id/swipeContainer"
             android:layout_alignBottom="@id/swipeContainer"
-            android:layout_above="@id/bn_main"
             android:layout_marginBottom="20dp"
             android:backgroundTint="@color/colorPrimaryDark"
             android:src="@drawable/ic_tambah"
@@ -69,8 +67,6 @@
             android:id="@+id/swipeContainer"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@id/toolbar"
-            android:layout_above="@id/bn_main"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="70dp">
 

@@ -153,29 +153,6 @@ public class ChangePassword extends AppCompatActivity {
                 hidepDialog();
                 Log.d("SUKSERNYA", "SUKSESNYA APA: " + response.body().getSuccess());
 
-
-//                if(response.body().getSuccess() == 1) {
-//                    Intent intent = new Intent(ChangePassword.this, MainActivity.class);
-//                    intent.putExtra(TAG_NAMA, nama);
-//                    intent.putExtra(TAG_NIPNIK, nipnik);
-//                    finish();
-//                    startActivity(intent);
-//
-//                    String text = "" + response.body().getMessage();
-//                    Spannable centeredText = new SpannableString(text);
-//                    centeredText.setSpan(new AlignmentSpan.Standard(Layout.Alignment.ALIGN_CENTER),
-//                            0, text.length() - 1,
-//                            Spannable.SPAN_INCLUSIVE_INCLUSIVE);
-//                    Toast.makeText(getApplicationContext(),centeredText, Toast.LENGTH_LONG).show();
-//                }else {
-//                    String text = "" + response.body().getMessage();
-//                    Spannable centeredText = new SpannableString(text);
-//                    centeredText.setSpan(new AlignmentSpan.Standard(Layout.Alignment.ALIGN_CENTER),
-//                            0, text.length() - 1,
-//                            Spannable.SPAN_INCLUSIVE_INCLUSIVE);
-//                    Toast.makeText(getApplicationContext(),centeredText, Toast.LENGTH_LONG).show();
-//                }
-
                 switch (response.body().getSuccess()) {
                     case 1:
                     Intent intent = new Intent(ChangePassword.this, MainActivityAdmin.class);
@@ -238,29 +215,6 @@ public class ChangePassword extends AppCompatActivity {
                 Log.d("onFailure", t.toString());
             }
         });
-    }
-
-    public static void setDefaultString(String key, String value, Context context) {
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.putString(key, value);
-        editor.commit();
-    }
-
-
-
-    public static void setDefaultBoolean(String key, Boolean value, Context context) {
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.putBoolean(key, value);
-        editor.commit();
-    }
-
-    public static void setDefaultInteger(String key, Integer value, Context context) {
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.putInt(key, value);
-        editor.commit();
     }
 
     public void onChangeFailed() {

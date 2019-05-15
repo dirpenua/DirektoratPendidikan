@@ -52,7 +52,6 @@ import retrofit2.Response;
 public class AkunFragment extends Fragment {
 
     SharedPreferences sharedpreferences;
-    SharedPreferences akun_sharepref;
     public final static String TAG_NAMA = "nama_user";
     public final static String TAG_FOTO = "foto_user";
     public final static String TAG_NIPNIK = "nipnik";
@@ -60,8 +59,8 @@ public class AkunFragment extends Fragment {
     String nama, foto, nipnik;
     TextView _namauser,_nipnik;
     Button btnLogout;
-    private String[] nama_pengaturan = {"Profil", "Email verifikasi", "Ubah password", "Bantuan", "Tentang DirpenUA"};
-    private Integer[] logo = {R.drawable.ic_akun, R.drawable.ic_email, R.drawable.ic_password, R.drawable.ic_bantuan, R.drawable.ic_tentangaplikasi};
+    private String[] nama_pengaturan = {"Profil", "Ubah password", "Bantuan", "Tentang DirpenUA"};
+    private Integer[] logo = {R.drawable.ic_akun, R.drawable.ic_password, R.drawable.ic_bantuan, R.drawable.ic_tentangaplikasi};
     private ListView lvakun;
     private ApiInterface apiInterface;
 

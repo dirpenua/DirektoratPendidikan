@@ -36,6 +36,7 @@ import retrofit2.Response;
 
 public class MainActivityAdmin extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
     SharedPreferences sharedpreferences;
+    public static final String main_shared_preferences= "my_shared_preferences";
     public final static String TAG_NIPNIK = "nipnik";
     String nipnik;
     public static final String CHANNEL_ID = "DirpenUA";
@@ -47,6 +48,7 @@ public class MainActivityAdmin extends AppCompatActivity implements BottomNaviga
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_admin);
         sharedpreferences = this.getSharedPreferences(LoginActivity.my_shared_preferences, Context.MODE_PRIVATE);
+        sharedpreferences = getSharedPreferences(main_shared_preferences, Context.MODE_PRIVATE);
         nipnik = getIntent().getStringExtra(TAG_NIPNIK);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -92,8 +94,6 @@ public class MainActivityAdmin extends AppCompatActivity implements BottomNaviga
     private void saveToken(String token){
         ApiInterface service = ApiClient.getApiClient().create(ApiInterface.class);
         Call<Notif> userCall = service.saveToken(nipnik, token);
-        Log.d("NIPNIK",nipnik);
-        Log.d("Token",token);
         userCall.enqueue(new Callback<Notif>() {
             @Override
             public void onResponse(Call<Notif> call, Response<Notif> response) {

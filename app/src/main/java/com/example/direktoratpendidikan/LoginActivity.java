@@ -321,8 +321,6 @@ public class LoginActivity extends AppCompatActivity {
         editor.commit();
     }
 
-
-
     public static void setDefaultBoolean(String key, Boolean value, Context context) {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
         SharedPreferences.Editor editor = preferences.edit();

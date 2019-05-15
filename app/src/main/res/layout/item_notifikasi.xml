@@ -2,27 +2,29 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
+    android:layout_marginTop="2dp"
+    android:layout_marginBottom="2dp"
     android:elevation="3dp"
     android:background="#FFF"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-        <ImageView
-            android:id="@+id/logoakun"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginBottom="10dp"
-            android:layout_weight="0"
-            android:src="@drawable/ic_password" />
-
         <TextView
-            android:id="@+id/namapengaturan"
+            android:id="@+id/hideidnotifikasi"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:textSize="0dp"
+            android:visibility="invisible"
+            android:textColor="@color/colorAccent"
+            />
+        <TextView
+            android:id="@+id/pesannotifikasi"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center_vertical"
+            android:layout_marginTop="8dp"
             android:layout_marginLeft="10dp"
-            android:text="Lalalalalalala"
+            android:layout_marginBottom="8dp"
+            android:text="Pesan notifikasi"
             android:textSize="14dp"
             android:textColor="@color/colorAccent"
             android:layout_weight="1"/>

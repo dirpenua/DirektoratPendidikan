@@ -15,30 +15,30 @@ import static android.app.Notification.DEFAULT_VIBRATE;
 
 public class NotificationHelper {
 
-    public static void displayNotification(Context context, String title, String body) {
-
-        Intent intent = new Intent(context, AgendaFragment.class);
-
-        PendingIntent pendingIntent = PendingIntent.getActivity(
-                context,
-                100,
-                intent,
-                PendingIntent.FLAG_CANCEL_CURRENT
-        );
-
-        NotificationCompat.Builder mBuilder =
-                new NotificationCompat.Builder(context, MainActivity.CHANNEL_ID)
-                        .setSmallIcon(R.mipmap.ic_launcher_round)
-                        .setContentTitle(title)
-                        .setContentText(body)
-                        .setContentIntent(pendingIntent)
-                        .setAutoCancel(true)
-                        .setDefaults(DEFAULT_SOUND | DEFAULT_VIBRATE | DEFAULT_LIGHTS   )
-                        .setPriority(NotificationCompat.PRIORITY_MAX);
-
-        NotificationManagerCompat mNotificationMgr = NotificationManagerCompat.from(context);
-        mNotificationMgr.notify(1, mBuilder.build());
-
-    }
+//    public static void displayNotification(Context context, String title, String body) {
+//
+//        Intent intent = new Intent(context, AgendaFragment.class);
+//
+//        PendingIntent pendingIntent = PendingIntent.getActivity(
+//                context,
+//                100,
+//                intent,
+//                PendingIntent.FLAG_CANCEL_CURRENT
+//        );
+//
+//        NotificationCompat.Builder mBuilder =
+//                new NotificationCompat.Builder(context, MainActivity.CHANNEL_ID)
+//                        .setSmallIcon(R.mipmap.ic_launcher_round)
+//                        .setContentTitle(title)
+//                        .setContentText(body)
+//                        .setContentIntent(pendingIntent)
+//                        .setDefaults(NotificationCompat.DEFAULT_ALL)
+//                        .setPriority(NotificationCompat.PRIORITY_HIGH)
+//                        .setAutoCancel(true);
+//
+//        NotificationManagerCompat mNotificationMgr = NotificationManagerCompat.from(context);
+//        mNotificationMgr.notify(1, mBuilder.build());
+//
+//    }
 
 }

@@ -4,6 +4,8 @@ import com.google.gson.annotations.SerializedName;
 
 public class MSG {
 
+    private String id;
+    public String getId() { return id; }
     private Integer success;
     private String message;
     private String nama_user;

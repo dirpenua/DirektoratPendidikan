@@ -197,7 +197,7 @@ public class AgendaFragment extends Fragment{
 
         });
 
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
             mSpinner.setDropDownVerticalOffset(-116);
         }
 

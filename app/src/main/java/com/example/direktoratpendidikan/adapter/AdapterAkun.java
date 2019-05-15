@@ -78,23 +78,23 @@ public class AdapterAkun extends BaseAdapter {
                         profil.putExtra(TAG_NIPNIK, nipnik);
                         v.getContext().startActivity(profil);
                     break;
+//                    case 1:
+//                        Intent email = new Intent(v.getContext(), EmailVerifikasiActivity.class);
+//                        email.putExtra(TAG_NAMA, nama);
+//                        email.putExtra(TAG_NIPNIK, nipnik);
+//                        v.getContext().startActivity(email);
+//                    break;
                     case 1:
-                        Intent email = new Intent(v.getContext(), EmailVerifikasiActivity.class);
-                        email.putExtra(TAG_NAMA, nama);
-                        email.putExtra(TAG_NIPNIK, nipnik);
-                        v.getContext().startActivity(email);
-                    break;
-                    case 2:
                         Intent password = new Intent(v.getContext(), ChangePassword.class);
                         password.putExtra(TAG_NAMA, nama);
                         password.putExtra(TAG_NIPNIK, nipnik);
                         v.getContext().startActivity(password);
                     break;
-                    case 3:
+                    case 2:
                         Intent bantuan = new Intent(v.getContext(), Bantuan.class);
                         v.getContext().startActivity(bantuan);
                     break;
-                    case 4:
+                    case 3:
                         Intent tentang = new Intent(v.getContext(), TentangDirpen.class);
                         v.getContext().startActivity(tentang);
                     break;
