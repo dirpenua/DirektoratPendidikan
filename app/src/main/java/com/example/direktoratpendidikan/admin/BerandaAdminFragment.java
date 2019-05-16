@@ -10,6 +10,8 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -23,6 +25,7 @@ import com.example.direktoratpendidikan.KalenderAkademik;
 import com.example.direktoratpendidikan.LoginActivity;
 import com.example.direktoratpendidikan.NotifikasiActivity;
 import com.example.direktoratpendidikan.R;
+import com.google.android.gms.actions.NoteIntents;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.iid.FirebaseInstanceId;
@@ -40,8 +43,10 @@ public class BerandaAdminFragment extends Fragment {
     public final static String TAG_FOTO = "foto_user";
     public final static String TAG_NIPNIK = "nipnik";
     String nama, foto, nipnik;
+    Integer count = 0;
     CarouselView carouselView;
-    TextView isiToken, replace;
+    ImageView lonceng;
+    TextView isiToken, notifbadge;
     int[] sampleImages = {R.drawable.slider1, R.drawable.slider2, R.drawable.slider3, R.drawable.slider4};
     ImageListener imageListener = new ImageListener() {
         public void setImageForPosition(int position, ImageView imageView) {
@@ -56,6 +61,23 @@ public class BerandaAdminFragment extends Fragment {
 
 //        isiToken= view.findViewById(R.id.token);
         //replace = view.findViewById(R.id.replacenipnik);
+        notifbadge = view.findViewById(R.id.notif_badge);
+        lonceng = view.findViewById(R.id.ic_pengumuman);
+        count = 0;
+        updateHotCount(count++);
+        notifbadge.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                updateHotCount(count++);
+            }
+        });
+        lonceng.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                updateHotCount(0);
+            }
+        });
+
 
         FirebaseInstanceId.getInstance().getInstanceId()
                 .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
@@ -166,4 +188,23 @@ public class BerandaAdminFragment extends Fragment {
         editor.putString(key, value);
         editor.commit();
     }
+
+    public void updateHotCount(final int new_hot_number) {
+        count = new_hot_number;
+        if (count < 0) return;
+        getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                if (count == 0)
+                    notifbadge.setVisibility(View.GONE);
+                else {
+                    notifbadge.setVisibility(View.VISIBLE);
+                    notifbadge.setText(Integer.toString(count));
+                    // supportInvalidateOptionsMenu();
+                }
+            }
+        });
+    }
+
+
 }
