@@ -19,8 +19,10 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.example.direktoratpendidikan.AkunFragment;
+import com.example.direktoratpendidikan.BeasiswaFragment;
 import com.example.direktoratpendidikan.BerandaFragment;
 import com.example.direktoratpendidikan.LoginActivity;
+import com.example.direktoratpendidikan.ProsedurFragment;
 import com.example.direktoratpendidikan.R;
 import com.example.direktoratpendidikan.api.ApiClient;
 import com.example.direktoratpendidikan.api.ApiInterface;
@@ -142,13 +144,13 @@ public class MainActivityAdmin extends AppCompatActivity implements BottomNaviga
                 fragment = new BerandaAdminFragment();
                 break;
             case R.id.prosedur:
-                fragment = new ProsedurAdminFragment();
+                fragment = new ProsedurFragment();
                 break;
             case R.id.agenda:
                 fragment = new AgendaAdminFragment();
                 break;
             case R.id.beasiswa:
-                fragment = new BeasiswaAdminFragment();
+                fragment = new BeasiswaFragment();
                 break;
             case R.id.akun:
                 fragment = new AkunFragment();

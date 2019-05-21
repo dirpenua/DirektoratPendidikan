@@ -154,15 +154,16 @@ public class BeasiswaFragment extends Fragment implements SearchView.OnQueryText
                             }
                         });
                         break;
-                    default:
+                    case 3:
                         progressBar.setVisibility(View.VISIBLE);
-                        fetchBeasiswa(0);
+                        fetchBeasiswa(3);
                         swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
                             @Override
                             public void onRefresh() {
-                                fetchBeasiswa(0);
+                                fetchBeasiswa(3);
                             }
                         });
+                        break;
                 }
 
             }
@@ -251,6 +252,13 @@ public class BeasiswaFragment extends Fragment implements SearchView.OnQueryText
                     break;
 
                     case "2":
+                        fetchCari = response.body().getListBeasiswa();
+                        adapter = new AdapterBeasiswa(getActivity(), fetchCari);
+                        recyclerView.setAdapter(adapter);
+                        adapter.notifyDataSetChanged();
+                    break;
+
+                    case "3":
                         fetchCari = response.body().getListBeasiswa();
                         adapter = new AdapterBeasiswa(getActivity(), fetchCari);
                         recyclerView.setAdapter(adapter);

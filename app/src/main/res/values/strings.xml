@@ -45,9 +45,10 @@
     </string-array>
 
     <string-array name="kategoribeasiswa">
-        <item>Tampilkan semua</item>
-        <item>Dalam Negeri</item>
-        <item>Luar Negeri</item>
+        <item>Info Beasiswa Studi Lanjut</item>
+        <item>Pendaftaran Beasiswa</item>
+        <item>Klaim SPPD</item>
+        <item>Pengembalian Instansi Induk</item>
     </string-array>
 
     <string-array name="kategoripeserta">
