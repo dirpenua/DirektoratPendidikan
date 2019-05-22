@@ -12,6 +12,7 @@ import com.example.direktoratpendidikan.data.MSG;
 import com.example.direktoratpendidikan.data.Notif;
 import com.example.direktoratpendidikan.data.Profil;
 import com.example.direktoratpendidikan.data.Prosedur;
+import com.example.direktoratpendidikan.data.RelawanMBK;
 
 import java.util.List;
 import retrofit2.Call;
@@ -57,6 +58,18 @@ public interface ApiInterface {
     Call < List<Dosen>> getListPeserta(
             @Field("kategori") String kategori,
             @Field("agendaid") String agendaid
+    );
+
+    @FormUrlEncoded
+    @POST("getmbk.php?")
+    Call < List<RelawanMBK>> getListMBK(
+            @Field("kategori") String kategori
+    );
+
+    @FormUrlEncoded
+    @POST("getrelawan.php?")
+    Call < List<RelawanMBK>> getListRelawan(
+            @Field("kategori") String kategori
     );
 
     @FormUrlEncoded
@@ -125,6 +138,18 @@ public interface ApiInterface {
     Call<Cari> searchTambahDsn(@Field("search") String search,
                                @Field("idagenda") String idagenda,
                                @Field("kategori") String kategori
+    );
+
+    @FormUrlEncoded
+    @POST("searchmbk.php")
+    Call<Cari> searchMBK(@Field("search") String search,
+                         @Field("kategori") String kategori
+    );
+
+    @FormUrlEncoded
+    @POST("searchrelawan.php")
+    Call<Cari> searchRelawan (@Field("search") String search,
+                              @Field("kategori") String kategori
     );
 
     @FormUrlEncoded

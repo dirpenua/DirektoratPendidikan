@@ -105,12 +105,12 @@ tools:context=".DetailBeasiswa">
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:autoLink="web|email"
+        android:textColorLink="@color/colorPrimaryDark"
         android:gravity="fill_horizontal"
         android:layout_marginRight="15dp"
         android:text="Di isi konten panjang"
         android:textSize="13dp"
         android:textColor="@color/colorAccent"
-        android:textColorLink="@color/colorPrimaryDark"
         android:textIsSelectable="true"/>
     </ScrollView>
 </LinearLayout>

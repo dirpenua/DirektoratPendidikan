@@ -3,7 +3,30 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".admin.TabRelawan">
+
+    <SearchView
+        android:id="@+id/cari"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginBottom="2dp"
+        app:queryBackground="@android:color/transparent"
+        android:background="@drawable/whiteround">
+    </SearchView>
+
+    <Spinner
+        android:id="@+id/spinner_peserta"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="?android:selectableItemBackground"
+        android:layout_below="@id/cari"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="30dp"
+        android:theme="@style/ThemeOverlay.AppCompat.Light" />
 
     <ProgressBar
         android:id="@+id/prograss"
@@ -15,6 +38,7 @@
     <android.support.v4.widget.SwipeRefreshLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/swipeContainer"
+        android:layout_below="@id/spinner_peserta"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="10dp"

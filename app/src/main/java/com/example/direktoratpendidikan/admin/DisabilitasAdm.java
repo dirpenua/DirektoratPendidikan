@@ -34,8 +34,8 @@ public class DisabilitasAdm extends AppCompatActivity {
         viewPager = (ViewPager) findViewById(R.id.viewPager);
         tabLayout = (TabLayout) findViewById(R.id.tabLayout);
         adapter = new TabAdapter(getSupportFragmentManager());
-        adapter.addFragment(new TabTambahPeserta(), "MBK");
-        adapter.addFragment(new TabPesertaDitambahkan(), "Relawan");
+        adapter.addFragment(new TabMBK(), "MBK");
+        adapter.addFragment(new TabRelawan(), "Relawan");
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
     }

@@ -12,6 +12,8 @@ public class Cari {
     List<Fakultas> resultfk;
     List<Dosen> resulttb;
     List<Dosen> resultpa;
+    List<RelawanMBK> resultrw;
+    List<RelawanMBK> resultmbk;
 
     public String getValue() {
         return value;
@@ -47,5 +49,13 @@ public class Cari {
 
     public List<Dosen> getListPesertaAda() {
         return resultpa;
+    }
+
+    public List<RelawanMBK> getListRelawan() {
+        return resultrw;
+    }
+
+    public List<RelawanMBK> getListMBK() {
+        return resultmbk;
     }
 }
