@@ -20,21 +20,12 @@
         <TextView
             android:id="@+id/pesannotifikasi"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:gravity="center_vertical"
             android:layout_marginTop="5dp"
             android:layout_marginLeft="5dp"
             android:layout_marginBottom="5dp"
             android:text="Pesan notifikasi"
             android:textSize="14dp"
-            android:textColor="@color/colorAccent"
-            android:layout_weight="1"/>
-        <ImageView
-            android:id="@+id/swipe_right"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_gravity="center_vertical"
-            android:layout_margin="10dp"
-            android:src="@drawable/ic_swipe_right"
-            android:layout_weight="0"/>
+            android:textColor="@color/colorAccent"/>
 </LinearLayout>

@@ -64,6 +64,7 @@
 
                 <TextView
                     android:id="@+id/notif_badge"
+                    android:visibility="invisible"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:layout_gravity="right|end|top"
@@ -313,6 +314,7 @@
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/Background"
@@ -331,6 +333,19 @@
             app:strokeColor="#FF777777"
             app:strokeWidth="1dp" />
 
+        <TextView
+            android:id="@+id/increase"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:text="   INCREASE   "
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:textColor="#fff"
+            android:textSize="18dp"
+            android:background="@drawable/rounddark"/>
+
     </LinearLayout>
+
+
 
 </LinearLayout>

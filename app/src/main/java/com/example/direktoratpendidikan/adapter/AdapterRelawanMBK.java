@@ -17,7 +17,9 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.direktoratpendidikan.DetailAgenda;
 import com.example.direktoratpendidikan.R;
+import com.example.direktoratpendidikan.admin.DetailRelawanMBK;
 import com.example.direktoratpendidikan.api.ApiClient;
 import com.example.direktoratpendidikan.api.ApiInterface;
 import com.example.direktoratpendidikan.data.Dosen;
@@ -86,12 +88,14 @@ public class AdapterRelawanMBK extends RecyclerView.Adapter<AdapterRelawanMBK.My
             swipe = itemView.findViewById(R.id.swipe_right);
             progressBar = itemView.findViewById(R.id.prograss);
             itemView.setTag(itemView);
-            swipe.setOnClickListener(new View.OnClickListener() {
+            itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    String nim = relawanmbkList.get(getAdapterPosition()).getNim();
-
+                    Intent i = new Intent(v.getContext(), DetailRelawanMBK.class);
+                    i.putExtra("nim",relawanmbkList.get(getAdapterPosition()).getNim());
+                    v.getContext().startActivity(i);
                 }
+
             });
         }
 

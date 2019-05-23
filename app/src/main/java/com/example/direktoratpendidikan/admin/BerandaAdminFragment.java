@@ -46,7 +46,7 @@ public class BerandaAdminFragment extends Fragment {
     Integer count = 0;
     CarouselView carouselView;
     ImageView lonceng;
-    TextView isiToken, notifbadge;
+    TextView isiToken, notifbadge, increase;
     int[] sampleImages = {R.drawable.slider1, R.drawable.slider2, R.drawable.slider3, R.drawable.slider4};
     ImageListener imageListener = new ImageListener() {
         public void setImageForPosition(int position, ImageView imageView) {
@@ -63,18 +63,19 @@ public class BerandaAdminFragment extends Fragment {
         //replace = view.findViewById(R.id.replacenipnik);
         notifbadge = view.findViewById(R.id.notif_badge);
         lonceng = view.findViewById(R.id.ic_pengumuman);
-        count = 0;
-        updateHotCount(count++);
-        notifbadge.setOnClickListener(new View.OnClickListener() {
+        increase = view.findViewById(R.id.increase);
+        increase.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                updateHotCount(count++);
+                updateCount(++count);
             }
         });
+
+
         lonceng.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                updateHotCount(0);
+                updateCount(count);
             }
         });
 
@@ -189,22 +190,18 @@ public class BerandaAdminFragment extends Fragment {
         editor.commit();
     }
 
-    public void updateHotCount(final int new_hot_number) {
+    public void updateCount(final int new_hot_number) {
         count = new_hot_number;
-        if (count < 0) return;
-        getActivity().runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                if (count == 0)
-                    notifbadge.setVisibility(View.GONE);
-                else {
-                    notifbadge.setVisibility(View.VISIBLE);
-                    notifbadge.setText(Integer.toString(count));
-                    // supportInvalidateOptionsMenu();
-                }
-            }
-        });
+        if (count <= 0 )
+            notifbadge.setVisibility(View.GONE);
+        else {
+            notifbadge.setVisibility(View.VISIBLE);
+            notifbadge.setText(Integer.toString(count));
+            // supportInvalidateOptionsMenu();
+        }
     }
+
+
 
 
 }

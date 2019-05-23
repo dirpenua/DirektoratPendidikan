@@ -192,6 +192,16 @@ public interface ApiInterface {
     );
 
     @FormUrlEncoded
+    @POST("detailrelawan.php")
+    Call<RelawanMBK> getDetailRelawan(  @Field("nim") String nim
+    );
+
+    @FormUrlEncoded
+    @POST("detailmbk.php")
+    Call<RelawanMBK> getDetailMBK(  @Field("nim") String nim
+    );
+
+    @FormUrlEncoded
     @POST("login.php")
     Call<MSG> userLogIn(@Field("nipnik") String nipnik,
                         @Field("password_user") String password_user
