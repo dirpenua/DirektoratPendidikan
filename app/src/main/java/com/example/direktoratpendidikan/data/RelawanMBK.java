@@ -17,6 +17,9 @@ public class RelawanMBK {
     @SerializedName("semester") private String semester;
     @SerializedName("ipk") private String ipk;
     @SerializedName("prestasi") private String prestasi;
+    @SerializedName("disabilitas") private String disabilitas;
+    @SerializedName("email") private String email;
+
 
     public String getNama() { return nama; }
 
@@ -46,5 +49,7 @@ public class RelawanMBK {
     public String getSemester() { return semester; }
     public String getIpk() { return ipk; }
     public String getPrestasi() { return prestasi; }
+    public String getDisabilitas() { return disabilitas; }
+    public String getEmail() { return email; }
 
 }

@@ -15,7 +15,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".admin.DetailRelawanMBK"
+        <activity android:name=".admin.DetailMBK"></activity>
+        <activity
+            android:name=".admin.DetailRelawanMBK"
             android:theme="@style/NoActionBar" />
         <activity
             android:name=".NotifikasiActivity"

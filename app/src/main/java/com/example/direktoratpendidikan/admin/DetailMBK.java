@@ -1,8 +1,5 @@
 package com.example.direktoratpendidikan.admin;
 
-import android.app.DatePickerDialog;
-import android.app.Dialog;
-import android.app.ProgressDialog;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.net.Uri;
@@ -15,39 +12,33 @@ import android.text.SpannableString;
 import android.text.style.AlignmentSpan;
 import android.util.Log;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.direktoratpendidikan.R;
-import com.example.direktoratpendidikan.TambahPeserta;
 import com.example.direktoratpendidikan.api.ApiClient;
 import com.example.direktoratpendidikan.api.ApiInterface;
-import com.example.direktoratpendidikan.data.Agenda;
 import com.example.direktoratpendidikan.data.RelawanMBK;
-
-import java.util.Calendar;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class DetailRelawanMBK extends AppCompatActivity {
+public class DetailMBK extends AppCompatActivity {
 
     public String relawan_id;
-    private TextView nim, namalengkap, namapanggilan, alamatrumah, alamatkosan, asalkota, asalprovinsi, nohp, fakultas, prodi, semester, ipkterakhir, prestasi, idrelawan;
+    private TextView nim, namalengkap, jenisdisabilitas, nohp, fakultas, prodi, email;
     public ImageView onback, nonaktif;
     private SwipeRefreshLayout swipeContainer;
     private ApiInterface apiInterface;
     ProgressBar progressBar;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_detail_relawan_mbk);
+        setContentView(R.layout.activity_detail_mbk);
         progressBar = findViewById(R.id.prograss);
         onback = (ImageView) findViewById(R.id.kembali);
         onback.setOnClickListener(new View.OnClickListener() {
@@ -62,17 +53,11 @@ public class DetailRelawanMBK extends AppCompatActivity {
                 android.R.color.holo_blue_bright);
         nim = findViewById(R.id.detailnim);
         namalengkap = findViewById(R.id.detailnamalengkap);
-        namapanggilan = findViewById(R.id.detailnamapanggil);
-        alamatrumah = findViewById(R.id.detailrumah);
-        alamatkosan = findViewById(R.id.detailkos);
-        asalkota = findViewById(R.id.detailkota);
-        asalprovinsi = findViewById(R.id.detailprovinsi);
+        jenisdisabilitas = findViewById(R.id.detailjenisdisabilitas);
         nohp = findViewById(R.id.detailhp);
         fakultas = findViewById(R.id.detailfakultas);
         prodi = findViewById(R.id.detailprodi);
-        semester = findViewById(R.id.detailsemester);
-        ipkterakhir = findViewById(R.id.detailipk);
-        prestasi = findViewById(R.id.detailprestasi);
+        email = findViewById(R.id.detailemail);
 
 
 
@@ -82,22 +67,21 @@ public class DetailRelawanMBK extends AppCompatActivity {
         if(b!=null)
         {
             progressBar.setVisibility(View.VISIBLE);
-            final String nimrelawan =(String) b.get("nim");
-            fetchDetailRelawan(nimrelawan);
+            final String nimmbk =(String) b.get("nim");
+            fetchDetailMBK(nimmbk);
             swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
                 @Override
                 public void onRefresh() {
-                    fetchDetailRelawan(nimrelawan);
+                    fetchDetailMBK(nimmbk);
                 }
             });
 
         }
     }
 
-    public void fetchDetailRelawan (String nimrelawan){
+    public void fetchDetailMBK (String nimmbk){
         apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
-        Call<RelawanMBK> userCall = apiInterface.getDetailRelawan(nimrelawan);
-        final String nimrel = getIntent().getStringExtra("nim");
+        Call<RelawanMBK> userCall = apiInterface.getDetailMBK(nimmbk);
         userCall.enqueue(new Callback<RelawanMBK>() {
             @Override
             public void onResponse(Call<RelawanMBK> call, Response<RelawanMBK> response) {
@@ -105,16 +89,10 @@ public class DetailRelawanMBK extends AppCompatActivity {
                 progressBar.setVisibility(View.GONE);
                 nim.setText(response.body().getNim());
                 namalengkap.setText(response.body().getNama());
-                namapanggilan.setText(response.body().getNamapanggilan());
-                alamatrumah.setText(response.body().getAlamatrumah());
-                alamatkosan.setText(response.body().getAlamatkos());
-                asalkota.setText(response.body().getAsalkota());
-                asalprovinsi.setText(response.body().getAsalprovinsi());
+                jenisdisabilitas.setText(response.body().getDisabilitas());
                 fakultas.setText(response.body().getFakultas());
                 prodi.setText(response.body().getProdi());
-                semester.setText(response.body().getSemester());
-                ipkterakhir.setText(response.body().getIpk());
-                prestasi.setText(response.body().getPrestasi());
+                email.setText(response.body().getEmail());
                 final String nomerhp =response.body().getNohp();
                 if(nomerhp.length() == 0 || nomerhp == null){
                     nohp.setText("Nomor HP tidak ada");

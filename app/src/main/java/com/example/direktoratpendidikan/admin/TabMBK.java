@@ -17,6 +17,7 @@ import android.widget.SearchView;
 import android.widget.Spinner;
 
 import com.example.direktoratpendidikan.R;
+import com.example.direktoratpendidikan.adapter.AdapterMBK;
 import com.example.direktoratpendidikan.adapter.AdapterRelawanMBK;
 import com.example.direktoratpendidikan.adapter.AdapterTambahPeserta;
 import com.example.direktoratpendidikan.adapter.SpinnerCariHitamAdapter;
@@ -45,7 +46,7 @@ public class TabMBK extends Fragment implements SearchView.OnQueryTextListener{
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
     private List relawanmbkList;
-    private AdapterRelawanMBK adapter;
+    private AdapterMBK adapter;
     private ApiInterface apiInterface;
     ProgressBar progressBar;
     private List<RelawanMBK> fetchCari = new ArrayList<>();
@@ -109,7 +110,7 @@ public class TabMBK extends Fragment implements SearchView.OnQueryTextListener{
                 progressBar.setVisibility(View.GONE);
                 relawanmbkList = response.body();
                 swipeContainer.setRefreshing(false);
-                adapter = new AdapterRelawanMBK(getContext(), relawanmbkList);
+                adapter = new AdapterMBK(getContext(), relawanmbkList);
                 recyclerView.setAdapter(adapter);
                 adapter.notifyDataSetChanged();
                 Log.e("tesPesertaBerhasil", new Gson().toJson(response.body()));
@@ -145,7 +146,7 @@ public class TabMBK extends Fragment implements SearchView.OnQueryTextListener{
                     progressBar.setVisibility(View.GONE);
                     recyclerView.setVisibility(View.VISIBLE);
                     fetchCari = response.body().getListMBK();
-                    adapter = new AdapterRelawanMBK(getContext(), fetchCari);
+                    adapter = new AdapterMBK(getContext(), fetchCari);
                     recyclerView.setAdapter(adapter);
                     adapter.notifyDataSetChanged();
                 } else {
