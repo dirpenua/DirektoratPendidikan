@@ -29,7 +29,7 @@ import retrofit2.Response;
 public class DetailMBK extends AppCompatActivity {
 
     public String relawan_id;
-    private TextView nim, namalengkap, jenisdisabilitas, nohp, fakultas, prodi, email;
+    private TextView nim, namalengkap, jenisdisabilitas, nohp, fakultas, prodi, email, idrelawan;
     public ImageView onback, nonaktif;
     private SwipeRefreshLayout swipeContainer;
     private ApiInterface apiInterface;
@@ -59,6 +59,8 @@ public class DetailMBK extends AppCompatActivity {
         prodi = findViewById(R.id.detailprodi);
         email = findViewById(R.id.detailemail);
 
+        idrelawan = findViewById(R.id.idrelawan);
+
 
 
         Intent iin= getIntent();
@@ -68,6 +70,7 @@ public class DetailMBK extends AppCompatActivity {
         {
             progressBar.setVisibility(View.VISIBLE);
             final String nimmbk =(String) b.get("nim");
+            //idrelawan.setText(nimmbk);
             fetchDetailMBK(nimmbk);
             swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
                 @Override

@@ -37,6 +37,14 @@
             android:text="NIP/NIK"
             android:textSize="12sp"/>
 
+                <TextView
+                    android:id="@+id/hidenimmbk"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    android:justificationMode="inter_word"
+                    android:text="NIP/NIK"/>
+
         <TextView
             android:id="@+id/fakultasrelawanmbk"
             android:layout_width="wrap_content"

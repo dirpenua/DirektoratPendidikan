@@ -40,7 +40,8 @@ public class AdapterMBK extends RecyclerView.Adapter<AdapterMBK.MyViewHolder> {
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
         holder.nama.setText(relawanmbkList.get(position).getNama());
-        holder.nim.setText(relawanmbkList.get(position).getNim());
+        holder.nimprodi.setText(relawanmbkList.get(position).getNimProdi());
+        holder.nimhide.setText(relawanmbkList.get(position).getNim());
         holder.fakultas.setText(relawanmbkList.get(position).getFakultas());
     }
 
@@ -61,13 +62,14 @@ public class AdapterMBK extends RecyclerView.Adapter<AdapterMBK.MyViewHolder> {
 
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        TextView nama, nim, fakultas;
+        TextView nama, nimprodi, fakultas, nimhide;
         ImageView swipe;
 
         public MyViewHolder(final View itemView) {
             super(itemView);
             nama = itemView.findViewById(R.id.namarelawanmbk);
-            nim = itemView.findViewById(R.id.nimrelawanmbk);
+            nimprodi = itemView.findViewById(R.id.nimrelawanmbk);
+            nimhide = itemView.findViewById(R.id.hidenimmbk);
             fakultas = itemView.findViewById(R.id.fakultasrelawanmbk);
             swipe = itemView.findViewById(R.id.swipe_right);
             progressBar = itemView.findViewById(R.id.prograss);

@@ -5,6 +5,7 @@ import com.google.gson.annotations.SerializedName;
 
 public class RelawanMBK {
     @SerializedName("nim") private String nim;
+    @SerializedName("nimprodi") private String nimprodi;
     @SerializedName("nama") private String nama;
     @SerializedName("namapanggilan") private String namapanggilan;
     @SerializedName("fakultas") private String fakultas;
@@ -42,6 +43,7 @@ public class RelawanMBK {
     public void setFakultas(String fakultas) { this.fakultas= fakultas;
     }
 
+    public String getNimProdi() { return nimprodi; }
     public String getAsalkota() { return asalkota; }
     public String getAsalprovinsi() { return asalprovinsi; }
     public String getProdi() { return prodi; }
