@@ -186,6 +186,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text=""
+                    android:textColor="@color/colorPrimaryDark"
+                    android:clickable="true"
                     android:textSize="14dp"
                     android:layout_weight="1"/>
             </LinearLayout>
@@ -221,6 +223,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text=""
+                    android:autoLink="email"
+                    android:textColorLink="@color/colorPrimaryDark"
                     android:textSize="14dp"
                     android:layout_weight="1"/>
             </LinearLayout>
