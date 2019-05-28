@@ -98,7 +98,7 @@ public class DetailMBK extends AppCompatActivity {
                 email.setText(response.body().getEmail());
                 final String nomerhp =response.body().getNohp();
                 if(nomerhp.length() == 0 || nomerhp == null){
-                    nohp.setText("Nomor HP tidak ada");
+                    nohp.setText(" Nomor HP tidak ada");
                 }
                 else{
                     nohp.setOnClickListener(new View.OnClickListener() {

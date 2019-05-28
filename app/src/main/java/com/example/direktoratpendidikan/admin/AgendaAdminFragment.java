@@ -451,9 +451,6 @@ public class  AgendaAdminFragment extends Fragment {
                 Log.d("SUKSERNYA", "SUKSESNYA APA: " + response.body().getSuccess());
                 if(response.body().getSuccess() == 1) {
                     dTambahAgenda.dismiss();
-//                    i.putExtra("judulakreditasi",akreditasiList.get(getAdapterPosition()).getJudulAk());
-//                    i.putExtra("linkwebview",akreditasiList.get(getAdapterPosition()).getLinkAk());
-
                     //NANTI KASIH REFRESH ADAPTER DISINI YAAAAA
                     String text = "" + response.body().getMessage();
                     Spannable centeredText = new SpannableString(text);

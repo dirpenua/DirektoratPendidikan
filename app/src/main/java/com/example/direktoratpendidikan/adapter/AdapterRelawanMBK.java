@@ -1,7 +1,9 @@
 package com.example.direktoratpendidikan.adapter;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.text.Layout;
@@ -78,14 +80,14 @@ public class AdapterRelawanMBK extends RecyclerView.Adapter<AdapterRelawanMBK.My
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         TextView nama, nim, fakultas;
-        ImageView swipe;
+        ImageView hapus;
 
         public MyViewHolder(final View itemView) {
             super(itemView);
             nama = itemView.findViewById(R.id.namarelawanmbk);
             nim = itemView.findViewById(R.id.nimrelawanmbk);
             fakultas = itemView.findViewById(R.id.fakultasrelawanmbk);
-            swipe = itemView.findViewById(R.id.swipe_right);
+            hapus = itemView.findViewById(R.id.hapus);
             progressBar = itemView.findViewById(R.id.prograss);
             itemView.setTag(itemView);
             itemView.setOnClickListener(new View.OnClickListener() {
@@ -96,6 +98,68 @@ public class AdapterRelawanMBK extends RecyclerView.Adapter<AdapterRelawanMBK.My
                     v.getContext().startActivity(i);
                 }
 
+            });
+            hapus.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    final String nim = relawanmbkList.get(getAdapterPosition()).getNim();
+                    final String nama = relawanmbkList.get(getAdapterPosition()).getNama();
+                    AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(((Activity) context));
+
+                    alertDialogBuilder
+                            .setMessage("Anda yakin " + nama + " sudah tidak aktif lagi ?")
+                            .setCancelable(false)
+                            .setPositiveButton("Ya", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    deactiveRelawan(nim);
+                                    notifyDataSetChanged();
+                                }
+                            })
+                            .setNegativeButton("Batal", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.cancel();
+                                }
+                            });
+
+                    AlertDialog alertDialog = alertDialogBuilder.create();
+                    alertDialog.show();
+
+                }
+            });
+        }
+
+        public void deactiveRelawan(String nim){
+            ApiInterface service = ApiClient.getApiClient().create(ApiInterface.class);
+            Call<MSG> userCall = service.hapusRelawan(nim);
+            final String nama = relawanmbkList.get(getAdapterPosition()).getNama();
+            userCall.enqueue(new Callback<MSG>() {
+                @Override
+                public void onResponse(Call<MSG> call, Response<MSG> response) {
+                    Log.d("SUKSESNYA", "SUKSESNYA APA: " + response.body().getSuccess());
+                    if(response.body().getSuccess() == 1) {
+                        String text = nama + " berhasil dinonaktifkan";
+                        Spannable centeredText = new SpannableString(text);
+                        centeredText.setSpan(new AlignmentSpan.Standard(Layout.Alignment.ALIGN_CENTER),
+                                0, text.length() - 1,
+                                Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+                        Toast.makeText(itemView.getContext(),centeredText, Toast.LENGTH_LONG).show();
+                    }else {
+                        String text = nama + " gagal dinonaktifkan";
+                        Spannable centeredText = new SpannableString(text);
+                        centeredText.setSpan(new AlignmentSpan.Standard(Layout.Alignment.ALIGN_CENTER),
+                                0, text.length() - 1,
+                                Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+                        Toast.makeText(itemView.getContext(),centeredText, Toast.LENGTH_LONG).show();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<MSG> call, Throwable t) {
+//                hidepDialog();
+                    Log.d("onFailure", t.toString());
+                }
             });
         }
 

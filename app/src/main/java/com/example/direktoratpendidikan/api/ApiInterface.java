@@ -97,6 +97,21 @@ public interface ApiInterface {
                              @Field("nipnik") String nipnik
     );
 
+    @FormUrlEncoded
+    @POST("hapusagenda.php")
+    Call<MSG> hapusAgenda (@Field("agendaid") String agendaid
+    );
+
+    @FormUrlEncoded
+    @POST("hapusmbk.php")
+    Call<MSG> hapusMBK (@Field("nim") String nim
+    );
+
+    @FormUrlEncoded
+    @POST("hapusrelawan.php")
+    Call<MSG> hapusRelawan (@Field("nim") String nim
+    );
+
     @GET("getfakultas.php?")
     Call < List<Fakultas>> getFakultas(
             @Query("kategori") Integer kategori
@@ -235,6 +250,24 @@ public interface ApiInterface {
                             @Field("tgljammulai") String tgljammulai,
                             @Field("tgljamselesai") String tgljamselesai
     );
+
+    @FormUrlEncoded
+    @POST("daftarrelawan.php")
+    Call<MSG> daftarRelawan (@Field("nim") String nim,
+                             @Field("namalengkap") String namalengkap,
+                             @Field("namapanggil") String namapanggil,
+                             @Field("alamatrumah") String alamatrumah,
+                             @Field("alamatkosan") String alamatkosan,
+                             @Field("asalkota") String asalkota,
+                             @Field("asalprovinsi") String asalprovinsi,
+                             @Field("nohp") String nohp,
+                             @Field("fakultas") String fakultas,
+                             @Field("prodi") String prodi,
+                             @Field("semester") String semester,
+                             @Field("ipk") String ipk,
+                             @Field("prestasi") String prestasi
+    );
+
 
     @FormUrlEncoded
     @POST("ubahagenda.php")

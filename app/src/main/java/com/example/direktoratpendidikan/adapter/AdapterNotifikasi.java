@@ -66,6 +66,7 @@ public class AdapterNotifikasi extends RecyclerView.Adapter<AdapterNotifikasi.My
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+
                     Intent i = new Intent(v.getContext(), DetailAgendaAdmin.class);
                     i.putExtra("idagenda",notifikasiList.get(getAdapterPosition()).getId());
                     v.getContext().startActivity(i);

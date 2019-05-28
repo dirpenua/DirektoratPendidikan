@@ -1,12 +1,15 @@
 package com.example.direktoratpendidikan.mahasiswa;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.view.View;
 
 import com.example.direktoratpendidikan.R;
 
 public class DisabilitasMhs extends Activity {
+
+    private ProgressDialog pDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

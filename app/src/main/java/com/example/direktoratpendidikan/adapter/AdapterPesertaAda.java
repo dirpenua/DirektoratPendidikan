@@ -106,6 +106,7 @@ public class AdapterPesertaAda extends RecyclerView.Adapter<AdapterPesertaAda.My
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
                                     hapusPeserta(agendaid, nipnik);
+                                    notifyDataSetChanged();
                                 }
                             })
                             .setNegativeButton("Batal", new DialogInterface.OnClickListener() {
@@ -131,14 +132,14 @@ public class AdapterPesertaAda extends RecyclerView.Adapter<AdapterPesertaAda.My
                 public void onResponse(Call<MSG> call, Response<MSG> response) {
                     Log.d("SUKSERNYA", "SUKSESNYA APA: " + response.body().getSuccess());
                     if(response.body().getSuccess() == 1) {
-                        String text = nama + " " +response.body().getMessage();
+                        String text = nama + " berhasil dihapus";
                         Spannable centeredText = new SpannableString(text);
                         centeredText.setSpan(new AlignmentSpan.Standard(Layout.Alignment.ALIGN_CENTER),
                                 0, text.length() - 1,
                                 Spannable.SPAN_INCLUSIVE_INCLUSIVE);
                         Toast.makeText(itemView.getContext(),centeredText, Toast.LENGTH_LONG).show();
                     }else {
-                        String text = nama + " " + response.body().getMessage();
+                        String text = nama + " gagal dihapus";
                         Spannable centeredText = new SpannableString(text);
                         centeredText.setSpan(new AlignmentSpan.Standard(Layout.Alignment.ALIGN_CENTER),
                                 0, text.length() - 1,

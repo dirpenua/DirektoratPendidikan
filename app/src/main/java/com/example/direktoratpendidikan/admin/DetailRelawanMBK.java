@@ -117,7 +117,7 @@ public class DetailRelawanMBK extends AppCompatActivity {
                 prestasi.setText(response.body().getPrestasi());
                 final String nomerhp =response.body().getNohp();
                 if(nomerhp.length() == 0 || nomerhp == null){
-                    nohp.setText("Nomor HP tidak ada");
+                    nohp.setText(" Nomor HP tidak ada");
                 }
                 else{
                     nohp.setOnClickListener(new View.OnClickListener() {
