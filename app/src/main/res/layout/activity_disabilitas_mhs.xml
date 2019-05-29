@@ -116,7 +116,6 @@
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_marginTop="4dp"
-
                     android:layout_height="match_parent">
 
                     <EditText
@@ -280,7 +279,7 @@
                     android:layout_marginRight="5dp"
                     android:layout_gravity="center"
                     android:hint="No HP (terhubung Whatsapp)"
-                    android:inputType="text"
+                    android:inputType="number"
                     android:singleLine="true"
                     android:textSize="14dp"
                     android:textColorHint="@color/colorPrimaryDark"
@@ -334,7 +333,6 @@
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_marginTop="4dp"
-
                     android:layout_height="match_parent">
 
                     <EditText
@@ -345,7 +343,7 @@
                         android:layout_marginLeft="5dp"
                         android:layout_marginRight="5dp"
                         android:hint="Semester"
-                        android:inputType="text"
+                        android:inputType="number"
                         android:textSize="14dp"
                         android:singleLine="true"
                         android:textColorHint="@color/colorPrimaryDark"
@@ -411,7 +409,7 @@
                         android:layout_marginLeft="5dp"
                         android:layout_marginRight="5dp"
                         android:hint="IPK Terakhir"
-                        android:inputType="text"
+                        android:inputType="numberDecimal"
                         android:textSize="14dp"
                         android:singleLine="true"
                         android:textColorHint="@color/colorPrimaryDark"
@@ -449,6 +447,7 @@
         </LinearLayout>
 
         <CheckBox
+            android:id="@+id/satutahun"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="20dp"
@@ -460,6 +459,7 @@
             android:text="Saya bersedia menjadi relawan AIL selama 1 tahun"/>
 
         <CheckBox
+            android:id="@+id/databenar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginLeft="10dp"
@@ -471,6 +471,7 @@
 
 
         <TextView
+            android:id="@+id/daftarrelawan"
             android:layout_width="140dp"
             android:layout_height="40dp"
             android:layout_gravity="center"
