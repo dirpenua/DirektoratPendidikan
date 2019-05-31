@@ -44,7 +44,7 @@ public class AdapterProsedur extends RecyclerView.Adapter<AdapterProsedur.MyView
         holder.tglpublish.setText(prosedurList.get(position).getTanggal());
         //Picasso.with(context).load(ApiClient.getApiImage()+prosedurList.get(position).getGambar()).error(R.mipmap.ic_launcher).into(holder.gambarprosedur);
         //Picasso.with(context).load(ApiClient.getApiImage()+"alurwisuda.jpg").error(R.mipmap.ic_launcher).into(holder.gambarprosedur);
-        Picasso.with(context).load(ApiClient.IMAGE_URL+prosedurList.get(position).getGambarPro()).error(R.drawable.ic_progress).into(holder.gambarprosedur);
+        Picasso.with(context).load(ApiClient.PROSEDUR_IMAGE_URL+prosedurList.get(position).getGambarPro()).error(R.drawable.ic_progress).into(holder.gambarprosedur);
     }
 
     @Override

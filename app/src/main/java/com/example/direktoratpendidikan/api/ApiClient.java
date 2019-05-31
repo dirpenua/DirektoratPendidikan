@@ -17,6 +17,8 @@ public class ApiClient {
     public static final String IMAGE_URL = "https://dirpenunair.000webhostapp.com/image/";
     public static final String USER_PIC = "https://dirpenunair.000webhostapp.com/userpic/";
     public static final String FAKUL_IMAGE_URL = "https://dirpenunair.000webhostapp.com/image/fakultas/";
+    public static final String BERITA_IMAGE_URL = "https://dirpenunair.000webhostapp.com/image/berita/";
+    public static final String PROSEDUR_IMAGE_URL = "https://dirpenunair.000webhostapp.com/image/prosedur/";
     public static final String CAROUSEL_IMAGE_URL = "https://dirpenunair.000webhostapp.com/image/carouselview/";
 
     public static Retrofit retrofit;

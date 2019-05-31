@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/colorPrimary"
+    tools:context=".mahasiswa.DisabilitasMhs">
+
+   <ImageView
+       android:layout_marginTop="40dp"
+       android:layout_marginLeft="10dp"
+       android:layout_marginRight="10dp"
+       android:layout_gravity="center"
+       android:layout_width="100dp"
+       android:layout_height="100dp"
+       android:src="@drawable/ic_smile"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:textAlignment="center"
+        android:textColor="@color/colorPrimaryDark"
+        android:fontFamily="@font/alegreya_sans_bold"
+        android:textSize="16dp"
+        android:text="Pendaftaran anda berhasil."/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:textAlignment="center"
+        android:fontFamily="@font/alegreya_sans_bold"
+        android:textSize="16dp"
+        android:textColor="@color/colorPrimaryDark"
+        android:text="Mohon tunggu kabar dari kami ya!"/>
+
+    <TextView
+        android:id="@+id/kembali"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:gravity="center"
+        android:layout_margin="30dp"
+        android:layout_gravity="center"
+        android:textSize="16dp"
+        android:fontFamily="@font/alegreya_sans_bold"
+        android:textColor="#fff"
+        android:elevation="5dp"
+        android:textStyle="bold"
+        android:background="@drawable/rounddark"
+        android:text="      KEMBALI KE BERANDA      "/>
+</LinearLayout>

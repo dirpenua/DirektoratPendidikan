@@ -19,6 +19,7 @@ import android.widget.Toast;
 import com.example.direktoratpendidikan.admin.DisabilitasAdm;
 import com.example.direktoratpendidikan.api.ApiClient;
 import com.example.direktoratpendidikan.mahasiswa.DisabilitasMhs;
+import com.example.direktoratpendidikan.mahasiswa.SplashDisabilitas;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -121,7 +122,7 @@ public class BerandaFragment extends Fragment {
         disabilitas.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent disabilitas = new Intent(getActivity(), DisabilitasMhs.class);
+                Intent disabilitas = new Intent(getActivity(), SplashDisabilitas.class);
                 startActivity(disabilitas);
             }
         });

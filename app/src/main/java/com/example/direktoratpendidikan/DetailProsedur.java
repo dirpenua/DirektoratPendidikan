@@ -57,15 +57,16 @@ public class DetailProsedur extends AppCompatActivity {
             tglpublish.setText(tgl);
 
             final String gambar = (String) b.get("gambarprosedur");
-            Picasso.with(getApplicationContext()).load(ApiClient.IMAGE_URL+gambar).into(gambarprosedur, new Callback() {
+            Picasso.with(getApplicationContext()).load(ApiClient.PROSEDUR_IMAGE_URL+gambar).into(gambarprosedur, new Callback() {
             @Override
             public void onSuccess() {
                 klikgambar.setText("(klik gambar untuk memperbesar)");
                 gambarprosedur.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        String url = ApiClient.IMAGE_URL+gambar;
-                        Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                        String url = ApiClient.PROSEDUR_IMAGE_URL+gambar;
+                        Intent i = new Intent(v.getContext(), PerbesarGambar.class);
+                        i.putExtra("gambar", url);
                         v.getContext().startActivity(i);
                     }
                 });

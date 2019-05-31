@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.direktoratpendidikan.api.ApiClient;
 import com.squareup.picasso.Callback;
@@ -54,15 +55,17 @@ public class DetailBerita extends AppCompatActivity {
             tglpublish.setText(tgl);
 
             final String gambar = (String) b.get("gambarberita");
-            Picasso.with(getApplicationContext()).load(ApiClient.IMAGE_URL+gambar).into(gambarberita, new Callback() {
+            Picasso.with(getApplicationContext()).load(ApiClient.BERITA_IMAGE_URL+gambar).into(gambarberita, new Callback() {
                 @Override
                 public void onSuccess() {
                     klikgambar.setText("(klik gambar untuk memperbesar)");
                     gambarberita.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            String url = ApiClient.IMAGE_URL+gambar;
-                            Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                            String url = ApiClient.BERITA_IMAGE_URL+gambar;
+//                            Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                            Intent i = new Intent(v.getContext(), PerbesarGambar.class);
+                            i.putExtra("gambar", url);
                             v.getContext().startActivity(i);
                         }
                     });

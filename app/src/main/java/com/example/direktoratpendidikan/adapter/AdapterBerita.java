@@ -44,7 +44,7 @@ public class AdapterBerita extends RecyclerView.Adapter<AdapterBerita.MyViewHold
         holder.bulan.setText(beritaList.get(position).getBulanB());
         holder.kontenberita.setText(beritaList.get(position).getKontenB());
         holder.tglpublish.setText(beritaList.get(position).getTanggalPublishB());
-        Picasso.with(context).load(ApiClient.IMAGE_URL+beritaList.get(position).getGambarB()).error(R.drawable.ic_progress).into(holder.gambarberita);
+        Picasso.with(context).load(ApiClient.BERITA_IMAGE_URL+beritaList.get(position).getGambarB()).error(R.drawable.ic_progress).into(holder.gambarberita);
 
 
     }

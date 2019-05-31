@@ -15,7 +15,18 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".admin.DetailMBK"
+        <activity android:name=".admin.PermintaanRelawan"></activity>
+        <activity
+            android:name=".PerbesarGambar"
+            android:theme="@style/NoActionBar" />
+        <activity
+            android:name=".mahasiswa.DaftarRelawanBerhasil"
+            android:theme="@style/NoActionBar" />
+        <activity
+            android:name=".mahasiswa.SplashDisabilitas"
+            android:theme="@style/NoActionBar" />
+        <activity
+            android:name=".admin.DetailMBK"
             android:theme="@style/NoActionBar" />
         <activity
             android:name=".admin.DetailRelawanMBK"
@@ -34,6 +45,7 @@
             android:theme="@style/NoActionBar" />
         <activity
             android:name=".mahasiswa.DisabilitasMhs"
+            android:noHistory="true"
             android:theme="@style/NoActionBar" />
         <activity
             android:name=".DetailAgendaAdmin"

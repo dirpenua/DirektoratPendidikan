@@ -112,6 +112,11 @@ public interface ApiInterface {
     Call<MSG> hapusRelawan (@Field("nim") String nim
     );
 
+    @FormUrlEncoded
+    @POST("hapusrelawan.php")
+    Call<MSG> tambahRelawan (@Field("nim") String nim
+    );
+
     @GET("getfakultas.php?")
     Call < List<Fakultas>> getFakultas(
             @Query("kategori") Integer kategori
