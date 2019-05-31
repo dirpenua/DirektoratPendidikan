@@ -1,6 +1,7 @@
 package com.example.direktoratpendidikan.admin;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
@@ -10,10 +11,11 @@ import android.widget.ImageView;
 
 import com.example.direktoratpendidikan.R;
 import com.example.direktoratpendidikan.adapter.TabAdapter;
+import com.example.direktoratpendidikan.mahasiswa.SplashDisabilitas;
 
 public class DisabilitasAdm extends AppCompatActivity {
 
-    ImageView tutup;
+    ImageView tutup, permintaan;
     private TabAdapter adapter;
     private TabLayout tabLayout;
     private ViewPager viewPager;
@@ -28,6 +30,15 @@ public class DisabilitasAdm extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 onBackPressed();
+            }
+        });
+
+        permintaan = (ImageView) findViewById(R.id.relawanrequest);
+        permintaan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent permintaan = new Intent(getApplicationContext(), PermintaanRelawan.class);
+                startActivity(permintaan);
             }
         });
 

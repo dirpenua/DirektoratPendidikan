@@ -73,6 +73,12 @@ public interface ApiInterface {
     );
 
     @FormUrlEncoded
+    @POST("getpermintaanrelawan.php?")
+    Call < List<RelawanMBK>> getPermintaanRelawan(
+            @Field("kategori") String kategori
+    );
+
+    @FormUrlEncoded
     @POST("getnotifikasi.php?")
     Call < List<MSG>> getNotifikasi(
             @Field("nipnik") String nipnik
@@ -113,7 +119,7 @@ public interface ApiInterface {
     );
 
     @FormUrlEncoded
-    @POST("hapusrelawan.php")
+    @POST("tambahrelawan.php")
     Call<MSG> tambahRelawan (@Field("nim") String nim
     );
 

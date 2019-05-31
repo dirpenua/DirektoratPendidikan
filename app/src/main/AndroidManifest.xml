@@ -15,7 +15,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".admin.PermintaanRelawan"></activity>
+        <activity android:name=".admin.PermintaanRelawan"
+            android:theme="@style/NoActionBar" />
         <activity
             android:name=".PerbesarGambar"
             android:theme="@style/NoActionBar" />

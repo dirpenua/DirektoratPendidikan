@@ -101,29 +101,7 @@ public class AdapterPermintaanRelawan extends RecyclerView.Adapter<AdapterPermin
                 @Override
                 public void onClick(View v) {
                     final String nim = relawanmbkList.get(getAdapterPosition()).getNim();
-                    final String nama = relawanmbkList.get(getAdapterPosition()).getNama();
-                    AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(((Activity) context));
-
-                    alertDialogBuilder
-                            .setMessage("Anda menambahkan " + nama + " menjadi relawan AIL ?")
-                            .setCancelable(false)
-                            .setPositiveButton("Ya", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    activateRelawan(nim);
-                                    notifyDataSetChanged();
-                                }
-                            })
-                            .setNegativeButton("Batal", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    dialog.cancel();
-                                }
-                            });
-
-                    AlertDialog alertDialog = alertDialogBuilder.create();
-                    alertDialog.show();
-
+                    activateRelawan(nim);
                 }
             });
         }
