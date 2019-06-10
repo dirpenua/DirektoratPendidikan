@@ -18,6 +18,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import butterknife.ButterKnife;
@@ -32,6 +33,7 @@ import com.example.direktoratpendidikan.api.ApiInterface;
 import com.example.direktoratpendidikan.data.MSG;
 import com.example.direktoratpendidikan.dosen.MainActivity;
 import com.example.direktoratpendidikan.mahasiswa.MainActivityMhs;
+import com.example.direktoratpendidikan.pengaturan.Bantuan;
 
 
 public class LoginActivity extends AppCompatActivity {
@@ -55,11 +57,13 @@ public class LoginActivity extends AppCompatActivity {
     @BindView(R.id.nipnik) EditText _nipnik;
     @BindView(R.id.password) EditText _password;
     @BindView(R.id.btn_login) Button _loginButton;
+    @BindView(R.id.lupapassword) TextView _lupapassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
 
         conMgr = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         {
@@ -121,6 +125,14 @@ public class LoginActivity extends AppCompatActivity {
                 } else {
                     Toast.makeText(getApplicationContext(), "Tidak ada koneksi internet", Toast.LENGTH_LONG).show();
                 }
+            }
+        });
+
+        _lupapassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this, Bantuan.class);
+                startActivity(intent);
             }
         });
     }

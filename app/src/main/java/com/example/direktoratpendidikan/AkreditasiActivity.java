@@ -1,6 +1,7 @@
 package com.example.direktoratpendidikan;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -9,6 +10,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
@@ -64,27 +67,50 @@ public class AkreditasiActivity extends AppCompatActivity {
 
         fetchAkreditasi(1);
 
-        gambarakreditasi = findViewById(R.id.gambarakreditasi);
+        WebView webView = findViewById(R.id.webview);
+        webView.getSettings().setLoadsImagesAutomatically(true);
+        webView.getSettings().setJavaScriptEnabled(true);
+        webView.getSettings().setDomStorageEnabled(true);
 
-        final String gambar = "akreditasi.jpg";
-        Picasso.with(getApplicationContext()).load(ApiClient.IMAGE_URL + gambar).into(gambarakreditasi, new Callback() {
-            @Override
-            public void onSuccess() {
-                gambarakreditasi.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        String url = ApiClient.IMAGE_URL + gambar;
-                        Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-                        v.getContext().startActivity(i);
-                    }
-                });
-            }
+        // Tiga baris di bawah ini agar laman yang dimuat dapat
+        // melakukan zoom.
+        webView.getSettings().setSupportZoom(true);
+        webView.getSettings().setBuiltInZoomControls(true);
+        webView.getSettings().setDisplayZoomControls(false);
+        // Baris di bawah untuk menambahkan scrollbar di dalam WebView-nya
+        webView.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);
+        webView.setWebViewClient(new WebViewClient());
+        //baris dibawah untuk menyesuaikan resolusi hp
+        webView.setInitialScale(1);
+        webView.getSettings().setLoadWithOverviewMode(true);
+        webView.getSettings().setUseWideViewPort(true);
+        webView.setScrollBarStyle(WebView.SCROLLBARS_OUTSIDE_OVERLAY);
+        webView.setScrollbarFadingEnabled(false);
+        webView.setBackgroundColor(Color.WHITE);
 
-            @Override
-            public void onError() {
-                Toast.makeText(getApplicationContext(), "Grafik tidak ditemukan. Harap hubungi admin melalui menu BANTUAN", Toast.LENGTH_SHORT);
-            }
-        });
+        webView.loadUrl("http://dirpenunair.000webhostapp.com/akreditasi.html");
+
+//        gambarakreditasi = findViewById(R.id.gambarakreditasi);
+
+//        final String gambar = "akreditasi.jpg";
+//        Picasso.with(getApplicationContext()).load(ApiClient.IMAGE_URL + gambar).into(gambarakreditasi, new Callback() {
+//            @Override
+//            public void onSuccess() {
+//                gambarakreditasi.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//                        String url = ApiClient.IMAGE_URL + gambar;
+//                        Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+//                        v.getContext().startActivity(i);
+//                    }
+//                });
+//            }
+//
+//            @Override
+//            public void onError() {
+//                Toast.makeText(getApplicationContext(), "Grafik tidak ditemukan. Harap hubungi admin melalui menu BANTUAN", Toast.LENGTH_SHORT);
+//            }
+//        });
     }
 
     public void fetchAkreditasi (Integer kategori){

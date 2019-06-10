@@ -1,11 +1,16 @@
 package com.example.direktoratpendidikan;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -15,14 +20,13 @@ import com.squareup.picasso.Picasso;
 
 public class KalenderAkademik extends AppCompatActivity {
 
-    public ImageView onback, gambarkalender;
-    public TextView klikdetail;
+    public ImageView onback;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_kalender_akademik);
-        onback = (ImageView) findViewById(R.id.kembali);
+        onback = findViewById(R.id.kembali);
         onback.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -30,39 +34,32 @@ public class KalenderAkademik extends AppCompatActivity {
             }
         });
 
-        gambarkalender = findViewById(R.id.kalenderakademik);
-        klikdetail = findViewById(R.id.klikdetail);
+        WebView webView = findViewById(R.id.webview);
+        webView.getSettings().setLoadsImagesAutomatically(true);
+        webView.getSettings().setJavaScriptEnabled(true);
+        webView.getSettings().setDomStorageEnabled(true);
 
+        // Tiga baris di bawah ini agar laman yang dimuat dapat
+        // melakukan zoom.
+        webView.getSettings().setSupportZoom(true);
+        webView.getSettings().setBuiltInZoomControls(true);
+        webView.getSettings().setDisplayZoomControls(false);
+        // Baris di bawah untuk menambahkan scrollbar di dalam WebView-nya
+        webView.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);
+        webView.setWebViewClient(new WebViewClient());
+        //baris dibawah untuk menyesuaikan resolusi hp
+        webView.setInitialScale(1);
+        webView.getSettings().setLoadWithOverviewMode(true);
+        webView.getSettings().setUseWideViewPort(true);
+        webView.setScrollBarStyle(WebView.SCROLLBARS_OUTSIDE_OVERLAY);
+        webView.setScrollbarFadingEnabled(false);
+        webView.setBackgroundColor(Color.WHITE);
 
-        final String gambar = "kalenderakademik.jpg";
-        Picasso.with(getApplicationContext()).load(ApiClient.IMAGE_URL+gambar).into(gambarkalender, new Callback() {
-            @Override
-            public void onSuccess() {
-                gambarkalender.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        String url = ApiClient.IMAGE_URL+gambar;
-                        Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-                        v.getContext().startActivity(i);
-                    }
-                });
-            }
-
-            @Override
-            public void onError() {
-                gambarkalender.setVisibility(View.GONE);
-                Toast.makeText(getApplicationContext(),"Halaman tidak ditemukan. Harap hubungi admin melalui menu BANTUAN",Toast.LENGTH_SHORT);
-            }
-        });
-
-        klikdetail.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String url = ApiClient.IMAGE_URL+gambar;
-                Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-                v.getContext().startActivity(i);
-            }
-        });
+        webView.loadUrl("http://dirpenunair.000webhostapp.com/kalenderakademik.html");
+        Snackbar snackbar = Snackbar.make(webView, "Cubit untuk memperbesar atau memperkecil", Snackbar.LENGTH_LONG);
+        snackbar.show();
 
     }
+
 }
+

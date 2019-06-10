@@ -35,48 +35,11 @@
 
     </android.support.v7.widget.Toolbar>
 
-
-    <LinearLayout
+    <WebView
+        android:id="@+id/webview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="100dp"
-        android:layout_marginBottom="100dp"
-        android:background="@drawable/whiteround"
-        android:orientation="vertical"
-        android:elevation="5dp">
-
-        <ImageView
-            android:id="@+id/kalenderakademik"
-            android:layout_width="match_parent"
-            android:layout_height="400dp"
-            android:scaleType="fitCenter"/>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:layout_width="22dp"
-                android:layout_height="22dp"
-                android:src="@drawable/ic_download"/>
-
-            <TextView
-                android:id="@+id/klikdetail"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/clickdetails"
-                android:textSize="15dp"
-                android:textColor="@color/colorPrimaryDark"
-                android:textStyle="bold"/>
-
-        </LinearLayout>
-
-
-    </LinearLayout>
+        android:layout_below="@id/toolbar"
+        android:background="#fff"/>
 
 </FrameLayout>

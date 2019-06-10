@@ -94,13 +94,14 @@
             android:layout_marginLeft="30dp"
             android:text="Lupa password anda?" />
         <TextView
+            android:id="@+id/lupapassword"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBaseline="@+id/btn_lupa"
             android:layout_alignParentLeft="true"
             android:layout_marginRight="30dp"
             android:textStyle="bold"
-            android:text=" Ubah password" />
+            android:text=" Bantuan" />
 
     </LinearLayout>
 </LinearLayout>
