@@ -43,7 +43,7 @@ public class BerandaFragment extends Fragment {
     TextView isiToken, namaLengkap;
 
 
-    int[] sampleImages = {R.drawable.slider1, R.drawable.slider2, R.drawable.slider3, R.drawable.slider4};
+    int[] sampleImages = {R.drawable.slider1, R.drawable.slider2, R.drawable.slider3};
     ImageListener imageListener = new ImageListener() {
         public void setImageForPosition(int position, ImageView imageView) {
             imageView.setImageResource(sampleImages[position]);

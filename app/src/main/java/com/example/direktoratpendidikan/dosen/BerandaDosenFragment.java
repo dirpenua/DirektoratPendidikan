@@ -40,7 +40,7 @@ public class BerandaDosenFragment extends Fragment {
 
     CarouselView carouselView;
     TextView isiToken, namaLengkap;
-    int[] sampleImages = {R.drawable.slider1, R.drawable.slider2, R.drawable.slider3, R.drawable.slider4};
+    int[] sampleImages = {R.drawable.slider1, R.drawable.slider2, R.drawable.slider3};
     ImageListener imageListener = new ImageListener() {
         public void setImageForPosition(int position, ImageView imageView) {
             imageView.setImageResource(sampleImages[position]);
@@ -121,6 +121,15 @@ public class BerandaDosenFragment extends Fragment {
             public void onClick(View v) {
                 Intent download = new Intent(getActivity(), DownloadActivity.class);
                 startActivity(download);
+            }
+        });
+
+        ImageView faq = view.findViewById(R.id.ic_tanya);
+        faq.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent faq= new Intent(getActivity(), FaqActivityDsn.class);
+                startActivity(faq);
             }
         });
 

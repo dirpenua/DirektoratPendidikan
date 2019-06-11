@@ -62,9 +62,20 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="10dp"
+                android:textStyle="bold"
                 android:textSize="14dp"
                 android:justificationMode="inter_word"
-                android:text="DirpenUA merupakan aplikasi mobile berbasis android dimana penggunanya antara lain dosen, tendik dan mahasiswa. Aplikasi ini berguna untuk media penyampaian informasi dan pelayanan dalam lingkup kerja Direktorat Pendidikan sesuai visi dan misi Universitas Airlangga."/>
+                android:textAlignment="center"
+                android:text="Versi 1.0"/>
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="10dp"
+                android:textSize="14dp"
+                android:justificationMode="inter_word"
+                android:text="DirpenUA merupakan aplikasi mobile berbasis android dimana penggunanya antara lain dosen, tendik dan mahasiswa Universitas Airlangga. Aplikasi ini berguna untuk media penyampaian informasi dan pelayanan di Direktorat Pendidikan sejalan dengan visi dan misi Universitas Airlangga."/>
 
         </LinearLayout>
 

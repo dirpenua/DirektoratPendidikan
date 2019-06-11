@@ -7,6 +7,7 @@ import com.example.direktoratpendidikan.data.Berita;
 import com.example.direktoratpendidikan.data.Cari;
 import com.example.direktoratpendidikan.data.Dosen;
 import com.example.direktoratpendidikan.data.Download;
+import com.example.direktoratpendidikan.data.FAQ;
 import com.example.direktoratpendidikan.data.Fakultas;
 import com.example.direktoratpendidikan.data.MSG;
 import com.example.direktoratpendidikan.data.Notif;
@@ -138,6 +139,11 @@ public interface ApiInterface {
             @Query("kategori") Integer kategori
     );
 
+    @GET("getfaq.php?")
+    Call < List<FAQ>> getFAQ(
+            @Query("kategori") String kategori
+    );
+
     @GET("getkalender.php?")
     Call < List<Download>> getKalender(
             @Query("kategori") String id
@@ -157,6 +163,11 @@ public interface ApiInterface {
     @POST("searchbeasiswa.php")
     Call<Cari> searchBeasiswa(@Field("search") String search,
                               @Field("kategori") String kategori
+    );
+
+    @FormUrlEncoded
+    @POST("searchfaq.php")
+    Call<Cari> searchFaq(@Field("search") String search
     );
 
     @FormUrlEncoded

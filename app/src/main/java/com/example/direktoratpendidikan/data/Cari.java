@@ -14,6 +14,7 @@ public class Cari {
     List<Dosen> resultpa;
     List<RelawanMBK> resultrw;
     List<RelawanMBK> resultmbk;
+    List<FAQ> resultfaq;
 
     public String getValue() {
         return value;
@@ -57,5 +58,9 @@ public class Cari {
 
     public List<RelawanMBK> getListMBK() {
         return resultmbk;
+    }
+
+    public List<FAQ> getListFAQ() {
+        return resultfaq;
     }
 }

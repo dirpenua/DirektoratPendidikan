@@ -47,7 +47,7 @@ public class BerandaAdminFragment extends Fragment {
     CarouselView carouselView;
     ImageView lonceng;
     TextView isiToken, notifbadge, increase;
-    int[] sampleImages = {R.drawable.slider1, R.drawable.slider2, R.drawable.slider3, R.drawable.slider4};
+    int[] sampleImages = {R.drawable.slider1, R.drawable.slider2, R.drawable.slider3};
     ImageListener imageListener = new ImageListener() {
         public void setImageForPosition(int position, ImageView imageView) {
             imageView.setImageResource(sampleImages[position]);
