@@ -20,6 +20,7 @@ import com.example.direktoratpendidikan.DownloadActivity;
 import com.example.direktoratpendidikan.FakultasActivity;
 import com.example.direktoratpendidikan.KalenderAkademik;
 import com.example.direktoratpendidikan.LoginActivity;
+import com.example.direktoratpendidikan.NotifikasiActivity;
 import com.example.direktoratpendidikan.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -78,6 +79,14 @@ public class BerandaDosenFragment extends Fragment {
         carouselView.setPageCount(sampleImages.length);
         carouselView.setImageListener(imageListener);
 
+        ImageView notifikasi = view.findViewById(R.id.ic_pengumuman);
+        notifikasi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent notifikasi = new Intent(getActivity(), NotifikasiActivity.class);
+                startActivity(notifikasi);
+            }
+        });
 
         ImageView berita = view.findViewById(R.id.ic_berita);
         berita.setOnClickListener(new View.OnClickListener() {

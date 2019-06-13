@@ -10,7 +10,6 @@ import android.widget.TextView;
 
 import com.example.direktoratpendidikan.DetailAgendaAdmin;
 import com.example.direktoratpendidikan.R;
-import com.example.direktoratpendidikan.data.Agenda;
 import com.example.direktoratpendidikan.data.MSG;
 
 import java.util.ArrayList;
@@ -39,6 +38,7 @@ public class AdapterNotifikasi extends RecyclerView.Adapter<AdapterNotifikasi.My
     public void onBindViewHolder(MyViewHolder holder, int position) {
         holder.message.setText(notifikasiList.get(position).getMessage());
         holder.idnotif.setText(notifikasiList.get(position).getId());
+        holder.jamterkirim.setText(notifikasiList.get(position).getJamterkirim());
     }
 
     @Override
@@ -56,20 +56,28 @@ public class AdapterNotifikasi extends RecyclerView.Adapter<AdapterNotifikasi.My
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        TextView message, idnotif;
+        TextView message, idnotif, jamterkirim;
 
         public MyViewHolder(final View itemView) {
             super(itemView);
             message = itemView.findViewById(R.id.pesannotifikasi);
             idnotif = itemView.findViewById(R.id.hideidnotifikasi);
+            jamterkirim = itemView.findViewById(R.id.jamterkirim);
             itemView.setTag(itemView);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
 
+//                    Intent intent = new Intent(context, MainActivityAdmin.class);
+//                    intent .putExtra("notifadmin",true);
+//                    intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+//                    v.getContext().startActivity(intent);
+
                     Intent i = new Intent(v.getContext(), DetailAgendaAdmin.class);
                     i.putExtra("idagenda",notifikasiList.get(getAdapterPosition()).getId());
                     v.getContext().startActivity(i);
+
+
                 }
 
             });

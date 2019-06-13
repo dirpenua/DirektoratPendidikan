@@ -5,9 +5,9 @@ import com.google.gson.annotations.SerializedName;
 public class MSG {
 
     private String id;
-    public String getId() { return id; }
     private Integer success;
     private String message;
+    private String jamterkirim;
     private String nama_user;
     private String foto_user;
     private Integer status_user;
@@ -28,6 +28,8 @@ public class MSG {
         this.message = message;
     }
 
+    public String getId() { return id; }
+
     public Integer getSuccess() {
         return success;
     }
@@ -38,6 +40,10 @@ public class MSG {
 
     public String getMessage() {
         return message;
+    }
+
+    public String getJamterkirim() {
+        return jamterkirim;
     }
 
     public void setMessage(String message) {

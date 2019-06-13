@@ -41,6 +41,7 @@ public class MainActivityAdmin extends AppCompatActivity implements BottomNaviga
     public static final String main_shared_preferences= "my_shared_preferences";
     public final static String TAG_NIPNIK = "nipnik";
     String nipnik;
+    Boolean notifadmin;
     public static final String CHANNEL_ID = "DirpenUA";
     private static final String CHANNEL_NAME = "Reminder Agenda";
     private static final String CHANNEL_DESC = "Reminder Agenda Notifications";
@@ -83,7 +84,16 @@ public class MainActivityAdmin extends AppCompatActivity implements BottomNaviga
                     }
                 });
 
-        // kita set default nya Home Fragment
+//        Bundle extras = getIntent().getExtras();
+//        if(extras!=null && extras.containsKey("notifadmin"))
+//             notifadmin = extras.getBoolean("notifadmin");
+//        if(notifadmin!=null){
+//            //add or replace fragment F2 in container
+//            int selectedItemId = MenuItem.getItemId();
+//            onNavigationItemSelected();
+//        }else {
+//            // kita set default nya Home Fragment
+//        }
         loadFragment(new BerandaAdminFragment());
 
         // inisialisasi BottomNavigaionView

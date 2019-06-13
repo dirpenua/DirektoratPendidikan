@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -22,6 +23,7 @@ import android.widget.Toast;
 
 import com.example.direktoratpendidikan.adapter.Adapter;
 import com.example.direktoratpendidikan.adapter.AdapterNotifikasi;
+import com.example.direktoratpendidikan.admin.AgendaAdminFragment;
 import com.example.direktoratpendidikan.admin.MainActivityAdmin;
 import com.example.direktoratpendidikan.api.ApiClient;
 import com.example.direktoratpendidikan.api.ApiInterface;
@@ -36,7 +38,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class NotifikasiActivity extends AppCompatActivity {
+public class NotifikasiActivity extends AppCompatActivity  {
 
     private SwipeRefreshLayout swipeContainer;
     FragmentActivity mActivity;
@@ -113,6 +115,19 @@ public class NotifikasiActivity extends AppCompatActivity {
                        Toast.makeText(getApplicationContext(), "Tidak ada notifikasi",Toast.LENGTH_SHORT).show();
                    }
                 Log.e("tesNotifikasiBerhasil", new Gson().toJson(response.body()));
+                adapter.SetOnItemClickListener(new AdapterNotifikasi.OnItemClickListener() {
+
+                        @Override
+                        public void onItemClick(View v , int position) {
+                            AgendaAdminFragment fragment = new AgendaAdminFragment();
+                            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                            transaction.replace(R.id.fl_containeradmin, fragment);
+                            transaction.commit();
+//                            Intent i = new Intent(getApplicationContext(), DetailAgenda.class);
+//                            i.putExtra("namaKegiatan",);
+//                            startActivity(i);
+                        }
+                    });
             }
 
             @Override
