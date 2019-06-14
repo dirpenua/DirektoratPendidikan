@@ -86,6 +86,12 @@ public interface ApiInterface {
     );
 
     @FormUrlEncoded
+    @POST("getnotifikasi.php?")
+    Call <MSG> getNotifikasiHarian(
+            @Field("nipnik") String nipnik
+    );
+
+    @FormUrlEncoded
     @POST("getpesertaada.php?")
     Call < List<Dosen>> getPesertaAda(
             @Field("kategori") String kategori,

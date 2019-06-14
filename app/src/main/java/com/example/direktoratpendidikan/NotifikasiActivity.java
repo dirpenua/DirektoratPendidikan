@@ -1,8 +1,10 @@
 package com.example.direktoratpendidikan;
 
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentActivity;
@@ -13,6 +15,10 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.text.Layout;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.style.AlignmentSpan;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -29,6 +35,7 @@ import com.example.direktoratpendidikan.api.ApiClient;
 import com.example.direktoratpendidikan.api.ApiInterface;
 import com.example.direktoratpendidikan.data.Agenda;
 import com.example.direktoratpendidikan.data.MSG;
+import com.example.direktoratpendidikan.data.Notif;
 import com.example.direktoratpendidikan.dosen.MainActivity;
 import com.google.gson.Gson;
 
@@ -42,7 +49,7 @@ public class NotifikasiActivity extends AppCompatActivity  {
 
     private SwipeRefreshLayout swipeContainer;
     FragmentActivity mActivity;
-    TextView setel;
+    TextView marquee;
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
     private List notifikasiList;
@@ -70,6 +77,9 @@ public class NotifikasiActivity extends AppCompatActivity  {
             }
         });
 
+        marquee = findViewById(R.id.pesanharian);
+        marquee.setSelected(true);
+
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHasFixedSize(true);
@@ -84,6 +94,7 @@ public class NotifikasiActivity extends AppCompatActivity  {
 //        setel = findViewById(R.id.notifikasi);
 //        setel.setText(nipnik);
 
+        fetchNotifikasiHarian();
         fetchNotifikasi();
         swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -134,6 +145,30 @@ public class NotifikasiActivity extends AppCompatActivity  {
             public void onFailure(@NonNull Call<List<MSG>> call, @NonNull Throwable t) {
                 Log.e("tesNotifikasiGagal", "Gagal");
                 progressBar.setVisibility(View.GONE);
+            }
+        });
+    }
+
+    public void fetchNotifikasiHarian (){
+        apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
+        Call<MSG> userCall = apiInterface.getNotifikasiHarian(nipnik);
+        userCall.enqueue(new Callback<MSG>() {
+            @Override
+            public void onResponse(Call<MSG> call, Response<MSG> response) {
+                //Log.d("onResponse", "" + response.body().getMessage());
+                progressBar.setVisibility(View.GONE);
+                marquee.setText(response.body().getMessage());
+            }
+
+            @Override
+            public void onFailure(Call<MSG> call, Throwable t) {
+                Log.d("onFailure", t.toString());
+                String text = "Koneksi sedang tidak stabil. Refresh halaman atau tunggu beberepa saat";
+                SpannableString centeredText = new SpannableString(text);
+                centeredText.setSpan(new AlignmentSpan.Standard(Layout.Alignment.ALIGN_CENTER),
+                        0, text.length() - 1,
+                        Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+                Toast.makeText(getApplicationContext(),centeredText, Toast.LENGTH_LONG).show();
             }
         });
     }
