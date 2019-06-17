@@ -86,7 +86,7 @@ public interface ApiInterface {
     );
 
     @FormUrlEncoded
-    @POST("getnotifikasi.php?")
+    @POST("getnotifikasiharian.php?")
     Call <MSG> getNotifikasiHarian(
             @Field("nipnik") String nipnik
     );

@@ -22,6 +22,7 @@ import android.text.style.AlignmentSpan;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -99,6 +100,7 @@ public class NotifikasiActivity extends AppCompatActivity  {
         swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
+                fetchNotifikasiHarian();
                 fetchNotifikasi();
             }
         });
@@ -155,9 +157,16 @@ public class NotifikasiActivity extends AppCompatActivity  {
         userCall.enqueue(new Callback<MSG>() {
             @Override
             public void onResponse(Call<MSG> call, Response<MSG> response) {
-                //Log.d("onResponse", "" + response.body().getMessage());
                 progressBar.setVisibility(View.GONE);
-                marquee.setText(response.body().getMessage());
+
+                if(response.body().getMessage() == null){
+                    LinearLayout notifharian = findViewById(R.id.notifikasiharian);
+                    notifharian.setVisibility(View.GONE);
+                }else {
+                    marquee.setText(response.body().getMessage());
+                    LinearLayout notifharian = findViewById(R.id.notifikasiharian);
+                    notifharian.setVisibility(View.VISIBLE);
+                }
             }
 
             @Override
