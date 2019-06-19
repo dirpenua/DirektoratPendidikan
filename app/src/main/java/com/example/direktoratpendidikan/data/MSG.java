@@ -11,6 +11,7 @@ public class MSG {
     private String nama_user;
     private String foto_user;
     private Integer status_user;
+    private Integer badge;
 
     /**
      * No args constructor for use in serialization
@@ -40,6 +41,10 @@ public class MSG {
 
     public String getMessage() {
         return message;
+    }
+
+    public Integer getBadge() {
+        return badge;
     }
 
     public String getJamterkirim() {

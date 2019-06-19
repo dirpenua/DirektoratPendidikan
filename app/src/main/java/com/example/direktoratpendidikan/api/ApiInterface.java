@@ -92,6 +92,18 @@ public interface ApiInterface {
     );
 
     @FormUrlEncoded
+    @POST("getbadge.php?")
+    Call <MSG> getBadge(
+            @Field("nipnik") String nipnik
+    );
+
+    @FormUrlEncoded
+    @POST("resetbadge.php?")
+    Call <MSG> resetBadge(
+            @Field("nipnik") String nipnik
+    );
+
+    @FormUrlEncoded
     @POST("getpesertaada.php?")
     Call < List<Dosen>> getPesertaAda(
             @Field("kategori") String kategori,

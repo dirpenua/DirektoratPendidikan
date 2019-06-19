@@ -97,6 +97,7 @@ public class NotifikasiActivity extends AppCompatActivity  {
 
         fetchNotifikasiHarian();
         fetchNotifikasi();
+        resetBadge();
         swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -178,6 +179,23 @@ public class NotifikasiActivity extends AppCompatActivity  {
                         0, text.length() - 1,
                         Spannable.SPAN_INCLUSIVE_INCLUSIVE);
                 Toast.makeText(getApplicationContext(),centeredText, Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
+    public void resetBadge (){
+        ApiInterface service = ApiClient.getApiClient().create(ApiInterface.class);
+        Call<MSG> userCall = service.resetBadge(nipnik);
+        userCall.enqueue(new Callback<MSG>() {
+            @Override
+            public void onResponse(Call<MSG> call, Response<MSG> response) {
+
+            }
+
+            @Override
+            public void onFailure(Call<MSG> call, Throwable t) {
+//                hidepDialog();
+                Log.d("onFailure", t.toString());
             }
         });
     }

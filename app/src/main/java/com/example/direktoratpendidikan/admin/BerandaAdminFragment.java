@@ -9,13 +9,20 @@ import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.text.Layout;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.style.AlignmentSpan;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.direktoratpendidikan.AkreditasiActivity;
 import com.example.direktoratpendidikan.BeritaActivity;
@@ -25,6 +32,9 @@ import com.example.direktoratpendidikan.KalenderAkademik;
 import com.example.direktoratpendidikan.LoginActivity;
 import com.example.direktoratpendidikan.NotifikasiActivity;
 import com.example.direktoratpendidikan.R;
+import com.example.direktoratpendidikan.api.ApiClient;
+import com.example.direktoratpendidikan.api.ApiInterface;
+import com.example.direktoratpendidikan.data.MSG;
 import com.google.android.gms.actions.NoteIntents;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -32,6 +42,10 @@ import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.InstanceIdResult;
 import com.synnapps.carouselview.CarouselView;
 import com.synnapps.carouselview.ImageListener;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -53,6 +67,7 @@ public class BerandaAdminFragment extends Fragment {
             imageView.setImageResource(sampleImages[position]);
         }
     };
+    private ApiInterface apiInterface;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -63,22 +78,24 @@ public class BerandaAdminFragment extends Fragment {
         //replace = view.findViewById(R.id.replacenipnik);
         notifbadge = view.findViewById(R.id.notif_badge);
         lonceng = view.findViewById(R.id.ic_pengumuman);
-        increase = view.findViewById(R.id.increase);
-        increase.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                updateCount(++count);
-            }
-        });
 
+//        increase = view.findViewById(R.id.increase);
+//        increase.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                updateCount(++count);
+//            }
+//        });
+//
+//
+//        lonceng.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                updateCount(count);
+//            }
+//        });
 
-        lonceng.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                updateCount(count);
-            }
-        });
-
+        fetchBadge();
 
         FirebaseInstanceId.getInstance().getInstanceId()
                 .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
@@ -122,6 +139,7 @@ public class BerandaAdminFragment extends Fragment {
             public void onClick(View v) {
                 Intent notifikasi = new Intent(getActivity(), NotifikasiActivity.class);
                 startActivity(notifikasi);
+                //resetBadge();
             }
         });
 
@@ -190,18 +208,61 @@ public class BerandaAdminFragment extends Fragment {
         editor.commit();
     }
 
-    public void updateCount(final int new_hot_number) {
-        count = new_hot_number;
-        if (count <= 0 )
-            notifbadge.setVisibility(View.GONE);
-        else {
-            notifbadge.setVisibility(View.VISIBLE);
-            notifbadge.setText(Integer.toString(count));
-            // supportInvalidateOptionsMenu();
-        }
+//    public void updateCount(final int new_hot_number) {
+//        count = new_hot_number;
+//        if (count <= 0 )
+//            notifbadge.setVisibility(View.GONE);
+//        else {
+//            notifbadge.setVisibility(View.VISIBLE);
+//            notifbadge.setText(Integer.toString(count));
+//            // supportInvalidateOptionsMenu();
+//        }
+//    }
+
+    public void fetchBadge (){
+        apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
+        Call<MSG> userCall = apiInterface.getBadge(nipnik);
+        userCall.enqueue(new Callback<MSG>() {
+            @Override
+            public void onResponse(Call<MSG> call, Response<MSG> response) {
+                count = response.body().getBadge();
+                if (count <= 0 )
+                    notifbadge.setVisibility(View.GONE);
+                else {
+                    notifbadge.setVisibility(View.VISIBLE);
+                    notifbadge.setText(Integer.toString(count));
+                    // supportInvalidateOptionsMenu();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<MSG> call, Throwable t) {
+                Log.d("onFailure", t.toString());
+                String text = "Koneksi sedang tidak stabil. Refresh halaman atau tunggu beberapa saat";
+                SpannableString centeredText = new SpannableString(text);
+                centeredText.setSpan(new AlignmentSpan.Standard(Layout.Alignment.ALIGN_CENTER),
+                        0, text.length() - 1,
+                        Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+                Toast.makeText(getActivity(),centeredText, Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
-
-
+//    public void resetBadge (){
+//        ApiInterface service = ApiClient.getApiClient().create(ApiInterface.class);
+//        Call<MSG> userCall = service.resetBadge(nipnik);
+//        userCall.enqueue(new Callback<MSG>() {
+//            @Override
+//            public void onResponse(Call<MSG> call, Response<MSG> response) {
+//
+//            }
+//
+//            @Override
+//            public void onFailure(Call<MSG> call, Throwable t) {
+////                hidepDialog();
+//                Log.d("onFailure", t.toString());
+//            }
+//        });
+//    }
 
 }

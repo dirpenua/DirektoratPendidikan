@@ -333,17 +333,6 @@
             app:strokeColor="#FF777777"
             app:strokeWidth="1dp" />
 
-        <TextView
-            android:id="@+id/increase"
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:text="   INCREASE   "
-            android:gravity="center"
-            android:layout_gravity="center"
-            android:textColor="#fff"
-            android:textSize="18dp"
-            android:background="@drawable/rounddark"/>
-
     </LinearLayout>
 
 
